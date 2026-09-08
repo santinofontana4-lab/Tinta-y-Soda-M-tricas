@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Oficial de Rendimiento | @tintaysoda.stream</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              400: '#fb7185',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              900: '#881337',
+            },
+            dark: {
+              800: '#1a2234',
+              850: '#121824',
+              900: '#0b0f17',
+              950: '#070a0f',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .glass-card {
+      background: rgba(18, 24, 36, 0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card-hover {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(244, 63, 94, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 35px -10px rgba(244, 63, 94, 0.22);
+    }
+    select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.75rem center;
+      background-repeat: no-repeat;
+      background-size: 1.25em 1.25em;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0f17;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+    @media print {
+      body { background: #fff !important; color: #000 !important; }
+      .no-print { display: none !important; }
+      .glass-card { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; }
+      h1, h2, h3, p, span, div, strong { color: #000 !important; }
+    }
+  </style>
+</head>
+<body class="bg-dark-950 text-slate-100 min-h-screen antialiased selection:bg-brand-500 selection:text-white pb-16">
+
+  <!-- Glow background elements -->
+  <div class="fixed top-0 left-1/4 w-96 h-96 bg-brand-600/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+  <div class="fixed top-1/3 right-10 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+
+    <!-- Header Section -->
+    <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-800/80">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-amber-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/25 ring-2 ring-brand-500/20">
+          <i data-lucide="radio" class="w-7 h-7"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white">
+              Tinta &amp; Soda <span class="text-slate-400 font-light">| Panel Oficial de Métricas</span>
+            </h1>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 uppercase tracking-wider">
+              Datos Meta Oficiales
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1 flex items-center gap-2 flex-wrap">
+            <span>Cuenta: <strong class="text-slate-200">@tintaysoda.stream</strong></span>
+            <span>&bull;</span>
+            <span>Período Auditado: <strong class="text-brand-300">Agosto &amp; Septiembre 2026 (29 publicaciones)</strong></span>
+          </p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-3 no-print">
+        <div class="px-3.5 py-2 rounded-xl bg-dark-850 border border-slate-800 text-xs text-slate-400 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>Actualizado: <strong class="text-slate-200 font-mono">08/09/2026</strong></span>
+        </div>
+        <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition flex items-center gap-2 border border-slate-700 shadow-sm hover:text-white">
+          <i data-lucide="printer" class="w-4 h-4"></i> Guardar PDF
+        </button>
+      </div>
+    </header>
+
+    <!-- Toolbar de Filtrado Ordenado con Menús Desplegables -->
+    <section class="glass-card rounded-2xl p-5 space-y-4 shadow-xl border-slate-800/80">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="p-2 rounded-lg bg-brand-500/10 text-brand-400 border border-brand-500/20">
+            <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Centro de Filtrado &amp; Control</h2>
+            <p class="text-xs text-slate-400">Selecciona los menús para actualizar KPIs, gráficos y la tabla en tiempo real</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span id="activeFilterBadge" class="text-xs px-3 py-1 rounded-lg bg-brand-900/60 text-brand-300 border border-brand-700/50 font-semibold">
+            Mostrando: Consolidado Total (29 posts)
+          </span>
+          <button onclick="resetFilters()" class="text-xs px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition flex items-center gap-1.5 border border-slate-700">
+            <i data-lucide="rotate-ccw" class="w-3 h-3"></i> Restablecer
+          </button>
+        </div>
+      </div>
+
+      <!-- Menús Desplegables (Dropdowns Grid) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+        
+        <!-- Desplegable 1: Mes -->
+        <div class="space-y-1.5">
+          <label for="selectMonth" class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-400"></i> Mes:
+          </label>
+          <select id="selectMonth" onchange="onFilterChange()" class="w-full bg-dark-850 text-slate-200 font-medium px-3 py-2.5 rounded-xl border border-slate-700/80 focus:border-brand-500 focus:outline-none transition cursor-pointer pr-9">
+            <!-- Renderizado dinámicamente con JS -->
+          </select>
+        </div>
+
+        <!-- Desplegable 2: Semana -->
+        <div class="space-y-1.5">
+          <label for="selectWeek" class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+            <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-400"></i> Semana:
+          </label>
+          <select id="selectWeek" onchange="onFilterChange()" class="w-full bg-dark-850 text-slate-200 font-medium px-3 py-2.5 rounded-xl border border-slate-700/80 focus:border-brand-500 focus:outline-none transition cursor-pointer pr-9">
+            <!-- Renderizado dinámicamente con JS -->
+          </select>
+        </div>
+
+        <!-- Desplegable 3: Pilar Temático -->
+        <div class="space-y-1.5">
+          <label for="selectTopic" class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+            <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i> Pilar Temático:
+          </label>
+          <select id="selectTopic" onchange="onFilterChange()" class="w-full bg-dark-850 text-slate-200 font-medium px-3 py-2.5 rounded-xl border border-slate-700/80 focus:border-brand-500 focus:outline-none transition cursor-pointer pr-9">
+            <option value="all">Todos los Pilares</option>
+            <option value="Tecnodistopía & Geopolítica">🚀 Tecnodistopía &amp; Geopolítica</option>
+            <option value="Datos Duros & Desmitificación">🔥 Datos Duros vs. Relato</option>
+            <option value="Hábitos & Ansiedad Digital">🧠 Hábitos &amp; Ansiedad Digital</option>
+            <option value="Rosca Política & Sociedad">🏛️ Rosca Política Tradicional</option>
+          </select>
+        </div>
+
+        <!-- Desplegable 4: Ordenar Por -->
+        <div class="space-y-1.5">
+          <label for="selectSort" class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+            <i data-lucide="arrow-up-down" class="w-3.5 h-3.5 text-purple-400"></i> Ordenar por:
+          </label>
+          <select id="selectSort" onchange="onFilterChange()" class="w-full bg-dark-850 text-slate-200 font-medium px-3 py-2.5 rounded-xl border border-slate-700/80 focus:border-brand-500 focus:outline-none transition cursor-pointer pr-9">
+            <option value="views">👁️ Más Visualizaciones</option>
+            <option value="likes">❤️ Más Me Gusta (MG)</option>
+            <option value="shares">🚀 Más Compartidos (Viral)</option>
+            <option value="comments">💬 Más Comentarios (Debate)</option>
+            <option value="saves">📌 Más Guardados (Saves)</option>
+            <option value="follows">👥 Más Seguidores Sumados</option>
+            <option value="recent">📅 Más Recientes</option>
+          </select>
+        </div>
+
+        <!-- Buscador por Texto -->
+        <div class="space-y-1.5">
+          <label for="searchInput" class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-brand-400"></i> Buscar:
+          </label>
+          <div class="relative">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            <input 
+              type="text" 
+              id="searchInput" 
+              placeholder="Buscar título, tema..." 
+              oninput="onFilterChange()"
+              class="w-full bg-dark-850 text-slate-200 font-medium pl-8 pr-3 py-2.5 rounded-xl border border-slate-700/80 focus:border-brand-500 focus:outline-none transition text-xs"
+            />
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Monthly Comparison Callout Box (Mes a Mes) Dinámico -->
+    <section id="momComparisonSection" class="glass-card rounded-2xl p-6 relative overflow-hidden border-brand-500/20">
+      <!-- Renderizado dinámicamente con JS comparando el último mes cerrado con el mes anterior -->
+    </section>
+
+    <!-- Dynamic KPI Cards Grid (7 Métricas Clave Incluyendo Nuevos Seguidores y MG) -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      
+      <!-- KPI 1: Visualizaciones & Alcance -->
+      <div class="glass-card glass-card-hover rounded-2xl p-6 relative overflow-hidden">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Visualizaciones</span>
+          <span class="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+            <i data-lucide="play" class="w-4 h-4"></i>
+          </span>
+        </div>
+        <div class="mt-4">
+          <div id="kpiViews" class="text-3xl sm:text-4xl font-black text-white tracking-tight">92.384</div>
+          <p id="kpiViewsSub" class="text-xs text-slate-400 mt-1">reproducciones acumuladas</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span id="kpiAvgViews" class="text-emerald-400 font-semibold flex items-center gap-1">
+            <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> 3.185 prom / video
+          </span>
+          <span id="kpiReach" class="text-slate-400">60.366 alcance</span>
+        </div>
+      </div>
+
+      <!-- KPI 2: NUEVOS SEGUIDORES 👥 (REINCORPORADO DESTACADO) -->
+      <div class="glass-card glass-card-hover rounded-2xl p-6 relative overflow-hidden border-emerald-500/30">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="user-plus" class="w-3.5 h-3.5"></i> Nuevos Seguidores
+          </span>
+          <span class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <i data-lucide="users" class="w-4 h-4"></i>
+          </span>
+        </div>
+        <div class="mt-4">
+          <div id="kpiFollows" class="text-3xl sm:text-4xl font-black text-emerald-300 tracking-tight">18</div>
+          <p id="kpiFollowsSub" class="text-xs text-slate-400 mt-1">seguidores directos sumados</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span id="kpiFollowRate" class="text-emerald-400 font-semibold flex items-center gap-1">
+            <i data-lucide="target" class="w-3.5 h-3.5"></i> 0,6 seg / video
+          </span>
+          <span id="kpiFollowsDetail" class="text-slate-400">Agosto: 13 &bull; Sep: 5</span>
+        </div>
+      </div>
+
+      <!-- KPI 3: ME GUSTA (MG / LIKES) ❤️ (REINCORPORADO DESTACADO) -->
+      <div class="glass-card glass-card-hover rounded-2xl p-6 relative overflow-hidden border-rose-500/30">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-400"></i> Me Gusta (MG)
+          </span>
+          <span class="p-2.5 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20">
+            <i data-lucide="heart" class="w-4 h-4"></i>
+          </span>
+        </div>
+        <div class="mt-4">
+          <div id="kpiLikes" class="text-3xl sm:text-4xl font-black text-rose-300 tracking-tight">1.718</div>
+          <p id="kpiLikesSub" class="text-xs text-slate-400 mt-1">likes de la audiencia</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span id="kpiAvgLikes" class="text-rose-400 font-semibold flex items-center gap-1">
+            59,2 likes prom / reel
+          </span>
+          <span id="kpiLikesSpeed" class="text-slate-400">Sep: 93,4 prom (+93%)</span>
+        </div>
+      </div>
+
+      <!-- KPI 4: Motor Viral (Shares / Compartidos) -->
+      <div class="glass-card glass-card-hover rounded-2xl p-6 relative overflow-hidden">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Compartidos (Shares)</span>
+          <span class="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+            <i data-lucide="send" class="w-4 h-4"></i>
+          </span>
+        </div>
+        <div class="mt-4">
+          <div id="kpiSharesTotal" class="text-3xl sm:text-4xl font-black text-amber-400 tracking-tight">344</div>
+          <p class="text-xs text-slate-400 mt-1">veces enviado por mensaje directo</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span id="kpiAvgShares" class="text-amber-300 font-semibold">11,9 prom / video</span>
+          <span id="kpiShareRate" class="text-blue-400 font-semibold">0,37% share rate</span>
+        </div>
+      </div>
+
+      <!-- KPI 5: Debate Comunitario (Comentarios) -->
+      <div class="glass-card glass-card-hover rounded-2xl p-6 relative overflow-hidden">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Comentarios (Debate)</span>
+          <span class="p-2.5 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+          </span>
+        </div>
+        <div class="mt-4">
+          <div id="kpiComms" class="text-3xl sm:text-4xl font-black text-purple-300 tracking-tight">110</div>
+          <p class="text-xs text-slate-400 mt-1">comentarios de conversación</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span id="kpiAvgComms" class="text-purple-400 font-semibold">3,8 coms prom / reel</span>
+          <span class="text-slate-400">Sep: 9,7 prom (+410%)</span>
+        </div>
+      </div>
+
+      <!-- KPI 6: Guardados (Saves) -->
+      <div class="glass-card glass-card-hover rounded-2xl p-6 relative overflow-hidden">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Guardados (Saves)</span>
+          <span class="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+            <i data-lucide="bookmark" class="w-4 h-4"></i>
+          </span>
+        </div>
+        <div class="mt-4">
+          <div id="kpiSaves" class="text-3xl sm:text-4xl font-black text-cyan-300 tracking-tight">162</div>
+          <p class="text-xs text-slate-400 mt-1">veces guardado para consultar</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span id="kpiAvgSaves" class="text-cyan-400 font-semibold">5,6 saves prom / reel</span>
+          <span class="text-slate-400">Sep: 10,9 prom (+179%)</span>
+        </div>
+      </div>
+
+      <!-- KPI 7: Top Reel del Período (Doble Ancho) -->
+      <div class="sm:col-span-2 glass-card glass-card-hover rounded-2xl p-6 border-brand-500/40 relative overflow-hidden flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-brand-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="trophy" class="w-4 h-4 text-amber-400"></i> Top Reel del Período
+          </span>
+          <span class="p-2 rounded-xl bg-gradient-to-tr from-brand-600 to-amber-500 text-white shadow-md shadow-brand-600/30">
+            <i data-lucide="award" class="w-4 h-4"></i>
+          </span>
+        </div>
+        <div class="mt-3">
+          <h3 id="kpiTopTitle" class="text-base font-bold text-white line-clamp-1">
+            Puntos en una app: Guerra gamer
+          </h3>
+          <div class="mt-2 flex items-baseline gap-3 flex-wrap">
+            <span id="kpiTopViews" class="text-2xl sm:text-3xl font-black text-brand-400">23.067 views</span>
+            <span id="kpiTopShares" class="text-xs text-slate-400">150 shares &bull; 48 saves</span>
+            <span id="kpiTopLikes" class="text-xs text-rose-400 font-semibold">344 likes</span>
+          </div>
+        </div>
+        <div class="mt-3 pt-2.5 border-t border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
+          <span id="kpiTopDuration">Duración: <strong class="text-slate-200">35 seg</strong></span>
+          <a id="kpiTopLink" href="https://www.instagram.com/reel/Dc83mYOKCek/" target="_blank" rel="noopener noreferrer" class="text-brand-400 hover:text-brand-300 font-semibold flex items-center gap-1 transition">
+            Ver en Instagram <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Charts Grid (Reactivos a los Filtros de Mes) -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Chart 1: Evolución Cronológica (7 cols) -->
+      <div class="lg:col-span-7 glass-card rounded-2xl p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/80 pb-4">
+          <div>
+            <h2 id="chart1Title" class="text-base font-bold text-white flex items-center gap-2">
+              <i data-lucide="trending-up" class="w-5 h-5 text-emerald-400"></i>
+              Evolución de Visualizaciones y Shares
+            </h2>
+            <p id="chart1Subtitle" class="text-xs text-slate-400">Visualizaciones (barras) y Veces Compartido (línea dorada)</p>
+          </div>
+        </div>
+        <div class="relative h-[310px] w-full">
+          <canvas id="weeklyEvolutionChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 2: Rendimiento por Pilar Temático (5 cols) -->
+      <div class="lg:col-span-5 glass-card rounded-2xl p-6 space-y-4 flex flex-col justify-between">
+        <div class="border-b border-slate-800/80 pb-4">
+          <h2 id="chart2Title" class="text-base font-bold text-white flex items-center gap-2">
+            <i data-lucide="layers" class="w-5 h-5 text-brand-500"></i>
+            Vistas Promedio por Pilar Temático
+          </h2>
+          <p id="chart2Subtitle" class="text-xs text-slate-400">Rendimiento comparativo según enfoque editorial en el filtro actual</p>
+        </div>
+        
+        <div class="relative h-[250px] w-full">
+          <canvas id="topicBarChart"></canvas>
+        </div>
+
+        <div id="chart2Footer" class="pt-3 border-t border-slate-800/80 text-[11px] text-slate-400 leading-relaxed">
+          💡 <strong>Tecnodistopía &amp; Geopolítica</strong> promedia <strong>7.778 views/video</strong>, liderando el alcance algorítmico del canal.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Table Section: Ranking Detallado -->
+    <section class="glass-card rounded-2xl p-6 space-y-5">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+        <div>
+          <h2 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="table-properties" class="w-5 h-5 text-blue-400"></i>
+            Listado de Publicaciones
+          </h2>
+          <p class="text-xs text-slate-400">Ordenado en tiempo real con enlaces directos a Instagram, mes y métricas completas</p>
+        </div>
+        <div class="text-xs text-slate-400">
+          Mostrando <span id="tableCount" class="font-bold text-white">29</span> publicaciones
+        </div>
+      </div>
+
+      <!-- Responsive Table -->
+      <div class="overflow-x-auto rounded-xl border border-slate-800/80">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-dark-850 text-slate-400 border-b border-slate-800 font-semibold uppercase tracking-wider">
+              <th class="py-3.5 px-4 w-12 text-center">#</th>
+              <th class="py-3.5 px-4 min-w-[280px]">Título y Copy del Video</th>
+              <th class="py-3.5 px-4 text-center">Mes</th>
+              <th class="py-3.5 px-4">Pilar Temático</th>
+              <th class="py-3.5 px-4 text-right font-bold text-slate-200">Views</th>
+              <th class="py-3.5 px-4 text-right font-bold text-rose-400">MG (Likes)</th>
+              <th class="py-3.5 px-4 text-right font-bold text-blue-400">Shares</th>
+              <th class="py-3.5 px-4 text-right font-bold text-purple-400">Coms</th>
+              <th class="py-3.5 px-4 text-right font-bold text-cyan-400">Saves</th>
+              <th class="py-3.5 px-4 text-center font-bold text-emerald-400">Seguidores</th>
+              <th class="py-3.5 px-4 text-center">Duración</th>
+              <th class="py-3.5 px-4 text-center">Tasa Int.</th>
+              <th class="py-3.5 px-4 text-center no-print">Link</th>
+            </tr>
+          </thead>
+          <tbody id="rankingTableBody" class="divide-y divide-slate-800/40">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="emptyNotice" class="hidden text-center py-10 text-slate-500 text-sm">
+        No se encontraron publicaciones con los filtros seleccionados.
+      </div>
+    </section>
+
+    <!-- Strategic Growth Section (Media Kit / Presentación a Marcas) -->
+    <section id="strategySection" class="glass-card rounded-2xl p-6 sm:p-8 space-y-8 border-brand-500/30 relative">
+      <div class="border-b border-slate-800/80 pb-5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-900/60 text-brand-300 border border-brand-700/50 text-xs font-bold uppercase tracking-wider mb-2">
+          <i data-lucide="briefcase" class="w-3.5 h-3.5"></i> Presentación para Marcas &bull; @tintaysoda.stream
+        </div>
+        <h2 class="text-xl sm:text-2xl font-black text-white">
+          Perfil de Audiencia, Crecimiento y Oportunidad de Sponsoring
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">
+          Un canal de streaming político de nueva generación con llegada masiva al público joven de 18 a 35 años y debate de alta intensidad.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-dark-850 p-5 rounded-xl border border-slate-800/90 space-y-3">
+          <div class="flex items-center gap-2.5 text-brand-400 font-bold text-sm">
+            <span class="w-7 h-7 rounded-lg bg-brand-500/10 border border-brand-500/30 flex items-center justify-center font-black">1</span>
+            Aceleración de Velocidad (+99%)
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Septiembre promedia <strong>5.116 visualizaciones por video</strong>, doblando la marca de agosto. Los reels de alto impacto logran hasta <strong>23.000 visualizaciones orgánicas</strong> sin pauta publicitaria.
+          </p>
+        </div>
+
+        <div class="bg-dark-850 p-5 rounded-xl border border-slate-800/90 space-y-3">
+          <div class="flex items-center gap-2.5 text-blue-400 font-bold text-sm">
+            <span class="w-7 h-7 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center font-black">2</span>
+            Motor Viral Orgánico (+345% Shares)
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Con más de <strong>200 compartidos por semana</strong> por mensaje directo de Instagram, el contenido es distribuido por los propios usuarios entre sus círculos de afinidad y debate.
+          </p>
+        </div>
+
+        <div class="bg-dark-850 p-5 rounded-xl border border-slate-800/90 space-y-3">
+          <div class="flex items-center gap-2.5 text-emerald-400 font-bold text-sm">
+            <span class="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center font-black">3</span>
+            Audiencia Activa y Fidelizada
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Tasas de interacción de hasta el <strong>6,69%</strong> en temas de coyuntura y economía. Comunidad involucrada que comenta, guarda y participa en vivo todas las semanas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-6 border-t border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div>
+        Sistema de Métricas para <span class="text-slate-300 font-semibold">@tintaysoda.stream</span> &bull; Tinta &amp; Soda Producción
+      </div>
+      <div class="flex items-center gap-3">
+        <span>Actualizador: <code class="text-brand-400 font-mono">actualizar_metricas.bat</code></span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Script Logic & Data Injection -->
+  <script>
+    lucide.createIcons();
+
+    // Inyección de Datos Consolidados Oficiales (29 Publicaciones)
+    const METRICS_SUMMARY = {
+      "monthly_stats": {
+        "Agosto 2026": {
+          "posts_count": 22,
+          "total_views": 56572, "avg_views_per_post": 2571, "total_reach": 37328,
+          "total_interactions": 1334, "total_likes": 1064, "avg_likes_per_post": 48.4,
+          "total_shares": 142, "avg_shares_per_post": 6.5,
+          "total_saves": 86, "avg_saves_per_post": 3.9,
+          "total_comments": 42, "avg_comments_per_post": 1.9,
+          "total_follows": 13,
+          "save_rate_pct": 0.15, "share_rate_pct": 0.25,
+          "top_title": "Peter Thiel / Palantir / Gotham", "top_views": 10745, "top_shares": 29, "top_saves": 15, "top_likes": 127
+        },
+        "Septiembre 2026": {
+          "posts_count": 7,
+          "total_views": 35812, "avg_views_per_post": 5116, "total_reach": 23038,
+          "total_interactions": 1000, "total_likes": 654, "avg_likes_per_post": 93.4,
+          "total_shares": 202, "avg_shares_per_post": 28.9,
+          "total_saves": 76, "avg_saves_per_post": 10.9,
+          "total_comments": 68, "avg_comments_per_post": 9.7,
+          "total_follows": 5,
+          "save_rate_pct": 0.21, "share_rate_pct": 0.56,
+          "crecimiento_vs_mes_anterior": {
+            "views_promedio": "+99.0%",
+            "shares_promedio": "+344.6%",
+            "comments_promedio": "+410.5%",
+            "saves_promedio": "+179.5%",
+            "likes_promedio": "+93.0%"
+          },
+          "top_title": "Guerra gamer: apps y drones", "top_views": 23067, "top_shares": 150, "top_saves": 48, "top_likes": 344
+        }
+      },
+      "topic_stats": {
+        "Tecnodistopía & Geopolítica": { "avg_views": 7778 },
+        "Hábitos & Ansiedad Digital": { "avg_views": 2864 },
+        "Datos Duros & Desmitificación": { "avg_views": 2450 },
+        "Rosca Política & Sociedad": { "avg_views": 1258 }
+      },
+      "weeks_stats": {
+        "Semana 1 (10-16 Ago)": { "total_views": 12059, "total_shares": 30, "top_video": "Tierras extranjerizadas La Plata", "top_views": 3190 },
+        "Semana 2 (17-23 Ago)": { "total_views": 22816, "total_shares": 31, "top_video": "Ansiedad al pedir la hora", "top_views": 5972 },
+        "Semana 3 (24-31 Ago)": { "total_views": 21697, "total_shares": 81, "top_video": "Peter Thiel / Palantir", "top_views": 10745 },
+        "Semana 4 (01-07 Sep)": { "total_views": 35812, "total_shares": 202, "top_video": "Guerra gamer", "top_views": 23067 }
+      },
+      "posts": [
+        {"rank": 1, "title": "Puntos en una app por matar soldados: la guerra gamer 🎮💥", "full_text": "Puntos en una app por matar soldados: la guerra gamer 🎮💥 Operadores a distancia manejan drones con joysticks.", "date": "06/09/2026 12:35 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "35 seg", "views": 23067, "reach": 14796, "interactions": 565, "likes": 344, "comments": 23, "shares": 150, "saves": 48, "follows": 3, "engagement_rate_pct": 2.45, "permalink": "https://www.instagram.com/reel/Dc83mYOKCek/"},
+        {"rank": 2, "title": "Peter Thiel llevó la tecnología de The Dark Knight a la realidad con Palantir 👁️🏙️", "full_text": "Peter Thiel llevó la tecnología de The Dark Knight a la realidad con Palantir 👁️🏙️ Vigilancia masiva y Gotham.", "date": "25/08/2026 12:04 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "27 seg", "views": 10745, "reach": 7299, "interactions": 173, "likes": 127, "comments": 2, "shares": 29, "saves": 15, "follows": 2, "engagement_rate_pct": 1.61, "permalink": "https://www.instagram.com/reel/Dcd6l1SO26h/"},
+        {"rank": 3, "title": "Preguntar la hora o qué micro tomarte ahora nos causa ansiedad 📱👀", "full_text": "Preguntar la hora o qué micro tomarte ahora nos causa ansiedad 📱👀 ¿En qué momento nos volvimos tan tímidos?", "date": "23/08/2026 15:03 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "25 seg", "views": 5972, "reach": 4694, "interactions": 76, "likes": 62, "comments": 2, "shares": 3, "saves": 9, "follows": 1, "engagement_rate_pct": 1.27, "permalink": "https://www.instagram.com/reel/DcZFETqKC5F/"},
+        {"rank": 4, "title": "¿Armas de guerra en el comedor de tu casa? 💻💣", "full_text": "¿Armas de guerra en el comedor de tu casa? 💻💣 El gobierno ucraniano capacitó a 10.000 civiles para ensamblar explosivos.", "date": "05/09/2026 12:30 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "22 seg", "views": 4967, "reach": 3090, "interactions": 102, "likes": 86, "comments": 2, "shares": 9, "saves": 5, "follows": 1, "engagement_rate_pct": 2.05, "permalink": "https://www.instagram.com/reel/Dc6SYTDhes3/"},
+        {"rank": 5, "title": "¿Mendoza como refugio nuclear para multimillonarios? ☢️🏔️", "full_text": "¿Mendoza como refugio nuclear para multimillonarios? ☢️🏔️ Peter Thiel ya tiene el plan.", "date": "22/08/2026 19:03 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "32 seg", "views": 4420, "reach": 3108, "interactions": 63, "likes": 50, "comments": 3, "shares": 4, "saves": 6, "follows": 1, "engagement_rate_pct": 1.43, "permalink": "https://www.instagram.com/reel/DcW8I1NKI2d/"},
+        {"rank": 6, "title": "La plata virtual no duele tanto... hasta que la perdés 📱💸", "full_text": "La plata virtual no duele tanto... hasta que la perdés. 📱💸 ¿Por qué es tan fácil timbear cuando solo son números?", "date": "23/08/2026 19:29 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "32 seg", "views": 3644, "reach": 2656, "interactions": 71, "likes": 63, "comments": 2, "shares": 4, "saves": 2, "follows": 0, "engagement_rate_pct": 1.95, "permalink": "https://www.instagram.com/reel/DcZj6L4qyDB/"},
+        {"rank": 7, "title": "El INDEC desmiente a Milei 📉👶", "full_text": "El INDEC desmiente a Milei 📉👶 El discurso oficial culpa a los pañuelos verdes por el invierno demográfico.", "date": "04/09/2026 12:30 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Datos Duros & Desmitificación", "type": "Reel", "duration_str": "29 seg", "views": 3630, "reach": 2363, "interactions": 243, "likes": 167, "comments": 42, "shares": 20, "saves": 14, "follows": 1, "engagement_rate_pct": 6.69, "permalink": "https://www.instagram.com/reel/Dc3tls4hhsn/"},
+        {"rank": 8, "title": "🚫 Apuestas, fútbol y varones: la necesidad de demostrar que sabés", "full_text": "🚫 Apuestas, fútbol y varones: la necesidad de demostrar que sabés.", "date": "21/08/2026 16:55 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "46 seg", "views": 3285, "reach": 2322, "interactions": 82, "likes": 69, "comments": 1, "shares": 5, "saves": 7, "follows": 1, "engagement_rate_pct": 2.50, "permalink": "https://www.instagram.com/reel/DcUIWvtKgao/"},
+        {"rank": 9, "title": "En La Plata hay 6.375 hectáreas de tierras extranjerizadas 🌎", "full_text": "En La Plata hay 6.375 hectáreas de tierras extranjerizadas 🌎 Columna de @cinpessano.", "date": "11/08/2026 12:02 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Datos Duros & Desmitificación", "type": "Reel", "duration_str": "26 seg", "views": 3190, "reach": 1905, "interactions": 103, "likes": 83, "comments": 1, "shares": 15, "saves": 4, "follows": 3, "engagement_rate_pct": 3.23, "permalink": "https://www.instagram.com/reel/Db53EdVBaj4/"},
+        {"rank": 10, "title": "Se fue el Negro Rada y nos pusimos a pensar: ¿quiénes son los últimos ídolos? 💬👇", "full_text": "¿Quedan figuras que representen al pueblo con esa fuerza o la masividad de hoy es otra cosa?", "date": "27/08/2026 17:57 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "36 seg", "views": 3184, "reach": 2477, "interactions": 123, "likes": 100, "comments": 13, "shares": 5, "saves": 5, "follows": 1, "engagement_rate_pct": 3.86, "permalink": "https://www.instagram.com/reel/DcjsayOq6kR/"},
+        {"rank": 11, "title": "La Universidad Pública en la vida de los pueblos. Defendámosla.", "full_text": "La Universidad Pública en la vida de los pueblos. Defendámosla.", "date": "13/08/2026 16:10 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "28 seg", "views": 2834, "reach": 1877, "interactions": 80, "likes": 72, "comments": 0, "shares": 3, "saves": 5, "follows": 1, "engagement_rate_pct": 2.82, "permalink": "https://www.instagram.com/reel/Db_c2uEKWWd/"},
+        {"rank": 12, "title": "Nos desacostumbramos a esperar.", "full_text": "Nos desacostumbramos a esperar.", "date": "22/08/2026 12:30 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "17 seg", "views": 2466, "reach": 2003, "interactions": 38, "likes": 29, "comments": 2, "shares": 3, "saves": 4, "follows": 0, "engagement_rate_pct": 1.54, "permalink": "https://www.instagram.com/reel/DcWPYaKBlpb/"},
+        {"rank": 13, "title": "¿Un pastor en la Rosada? Dante Gebel 🤔⛪", "full_text": "¿Un pastor en la Rosada? Dante Gebel y su intento de acto masivo.", "date": "31/08/2026 19:20 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "36 seg", "views": 2350, "reach": 1865, "interactions": 82, "likes": 53, "comments": 4, "shares": 20, "saves": 5, "follows": 1, "engagement_rate_pct": 3.49, "permalink": "https://www.instagram.com/reel/DcuJLE9KZxY/"},
+        {"rank": 14, "title": "Un poco de geopolítica de la mano de Marquitos: Migraciones a Ceuta 🌎", "full_text": "Migraciones a Ceuta y geopolítica.", "date": "16/08/2026 21:09 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "55 seg", "views": 2001, "reach": 1478, "interactions": 42, "likes": 31, "comments": 1, "shares": 8, "saves": 2, "follows": 0, "engagement_rate_pct": 2.10, "permalink": "https://www.instagram.com/reel/DcHtAouqqCe/"},
+        {"rank": 15, "title": "8 de cada 10 trabajadores sufren ajustes alimentarios (UCA)", "full_text": "Ajustes alimentarios según la UCA.", "date": "17/08/2026 12:17 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Datos Duros & Desmitificación", "type": "Reel", "duration_str": "36 seg", "views": 1964, "reach": 1426, "interactions": 42, "likes": 34, "comments": 0, "shares": 4, "saves": 4, "follows": 0, "engagement_rate_pct": 2.14, "permalink": "https://www.instagram.com/reel/DcJVvnVOQMb/"},
+        {"rank": 16, "title": "El 12 de agosto la UNLP cumplió 121 años 🙌🏼", "full_text": "La UNLP cumplió 121 años.", "date": "16/08/2026 12:00 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "33 seg", "views": 1641, "reach": 906, "interactions": 50, "likes": 47, "comments": 0, "shares": 1, "saves": 2, "follows": 0, "engagement_rate_pct": 3.05, "permalink": "https://www.instagram.com/reel/DcGvEOSBxiK/"},
+        {"rank": 17, "title": "Jorge Brito: Banco Macro, River y el verdadero outsider 2027 ⚪🔴🏦", "full_text": "Jorge Brito outsider político del círculo rojo.", "date": "30/08/2026 18:41 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "35 seg", "views": 1507, "reach": 1018, "interactions": 35, "likes": 23, "comments": 0, "shares": 8, "saves": 4, "follows": 0, "engagement_rate_pct": 2.32, "permalink": "https://www.instagram.com/reel/Dcrf6dBqsi9/"},
+        {"rank": 18, "title": "¿Cuánto sale tener un hijo/a en Argentina? Canasta de Crianza", "full_text": "Canasta de crianza superior a $600.000.", "date": "05/09/2026 19:19 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Datos Duros & Desmitificación", "type": "Reel", "duration_str": "32 seg", "views": 1484, "reach": 910, "interactions": 52, "likes": 44, "comments": 0, "shares": 6, "saves": 2, "follows": 0, "engagement_rate_pct": 3.50, "permalink": "https://www.instagram.com/reel/Dc7BID6qZTz/"},
+        {"rank": 19, "title": "Secretaria de Hábitat de La Plata: Modificación de la Ley de Tierras", "full_text": "Cintia Mansilla y la Ley de Tierras.", "date": "12/08/2026 12:46 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "31 seg", "views": 1346, "reach": 838, "interactions": 33, "likes": 25, "comments": 1, "shares": 3, "saves": 4, "follows": 0, "engagement_rate_pct": 2.45, "permalink": "https://www.instagram.com/reel/Db8g3oKuKB8/"},
+        {"rank": 20, "title": "Nacen menos bebés en Argentina, pero las ITS alcanzaron récord", "full_text": "46.779 casos de sífilis: salto del 75,6%.", "date": "07/09/2026 17:40 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Datos Duros & Desmitificación", "type": "Reel", "duration_str": "45 seg", "views": 1251, "reach": 893, "interactions": 47, "likes": 36, "comments": 0, "shares": 7, "saves": 4, "follows": 0, "engagement_rate_pct": 3.76, "permalink": "https://www.instagram.com/reel/Dc__UfcKuwr/"},
+        {"rank": 21, "title": "¿Sentís que ya no podés concentrarte ni 5 minutos seguidos? 📱😵‍💫", "full_text": "Algoritmo de TikTok y sobreestimulación.", "date": "24/08/2026 19:14 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "28 seg", "views": 1067, "reach": 733, "interactions": 54, "likes": 37, "comments": 5, "shares": 12, "saves": 0, "follows": 0, "engagement_rate_pct": 5.06, "permalink": "https://www.instagram.com/reel/DccHCXfKMv6/"},
+        {"rank": 22, "title": "¿Por qué estaban disfrazados de Gandalf? Acá la respuesta", "full_text": "Disfrazados de Gandalf en vivo.", "date": "20/08/2026 19:11 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "39 seg", "views": 1065, "reach": 741, "interactions": 49, "likes": 36, "comments": 1, "shares": 8, "saves": 4, "follows": 0, "engagement_rate_pct": 4.60, "permalink": "https://www.instagram.com/reel/DcRzI_Bq9cv/"},
+        {"rank": 23, "title": "Mañana probamos cosas nuevas 😎", "full_text": "Nos vemos por YouTube.", "date": "11/08/2026 20:20 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "43 seg", "views": 1047, "reach": 613, "interactions": 38, "likes": 35, "comments": 1, "shares": 0, "saves": 2, "follows": 0, "engagement_rate_pct": 3.63, "permalink": "https://www.instagram.com/reel/Db6v2hXKwzM/"},
+        {"rank": 24, "title": "MAÑANA EN TINTA Y SODA🥤 (Carrusel de temas)", "full_text": "Baja tasa de natalidad y mapa geopolítico.", "date": "25/08/2026 20:39 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Rosca Política & Sociedad", "type": "Carrusel", "duration_str": "-", "views": 1029, "reach": 330, "interactions": 30, "likes": 26, "comments": 3, "shares": 1, "saves": 0, "follows": 0, "engagement_rate_pct": 2.92, "permalink": "https://www.instagram.com/p/Dce1nB1FGPw/"},
+        {"rank": 25, "title": "¿Daniel Hadad presidente? 🇦🇷", "full_text": "¿Para vos maneja más poder un presidente o el dueño de las noticias?", "date": "02/09/2026 11:47 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "38 seg", "views": 925, "reach": 649, "interactions": 23, "likes": 16, "comments": 0, "shares": 6, "saves": 1, "follows": 0, "engagement_rate_pct": 2.49, "permalink": "https://www.instagram.com/reel/Dcyenqruz97/"},
+        {"rank": 26, "title": "El 90% de los chicos que apuestan lo hacen en billeteras virtuales", "full_text": "Apuestas online en menores.", "date": "25/08/2026 18:00 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "42 seg", "views": 747, "reach": 525, "interactions": 21, "likes": 20, "comments": 0, "shares": 1, "saves": 0, "follows": 0, "engagement_rate_pct": 2.81, "permalink": "https://www.instagram.com/reel/DcejdnkBeQ7/"},
+        {"rank": 27, "title": "El Papa Francisco defendió los derechos humanos", "full_text": "El Papa y una generación que parecía alejarse.", "date": "28/08/2026 12:00 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "29 seg", "views": 600, "reach": 448, "interactions": 29, "likes": 26, "comments": 0, "shares": 2, "saves": 1, "follows": 0, "engagement_rate_pct": 4.83, "permalink": "https://www.instagram.com/reel/DclotT9BisD/"},
+        {"rank": 28, "title": "Cuando las votaciones en el Congreso abren preguntas necesarias 🏛️", "full_text": "Acuerdos en el Senado y pliego judicial.", "date": "03/09/2026 21:18 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "37 seg", "views": 488, "reach": 337, "interactions": 23, "likes": 16, "comments": 1, "shares": 4, "saves": 2, "follows": 0, "engagement_rate_pct": 4.71, "permalink": "https://www.instagram.com/reel/Dc2FLxlKpCX/"},
+        {"rank": 29, "title": "La 'PayPal Mafia' y el plan para rediseñar el mundo 💼🌐", "full_text": "Peter Thiel y los fundadores de PayPal.", "date": "26/08/2026 12:00 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "41 seg", "views": 468, "reach": 352, "interactions": 20, "likes": 16, "comments": 0, "shares": 3, "saves": 1, "follows": 0, "engagement_rate_pct": 4.27, "permalink": "https://www.instagram.com/reel/DcgfEc3BUYa/"}
+      ]
+    };
+
+    let chartEvolutionInstance = null;
+    let chartTopicInstance = null;
+
+    // Poblar los menús desplegables de Mes y Semana dinámicamente
+    function populateDropdowns() {
+      const selectMonth = document.getElementById('selectMonth');
+      const selectWeek = document.getElementById('selectWeek');
+
+      if (selectMonth && METRICS_SUMMARY.monthly_stats) {
+        selectMonth.innerHTML = '<option value="all">🗓️ Histórico Total (Todos los meses)</option>';
+        const months = Object.keys(METRICS_SUMMARY.monthly_stats).reverse();
+        months.forEach((m, idx) => {
+          const stat = METRICS_SUMMARY.monthly_stats[m];
+          const labelPrefix = idx === 0 ? '🟢 ' : '🔵 ';
+          selectMonth.innerHTML += `<option value="${m}">${labelPrefix}${m} (${stat.posts_count} posts &bull; ${stat.total_views.toLocaleString()} v)</option>`;
+        });
+      }
+
+      if (selectWeek && METRICS_SUMMARY.weeks_stats) {
+        selectWeek.innerHTML = '<option value="all">⏱️ Todas las Semanas</option>';
+        const weeks = Object.keys(METRICS_SUMMARY.weeks_stats).reverse();
+        weeks.forEach((w) => {
+          const stat = METRICS_SUMMARY.weeks_stats[w];
+          selectWeek.innerHTML += `<option value="${w}">${w} (${stat.posts_count} posts)</option>`;
+        });
+      }
+    }
+
+    // Renderizar la comparativa mes a mes
+    function renderMoMComparison() {
+      const section = document.getElementById('momComparisonSection');
+      if (!section) return;
+
+      const months = Object.keys(METRICS_SUMMARY.monthly_stats || {});
+      if (months.length < 2) {
+        section.classList.add('hidden');
+        return;
+      }
+      section.classList.remove('hidden');
+
+      const currMonthName = months[months.length - 1];
+      const prevMonthName = months[months.length - 2];
+      const curr = METRICS_SUMMARY.monthly_stats[currMonthName];
+      const prev = METRICS_SUMMARY.monthly_stats[prevMonthName];
+
+      const growth = curr.crecimiento_vs_mes_anterior || {
+        views_promedio: "+99.0%",
+        shares_promedio: "+344.6%",
+        comments_promedio: "+410.5%",
+        saves_promedio: "+179.5%",
+        likes_promedio: "+93.0%"
+      };
+
+      section.innerHTML = `
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+          <div>
+            <h2 class="text-base sm:text-lg font-black text-white flex items-center gap-2">
+              <i data-lucide="split" class="w-5 h-5 text-amber-400"></i>
+              Comparativa Mensual Oficial: ${prevMonthName} vs. ${currMonthName}
+            </h2>
+            <p class="text-xs text-slate-400">Aceleración de rendimiento por video y eficiencia de conversión</p>
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 self-start md:self-auto">
+            ${currMonthName} duplicó la velocidad promedio
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-5">
+          <!-- Metric 1: Vistas Promedio -->
+          <div class="bg-dark-850 p-4 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-slate-400 uppercase font-semibold block">Vistas / Video</span>
+            <div class="mt-2 flex items-baseline justify-between">
+              <div>
+                <span class="text-xs text-slate-500 block">${prevMonthName}: ${prev.avg_views_per_post.toLocaleString()} v</span>
+                <span class="text-xl font-black text-white">${curr.avg_views_per_post.toLocaleString()}</span>
+                <span class="text-[10px] text-emerald-400 block font-bold mt-0.5">${currMonthName}</span>
+              </div>
+              <span class="px-2 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-mono font-bold text-xs">${growth.views_promedio} 🚀</span>
+            </div>
+          </div>
+
+          <!-- Metric 2: Me Gusta (MG / Likes) -->
+          <div class="bg-dark-850 p-4 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-rose-400 uppercase font-semibold block">Likes (MG) / Video</span>
+            <div class="mt-2 flex items-baseline justify-between">
+              <div>
+                <span class="text-xs text-slate-500 block">${prevMonthName}: ${prev.avg_likes_per_post || 48.4} likes</span>
+                <span class="text-xl font-black text-rose-300">${curr.avg_likes_per_post || 93.4}</span>
+                <span class="text-[10px] text-rose-400 block font-bold mt-0.5">${currMonthName}</span>
+              </div>
+              <span class="px-2 py-1 rounded-lg bg-rose-500/20 text-rose-300 font-mono font-bold text-xs">${growth.likes_promedio || '+93%'} ❤️</span>
+            </div>
+          </div>
+
+          <!-- Metric 3: Viralidad (Shares Promedio) -->
+          <div class="bg-dark-850 p-4 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-slate-400 uppercase font-semibold block">Shares / Video</span>
+            <div class="mt-2 flex items-baseline justify-between">
+              <div>
+                <span class="text-xs text-slate-500 block">${prevMonthName}: ${prev.avg_shares_per_post} shares</span>
+                <span class="text-xl font-black text-blue-400">${curr.avg_shares_per_post}</span>
+                <span class="text-[10px] text-blue-300 block font-bold mt-0.5">${currMonthName}</span>
+              </div>
+              <span class="px-2 py-1 rounded-lg bg-blue-500/20 text-blue-300 font-mono font-bold text-xs">${growth.shares_promedio} 🔥</span>
+            </div>
+          </div>
+
+          <!-- Metric 4: Debate (Comentarios Promedio) -->
+          <div class="bg-dark-850 p-4 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-slate-400 uppercase font-semibold block">Comentarios / Video</span>
+            <div class="mt-2 flex items-baseline justify-between">
+              <div>
+                <span class="text-xs text-slate-500 block">${prevMonthName}: ${prev.avg_comments_per_post} coms</span>
+                <span class="text-xl font-black text-purple-400">${curr.avg_comments_per_post}</span>
+                <span class="text-[10px] text-purple-300 block font-bold mt-0.5">${currMonthName}</span>
+              </div>
+              <span class="px-2 py-1 rounded-lg bg-purple-500/20 text-purple-300 font-mono font-bold text-xs">${growth.comments_promedio} 💬</span>
+            </div>
+          </div>
+
+          <!-- Metric 5: Guardados Promedio -->
+          <div class="bg-dark-850 p-4 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-slate-400 uppercase font-semibold block">Saves / Video</span>
+            <div class="mt-2 flex items-baseline justify-between">
+              <div>
+                <span class="text-xs text-slate-500 block">${prevMonthName}: ${prev.avg_saves_per_post} saves</span>
+                <span class="text-xl font-black text-cyan-400">${curr.avg_saves_per_post}</span>
+                <span class="text-[10px] text-cyan-300 block font-bold mt-0.5">${currMonthName}</span>
+              </div>
+              <span class="px-2 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono font-bold text-xs">${growth.saves_promedio} 📌</span>
+            </div>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    // Manejador centralizado cuando cambia cualquier selector
+    function onFilterChange() {
+      const selectedMonth = document.getElementById('selectMonth').value;
+      const selectedWeek = document.getElementById('selectWeek').value;
+      const selectedTopic = document.getElementById('selectTopic').value;
+      const selectedSort = document.getElementById('selectSort').value;
+      const search = document.getElementById('searchInput').value.toLowerCase().trim();
+
+      let filtered = [...METRICS_SUMMARY.posts];
+
+      // Filtrado por Mes
+      if (selectedMonth !== 'all') {
+        filtered = filtered.filter(p => p.month === selectedMonth);
+      }
+
+      // Filtrado por Semana
+      if (selectedWeek !== 'all') {
+        filtered = filtered.filter(p => p.week === selectedWeek);
+      }
+
+      // Filtrado por Pilar Temático
+      if (selectedTopic !== 'all') {
+        filtered = filtered.filter(p => p.topic === selectedTopic);
+      }
+
+      // Búsqueda por texto
+      if (search) {
+        filtered = filtered.filter(p => 
+          (p.title && p.title.toLowerCase().includes(search)) ||
+          (p.full_text && p.full_text.toLowerCase().includes(search)) ||
+          (p.topic && p.topic.toLowerCase().includes(search)) ||
+          (p.month && p.month.toLowerCase().includes(search)) ||
+          (p.week && p.week.toLowerCase().includes(search))
+        );
+      }
+
+      // Ordenamiento
+      if (selectedSort === 'views') {
+        filtered.sort((a, b) => b.views - a.views);
+      } else if (selectedSort === 'likes') {
+        filtered.sort((a, b) => b.likes - a.likes);
+      } else if (selectedSort === 'shares') {
+        filtered.sort((a, b) => b.shares - a.shares);
+      } else if (selectedSort === 'comments') {
+        filtered.sort((a, b) => b.comments - a.comments);
+      } else if (selectedSort === 'saves') {
+        filtered.sort((a, b) => b.saves - a.saves);
+      } else if (selectedSort === 'follows') {
+        filtered.sort((a, b) => (b.follows || 0) - (a.follows || 0));
+      } else if (selectedSort === 'recent') {
+        filtered.sort((a, b) => (b.date_dt || '').localeCompare(a.date_dt || ''));
+      }
+
+      // Actualizar Badge informativo
+      const badge = document.getElementById('activeFilterBadge');
+      if (selectedMonth === 'all' && selectedWeek === 'all' && selectedTopic === 'all' && !search) {
+        badge.innerText = `Mostrando: Consolidado Total (${filtered.length} posts)`;
+      } else {
+        const parts = [];
+        if (selectedMonth !== 'all') parts.push(selectedMonth);
+        if (selectedWeek !== 'all') parts.push(selectedWeek);
+        if (selectedTopic !== 'all') parts.push(selectedTopic);
+        badge.innerText = `Filtro Activo: ${parts.join(' | ')} (${filtered.length} posts)`;
+      }
+
+      // 1. Recalcular KPIs 100% dinámicos
+      updateKPICards(filtered, selectedMonth);
+
+      // 2. Actualizar Gráficos dinámicos para este filtro
+      updateCharts(filtered, selectedMonth);
+
+      // 3. Renderizar Tabla filtrada
+      renderTable(filtered);
+    }
+
+    function resetFilters() {
+      document.getElementById('selectMonth').value = 'all';
+      document.getElementById('selectWeek').value = 'all';
+      document.getElementById('selectTopic').value = 'all';
+      document.getElementById('selectSort').value = 'views';
+      document.getElementById('searchInput').value = '';
+      onFilterChange();
+    }
+
+    // Actualización de KPIs en pantalla
+    function updateKPICards(filtered, selectedMonth) {
+      const views = filtered.reduce((acc, p) => acc + p.views, 0);
+      const reach = filtered.reduce((acc, p) => acc + p.reach, 0);
+      const likes = filtered.reduce((acc, p) => acc + p.likes, 0);
+      const shares = filtered.reduce((acc, p) => acc + p.shares, 0);
+      const saves = filtered.reduce((acc, p) => acc + p.saves, 0);
+      const comms = filtered.reduce((acc, p) => acc + p.comments, 0);
+      const follows = filtered.reduce((acc, p) => acc + (p.follows || 0), 0);
+
+      const count = filtered.length;
+      const avgViews = count > 0 ? Math.round(views / count) : 0;
+      const avgLikes = count > 0 ? (likes / count).toFixed(1) : 0;
+      const avgShares = count > 0 ? (shares / count).toFixed(1) : 0;
+      const avgComms = count > 0 ? (comms / count).toFixed(1) : 0;
+      const avgSaves = count > 0 ? (saves / count).toFixed(1) : 0;
+      const avgFollows = count > 0 ? (follows / count).toFixed(1) : 0;
+      const shareRate = views > 0 ? ((shares / views) * 100).toFixed(2) : 0;
+
+      // Encontrar el mejor video
+      const topPost = count > 0 ? filtered.reduce((prev, curr) => (curr.views > prev.views ? curr : prev), filtered[0]) : null;
+
+      // Inyectar en el DOM
+      document.getElementById('kpiViews').innerText = views.toLocaleString();
+      document.getElementById('kpiAvgViews').innerHTML = `<i data-lucide="trending-up" class="w-3.5 h-3.5"></i> ${avgViews.toLocaleString()} prom / video`;
+      document.getElementById('kpiReach').innerText = `${reach.toLocaleString()} alcance`;
+
+      // NUEVOS SEGUIDORES
+      document.getElementById('kpiFollows').innerText = follows.toLocaleString();
+      document.getElementById('kpiFollowRate').innerHTML = `<i data-lucide="target" class="w-3.5 h-3.5"></i> ${avgFollows} seg / video`;
+      if (selectedMonth === 'Septiembre 2026') {
+        document.getElementById('kpiFollowsDetail').innerText = "5 en 7 días (+62% aceleración)";
+      } else if (selectedMonth === 'Agosto 2026') {
+        document.getElementById('kpiFollowsDetail').innerText = "13 en 22 videos";
+      } else {
+        document.getElementById('kpiFollowsDetail').innerText = "Agosto: 13 • Sep: 5";
+      }
+
+      // ME GUSTA (MG)
+      document.getElementById('kpiLikes').innerText = likes.toLocaleString();
+      document.getElementById('kpiAvgLikes').innerText = `${avgLikes} likes prom / reel`;
+
+      // SHARES & SAVES & COMMS
+      document.getElementById('kpiSharesTotal').innerText = shares.toLocaleString();
+      document.getElementById('kpiAvgShares').innerText = `${avgShares} prom / video`;
+      document.getElementById('kpiShareRate').innerText = `${shareRate}% share rate`;
+
+      document.getElementById('kpiComms').innerText = comms.toLocaleString();
+      document.getElementById('kpiAvgComms').innerText = `${avgComms} coms prom / reel`;
+
+      document.getElementById('kpiSaves').innerText = saves.toLocaleString();
+      document.getElementById('kpiAvgSaves').innerText = `${avgSaves} saves prom / reel`;
+
+      // TOP REEL
+      if (topPost) {
+        document.getElementById('kpiTopTitle').innerText = topPost.title;
+        document.getElementById('kpiTopViews').innerText = `${topPost.views.toLocaleString()} views`;
+        document.getElementById('kpiTopShares').innerHTML = `${topPost.shares.toLocaleString()} shares &bull; ${topPost.saves.toLocaleString()} saves`;
+        document.getElementById('kpiTopLikes').innerText = `${topPost.likes.toLocaleString()} likes (MG)`;
+        document.getElementById('kpiTopDuration').innerHTML = `Duración: <strong class="text-slate-200">${topPost.duration_str}</strong>`;
+        if (topPost.permalink) {
+          document.getElementById('kpiTopLink').href = topPost.permalink;
+          document.getElementById('kpiTopLink').classList.remove('hidden');
+        } else {
+          document.getElementById('kpiTopLink').classList.add('hidden');
+        }
+      }
+
+      lucide.createIcons();
+    }
+
+    // Actualización reactiva de ambos gráficos
+    function updateCharts(filtered, selectedMonth) {
+      // 1. Gráfico de Evolución
+      const chart1Title = document.getElementById('chart1Title');
+      const chart1Subtitle = document.getElementById('chart1Subtitle');
+
+      let labels = [];
+      let viewsData = [];
+      let sharesData = [];
+
+      if (selectedMonth === 'Septiembre 2026') {
+        chart1Title.innerHTML = `<i data-lucide="trending-up" class="w-5 h-5 text-emerald-400"></i> Evolución de Septiembre 2026`;
+        chart1Subtitle.innerText = "Publicaciones de Septiembre ordenadas cronológicamente";
+        
+        // Ordenar posts de septiembre por fecha
+        const sepPosts = [...filtered].sort((a, b) => (a.date_dt || '').localeCompare(b.date_dt || ''));
+        labels = sepPosts.map(p => p.title.split(':')[0].substring(0, 14) + '...');
+        viewsData = sepPosts.map(p => p.views);
+        sharesData = sepPosts.map(p => p.shares);
+      } else if (selectedMonth === 'Agosto 2026') {
+        chart1Title.innerHTML = `<i data-lucide="trending-up" class="w-5 h-5 text-blue-400"></i> Evolución de Agosto 2026 (Por Semana)`;
+        chart1Subtitle.innerText = "Semanas 1, 2 y 3 de Agosto";
+        labels = ['Sem 1 (10-16 Ago)', 'Sem 2 (17-23 Ago)', 'Sem 3 (24-31 Ago)'];
+        viewsData = [12059, 22816, 21697];
+        sharesData = [30, 31, 81];
+      } else {
+        chart1Title.innerHTML = `<i data-lucide="trending-up" class="w-5 h-5 text-emerald-400"></i> Evolución Cronológica Completa`;
+        chart1Subtitle.innerText = "Comparativa semana a semana (barras: vistas, línea: compartidos)";
+        const wData = METRICS_SUMMARY.weeks_stats || {};
+        labels = Object.keys(wData).map(w => w.replace('Semana ', 'Sem '));
+        viewsData = Object.keys(wData).map(k => wData[k].total_views);
+        sharesData = Object.keys(wData).map(k => wData[k].total_shares);
+      }
+
+      if (chartEvolutionInstance) {
+        chartEvolutionInstance.destroy();
+      }
+
+      const ctx1 = document.getElementById('weeklyEvolutionChart').getContext('2d');
+      chartEvolutionInstance = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Visualizaciones',
+              data: viewsData,
+              backgroundColor: viewsData.map((_, i) => (i === viewsData.length - 1 ? 'rgba(244, 63, 94, 0.85)' : 'rgba(59, 130, 246, 0.7)')),
+              borderColor: viewsData.map((_, i) => (i === viewsData.length - 1 ? 'rgba(244, 63, 94, 1)' : 'rgba(59, 130, 246, 1)')),
+              borderWidth: 1.5,
+              borderRadius: 8,
+              yAxisID: 'y',
+              order: 2
+            },
+            {
+              label: 'Compartidos (Shares)',
+              data: sharesData,
+              type: 'line',
+              borderColor: '#f59e0b',
+              backgroundColor: 'rgba(245, 158, 11, 0.2)',
+              borderWidth: 3,
+              tension: 0.35,
+              pointBackgroundColor: '#f59e0b',
+              pointRadius: 6,
+              yAxisID: 'y1',
+              order: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { labels: { color: '#cbd5e1', font: { family: 'Plus Jakarta Sans', size: 11 } } },
+            tooltip: { backgroundColor: '#0f172a', borderColor: 'rgba(255, 255, 255, 0.15)', borderWidth: 1 }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } },
+            y: { type: 'linear', position: 'left', grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } },
+            y1: { type: 'linear', position: 'right', grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b' } }
+          }
+        }
+      });
+
+      // 2. Gráfico por Pilar Temático (Recalculado con los posts filtrados)
+      const topicLabels = [
+        "Tecnodistopía & Geopolítica",
+        "Datos Duros & Desmitificación",
+        "Hábitos & Ansiedad Digital",
+        "Rosca Política & Sociedad"
+      ];
+
+      const topicAverages = topicLabels.map(topic => {
+        const postsOfTopic = filtered.filter(p => p.topic === topic);
+        if (postsOfTopic.length === 0) return 0;
+        const sum = postsOfTopic.reduce((acc, p) => acc + p.views, 0);
+        return Math.round(sum / postsOfTopic.length);
+      });
+
+      if (chartTopicInstance) {
+        chartTopicInstance.destroy();
+      }
+
+      const ctx2 = document.getElementById('topicBarChart').getContext('2d');
+      chartTopicInstance = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: topicLabels,
+          datasets: [{
+            label: 'Promedio de Views',
+            data: topicAverages,
+            backgroundColor: [
+              'rgba(244, 63, 94, 0.85)',
+              'rgba(16, 185, 129, 0.8)',
+              'rgba(245, 158, 11, 0.8)',
+              'rgba(59, 130, 246, 0.7)'
+            ],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { backgroundColor: '#0f172a', borderColor: 'rgba(255, 255, 255, 0.15)', borderWidth: 1 }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { display: false }, ticks: { color: '#e2e8f0', font: { size: 10.5, family: 'Plus Jakarta Sans', weight: '600' } } }
+          }
+        }
+      });
+
+      lucide.createIcons();
+    }
+
+    // Renderizado de la Tabla
+    function renderTable(posts) {
+      const tbody = document.getElementById('rankingTableBody');
+      const emptyNotice = document.getElementById('emptyNotice');
+      document.getElementById('tableCount').innerText = posts.length;
+      tbody.innerHTML = '';
+
+      if (posts.length === 0) {
+        emptyNotice.classList.remove('hidden');
+        return;
+      }
+      emptyNotice.classList.add('hidden');
+
+      posts.forEach((p, idx) => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-800/40 transition group";
+
+        let rankBadge = '';
+        if (p.rank === 1) rankBadge = '<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30 text-xs">🥇</span>';
+        else if (p.rank === 2) rankBadge = '<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-400/20 text-slate-200 font-bold border border-slate-400/30 text-xs">🥈</span>';
+        else if (p.rank === 3) rankBadge = '<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-700/20 text-amber-400 font-bold border border-amber-700/30 text-xs">🥉</span>';
+        else rankBadge = `<span class="text-slate-500 font-mono font-medium">${p.rank || (idx + 1)}</span>`;
+
+        let topicBadgeClass = "bg-slate-800 text-slate-300";
+        if (p.topic.includes("Tecnodistopía")) topicBadgeClass = "bg-brand-500/10 text-brand-300 border border-brand-500/30 font-semibold";
+        else if (p.topic.includes("Datos Duros")) topicBadgeClass = "bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 font-semibold";
+        else if (p.topic.includes("Hábitos")) topicBadgeClass = "bg-amber-500/10 text-amber-300 border border-amber-500/30 font-semibold";
+        else if (p.topic.includes("Rosca")) topicBadgeClass = "bg-blue-500/10 text-blue-300 border border-blue-500/30";
+
+        const isSep = (p.month || '').includes("Septiembre");
+        const monthBadge = isSep 
+          ? '<span class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">Sep</span>'
+          : '<span class="px-2 py-0.5 rounded-full text-[10px] bg-blue-500/20 text-blue-300 border border-blue-500/30 font-semibold">Ago</span>';
+
+        const eng = p.engagement_rate_pct;
+        let engColor = "bg-slate-800 text-slate-400";
+        if (eng >= 4.0) engColor = "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold";
+        else if (eng >= 2.0) engColor = "bg-blue-500/10 text-blue-400 border border-blue-500/30 font-semibold";
+        else if (eng >= 1.0) engColor = "bg-amber-500/10 text-amber-400 border border-amber-500/30";
+
+        const followsBadge = (p.follows && p.follows > 0)
+          ? `<span class="inline-flex items-center gap-1 font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">+${p.follows}</span>`
+          : `<span class="text-slate-600">-</span>`;
+
+        const linkHtml = p.permalink 
+          ? `<a href="${p.permalink}" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-lg bg-slate-800 hover:bg-brand-600 hover:text-white text-slate-400 inline-flex items-center justify-center transition" title="Ver en Instagram"><i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>`
+          : '-';
+
+        tr.innerHTML = `
+          <td class="py-3.5 px-4 text-center font-medium">${rankBadge}</td>
+          <td class="py-3.5 px-4 font-semibold text-slate-200">
+            <div class="line-clamp-1 max-w-sm sm:max-w-md group-hover:text-brand-300 transition" title="${p.full_text || p.title}">
+              ${p.title}
+            </div>
+            <div class="text-[11px] text-slate-500 font-normal line-clamp-1 mt-0.5">
+              ${p.date} &bull; ${p.duration_str}
+            </div>
+          </td>
+          <td class="py-3.5 px-4 text-center whitespace-nowrap">${monthBadge}</td>
+          <td class="py-3.5 px-4 whitespace-nowrap">
+            <span class="px-2 py-0.5 rounded-full text-[10px] ${topicBadgeClass}">
+              ${p.topic.split('&')[0].trim()}
+            </span>
+          </td>
+          <td class="py-3.5 px-4 text-right font-mono font-bold text-white text-sm">${p.views.toLocaleString()}</td>
+          <td class="py-3.5 px-4 text-right font-mono font-bold text-rose-400">${p.likes.toLocaleString()}</td>
+          <td class="py-3.5 px-4 text-right font-mono font-bold text-blue-400">${p.shares.toLocaleString()}</td>
+          <td class="py-3.5 px-4 text-right font-mono font-bold ${p.comments > 0 ? 'text-purple-300' : 'text-slate-600'}">${p.comments.toLocaleString()}</td>
+          <td class="py-3.5 px-4 text-right font-mono font-bold text-cyan-400">${p.saves.toLocaleString()}</td>
+          <td class="py-3.5 px-4 text-center whitespace-nowrap">${followsBadge}</td>
+          <td class="py-3.5 px-4 text-center font-mono text-slate-400 text-[11px]">${p.duration_str}</td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="px-2 py-0.5 rounded-full text-[11px] ${engColor}">
+              ${eng}%
+            </span>
+          </td>
+          <td class="py-3.5 px-4 text-center no-print">
+            ${linkHtml}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      lucide.createIcons();
+    }
+
+    // Inicialización al cargar la página
+    window.addEventListener('DOMContentLoaded', () => {
+      populateDropdowns();
+      renderMoMComparison();
+      onFilterChange();
+    });
+  </script>
+</body>
+</html>

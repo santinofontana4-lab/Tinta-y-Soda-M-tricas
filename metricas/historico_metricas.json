@@ -1,0 +1,214 @@
+{
+  "metadata": {
+    "account": "@tintaysoda.stream",
+    "periodo": "10/08/2026 al 07/09/2026 (Consolidado Agosto + Septiembre)",
+    "generated_at": "2026-09-08 00:37:00",
+    "total_posts": 29,
+    "fuente": "Meta Business Suite Oficial (Agosto + Septiembre Anexados)"
+  },
+  "kpis": {
+    "total_views": 92384,
+    "total_interactions": 2334,
+    "total_likes": 1718,
+    "total_comments": 110,
+    "total_shares": 344,
+    "total_saves": 162,
+    "total_reach": 60366,
+    "total_follows": 18,
+    "save_rate_pct": 0.18,
+    "share_rate_pct": 0.37,
+    "engagement_rate_pct": 2.53,
+    "top_performer": {
+      "rank": 1,
+      "post_id": "18181798924423792",
+      "title": "Puntos en una app por matar soldados: la guerra gamer 🎮💥",
+      "views": 23067,
+      "shares": 150,
+      "saves": 48,
+      "likes": 344,
+      "comments": 23,
+      "month": "Septiembre 2026",
+      "week": "Semana 4 (01-07 Sep)",
+      "topic": "Tecnodistopía & Geopolítica"
+    }
+  },
+  "monthly_stats": {
+    "Agosto 2026": {
+      "month": "Agosto 2026",
+      "periodo": "11 al 31 de Agosto de 2026 (21 días auditados)",
+      "posts_count": 22,
+      "total_views": 56572,
+      "avg_views_per_post": 2571,
+      "total_reach": 37328,
+      "total_interactions": 1334,
+      "avg_interactions_per_post": 60.6,
+      "total_shares": 142,
+      "avg_shares_per_post": 6.5,
+      "total_saves": 86,
+      "avg_saves_per_post": 3.9,
+      "total_comments": 42,
+      "avg_comments_per_post": 1.9,
+      "total_likes": 1064,
+      "total_follows": 13,
+      "save_rate_pct": 0.15,
+      "share_rate_pct": 0.25,
+      "engagement_rate_pct": 2.36,
+      "top_performer": {
+        "title": "Peter Thiel llevó la tecnología de The Dark Knight a la realidad con Palantir 👁️🏙️",
+        "views": 10745,
+        "shares": 29,
+        "saves": 15,
+        "comments": 2
+      }
+    },
+    "Septiembre 2026": {
+      "month": "Septiembre 2026",
+      "periodo": "01 al 07 de Septiembre de 2026 (7 días en curso)",
+      "posts_count": 7,
+      "total_views": 35812,
+      "avg_views_per_post": 5116,
+      "total_reach": 23038,
+      "total_interactions": 1000,
+      "avg_interactions_per_post": 142.9,
+      "total_shares": 202,
+      "avg_shares_per_post": 28.9,
+      "total_saves": 76,
+      "avg_saves_per_post": 10.9,
+      "total_comments": 68,
+      "avg_comments_per_post": 9.7,
+      "total_likes": 654,
+      "total_follows": 5,
+      "save_rate_pct": 0.21,
+      "share_rate_pct": 0.56,
+      "engagement_rate_pct": 2.79,
+      "crecimiento_vs_agosto": {
+        "views_promedio": "+99.0%",
+        "shares_promedio": "+344.6%",
+        "saves_promedio": "+179.5%",
+        "comments_promedio": "+410.5%"
+      },
+      "top_performer": {
+        "title": "Puntos en una app por matar soldados: la guerra gamer 🎮💥",
+        "views": 23067,
+        "shares": 150,
+        "saves": 48,
+        "comments": 23
+      }
+    }
+  },
+  "weeks_stats": {
+    "Semana 1 (10-16 Ago)": {
+      "posts_count": 6,
+      "total_views": 12059,
+      "avg_views_per_post": 2010,
+      "total_interactions": 346,
+      "total_shares": 30,
+      "total_saves": 19,
+      "total_comments": 4,
+      "total_likes": 293,
+      "top_video": "En La Plata hay 6.375 hectáreas de tierras extranjerizadas 🌎 (3.190 views)"
+    },
+    "Semana 2 (17-23 Ago)": {
+      "posts_count": 7,
+      "total_views": 22816,
+      "avg_views_per_post": 3259,
+      "total_interactions": 421,
+      "total_shares": 31,
+      "total_saves": 36,
+      "total_comments": 11,
+      "total_likes": 343,
+      "top_video": "Preguntar la hora o qué micro tomarte ahora nos causa ansiedad (5.972 views)"
+    },
+    "Semana 3 (24-31 Ago)": {
+      "posts_count": 9,
+      "total_views": 21697,
+      "avg_views_per_post": 2411,
+      "total_interactions": 567,
+      "total_shares": 81,
+      "total_saves": 31,
+      "total_comments": 27,
+      "total_likes": 428,
+      "top_video": "Peter Thiel llevó la tecnología de The Dark Knight a la realidad con Palantir (10.745 views)"
+    },
+    "Semana 4 (01-07 Sep)": {
+      "posts_count": 7,
+      "total_views": 35812,
+      "avg_views_per_post": 5116,
+      "total_interactions": 1000,
+      "total_shares": 202,
+      "total_saves": 76,
+      "total_comments": 68,
+      "total_likes": 654,
+      "top_video": "Puntos en una app por matar soldados: la guerra gamer 🎮💥 (23.067 views - RÉCORD)"
+    }
+  },
+  "topic_stats": {
+    "Tecnodistopía & Geopolítica": {
+      "count": 6,
+      "total_views": 46666,
+      "avg_views": 7778,
+      "total_shares": 195,
+      "avg_shares": 32.5,
+      "total_saves": 77,
+      "total_comments": 30
+    },
+    "Datos Duros & Desmitificación": {
+      "count": 6,
+      "total_views": 14700,
+      "avg_views": 2450,
+      "total_shares": 59,
+      "avg_shares": 9.8,
+      "total_saves": 30,
+      "total_comments": 44
+    },
+    "Hábitos & Ansiedad Digital": {
+      "count": 6,
+      "total_views": 17181,
+      "avg_views": 2864,
+      "total_shares": 28,
+      "avg_shares": 4.7,
+      "total_saves": 22,
+      "total_comments": 17
+    },
+    "Rosca Política & Sociedad": {
+      "count": 11,
+      "total_views": 13837,
+      "avg_views": 1258,
+      "total_shares": 62,
+      "avg_shares": 5.6,
+      "total_saves": 33,
+      "total_comments": 19
+    }
+  },
+  "posts": [
+    {"rank": 1, "post_id": "18181798924423792", "title": "Puntos en una app por matar soldados: la guerra gamer 🎮💥", "full_text": "Puntos en una app por matar soldados: la guerra gamer 🎮💥 Operadores a distancia manejan drones con joysticks.", "date": "06/09/2026 12:35 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "35 seg", "views": 23067, "reach": 14796, "interactions": 565, "likes": 344, "comments": 23, "shares": 150, "saves": 48, "follows": 1, "engagement_rate_pct": 2.45, "permalink": "https://www.instagram.com/reel/Dc83mYOKCek/"},
+    {"rank": 2, "post_id": "17909683902281914", "title": "Peter Thiel llevó la tecnología de The Dark Knight a la realidad con Palantir 👁️🏙️", "full_text": "Peter Thiel llevó la tecnología de The Dark Knight a la realidad con Palantir 👁️🏙️ Vigilancia masiva, análisis de datos y una oficina bautizada como 'Gotham'.", "date": "25/08/2026 12:04 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "27 seg", "views": 10745, "reach": 7299, "interactions": 173, "likes": 127, "comments": 2, "shares": 29, "saves": 15, "follows": 1, "engagement_rate_pct": 1.61, "permalink": "https://www.instagram.com/reel/Dcd6l1SO26h/"},
+    {"rank": 3, "post_id": "18148091458526174", "title": "Preguntar la hora o qué micro tomarte ahora nos causa ansiedad 📱👀", "full_text": "Preguntar la hora o qué micro tomarte ahora nos causa ansiedad 📱👀 ¿En qué momento nos volvimos tan tímidos en la calle?", "date": "23/08/2026 15:03 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "25 seg", "views": 5972, "reach": 4694, "interactions": 76, "likes": 62, "comments": 2, "shares": 3, "saves": 9, "follows": 2, "engagement_rate_pct": 1.27, "permalink": "https://www.instagram.com/reel/DcZFETqKC5F/"},
+    {"rank": 4, "post_id": "18107449337525696", "title": "¿Armas de guerra en el comedor de tu casa? 💻💣", "full_text": "¿Armas de guerra en el comedor de tu casa? 💻💣 El gobierno ucraniano compró el 60% de los drones comerciales del mundo y capacitó a 10.000 civiles por videollamada.", "date": "05/09/2026 12:30 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "22 seg", "views": 4967, "reach": 3090, "interactions": 102, "likes": 86, "comments": 2, "shares": 9, "saves": 5, "follows": 0, "engagement_rate_pct": 2.05, "permalink": "https://www.instagram.com/reel/Dc6SYTDhes3/"},
+    {"rank": 5, "post_id": "18112253363007002", "title": "¿Mendoza como refugio nuclear para multimillonarios? ☢️🏔️", "full_text": "¿Mendoza como refugio nuclear para multimillonarios? ☢️🏔️ Peter Thiel ya tiene el plan.", "date": "22/08/2026 19:03 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "32 seg", "views": 4420, "reach": 3108, "interactions": 63, "likes": 50, "comments": 3, "shares": 4, "saves": 6, "follows": 0, "engagement_rate_pct": 1.43, "permalink": "https://www.instagram.com/reel/DcW8I1NKI2d/"},
+    {"rank": 6, "post_id": "18007295015973246", "title": "La plata virtual no duele tanto... hasta que la perdés 📱💸", "full_text": "La plata virtual no duele tanto... hasta que la perdés. 📱💸 ¿Por qué es tan fácil timbear cuando solo son números en una pantalla?", "date": "23/08/2026 19:29 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "32 seg", "views": 3644, "reach": 2656, "interactions": 71, "likes": 63, "comments": 2, "shares": 4, "saves": 2, "follows": 1, "engagement_rate_pct": 1.95, "permalink": "https://www.instagram.com/reel/DcZj6L4qyDB/"},
+    {"rank": 7, "post_id": "17984639174876161", "title": "El INDEC desmiente a Milei 📉👶", "full_text": "El INDEC desmiente a Milei 📉👶 El discurso oficial culpa a los pañuelos verdes por el invierno demográfico.", "date": "04/09/2026 12:30 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Datos Duros & Desmitificación", "type": "Reel", "duration_str": "29 seg", "views": 3630, "reach": 2363, "interactions": 243, "likes": 167, "comments": 42, "shares": 20, "saves": 14, "follows": 1, "engagement_rate_pct": 6.69, "permalink": "https://www.instagram.com/reel/Dc3tls4hhsn/"},
+    {"rank": 8, "post_id": "17958307269078968", "title": "🚫 Apuestas, fútbol y varones: la necesidad de demostrar que sabés", "full_text": "🚫 Apuestas, fútbol y varones: la necesidad de demostrar que sabés.", "date": "21/08/2026 16:55 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "46 seg", "views": 3285, "reach": 2322, "interactions": 82, "likes": 69, "comments": 1, "shares": 5, "saves": 7, "follows": 1, "engagement_rate_pct": 2.50, "permalink": "https://www.instagram.com/reel/DcUIWvtKgao/"},
+    {"rank": 9, "post_id": "17911979964526738", "title": "En La Plata hay 6.375 hectáreas de tierras extranjerizadas 🌎", "full_text": "En La Plata hay 6.375 hectáreas de tierras extranjerizadas 🌎 Un fragmento de lo que fue la columna de @cinpessano.", "date": "11/08/2026 12:02 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Datos Duros & Desmitificación", "type": "Reel", "duration_str": "26 seg", "views": 3190, "reach": 1905, "interactions": 103, "likes": 83, "comments": 1, "shares": 15, "saves": 4, "follows": 3, "engagement_rate_pct": 3.23, "permalink": "https://www.instagram.com/reel/Db53EdVBaj4/"},
+    {"rank": 10, "post_id": "18102210263352943", "title": "Se fue el Negro Rada y nos pusimos a pensar: ¿quiénes son los últimos ídolos? 💬👇", "full_text": "Se fue el Negro Rada y nos pusimos a pensar: ¿quedan figuras que representen al pueblo con esa fuerza?", "date": "27/08/2026 17:57 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "36 seg", "views": 3184, "reach": 2477, "interactions": 123, "likes": 100, "comments": 13, "shares": 5, "saves": 5, "follows": 1, "engagement_rate_pct": 3.86, "permalink": "https://www.instagram.com/reel/DcjsayOq6kR/"},
+    {"rank": 11, "post_id": "18103466729586360", "title": "La Universidad Pública en la vida de los pueblos. Defendámosla.", "full_text": "La Universidad Pública en la vida de los pueblos. Defendámosla.", "date": "13/08/2026 16:10 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "28 seg", "views": 2834, "reach": 1877, "interactions": 80, "likes": 72, "comments": 0, "shares": 3, "saves": 5, "follows": 1, "engagement_rate_pct": 2.82, "permalink": "https://www.instagram.com/reel/Db_c2uEKWWd/"},
+    {"rank": 12, "post_id": "17888937792436214", "title": "Nos desacostumbramos a esperar.", "full_text": "Nos desacostumbramos a esperar. Podés ver el programa completo en YouTube.", "date": "22/08/2026 12:30 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "17 seg", "views": 2466, "reach": 2003, "interactions": 38, "likes": 29, "comments": 2, "shares": 3, "saves": 4, "follows": 1, "engagement_rate_pct": 1.54, "permalink": "https://www.instagram.com/reel/DcWPYaKBlpb/"},
+    {"rank": 13, "post_id": "18208931791364014", "title": "¿Un pastor en la Rosada? Dante Gebel 🤔⛪", "full_text": "¿Un pastor en la Rosada? 🤔⛪ Desmenuzamos el armado político de Dante Gebel.", "date": "31/08/2026 19:20 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "36 seg", "views": 2350, "reach": 1865, "interactions": 82, "likes": 53, "comments": 4, "shares": 20, "saves": 5, "follows": 0, "engagement_rate_pct": 3.49, "permalink": "https://www.instagram.com/reel/DcuJLE9KZxY/"},
+    {"rank": 14, "post_id": "18060972725758179", "title": "Un poco de geopolítica de la mano de Marquitos: Migraciones a Ceuta 🌎", "full_text": "Un poco de geopolítica de la mano de Marquitos sobre las migraciones a Ceuta.", "date": "16/08/2026 21:09 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "55 seg", "views": 2001, "reach": 1478, "interactions": 42, "likes": 31, "comments": 1, "shares": 8, "saves": 2, "follows": 0, "engagement_rate_pct": 2.10, "permalink": "https://www.instagram.com/reel/DcHtAouqqCe/"},
+    {"rank": 15, "post_id": "18106744876885723", "title": "8 de cada 10 trabajadores sufren ajustes alimentarios (UCA)", "full_text": "8 de cada 10 trabajadores sufren ajustes alimentarios según la UCA.", "date": "17/08/2026 12:17 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Datos Duros & Desmitificación", "type": "Reel", "duration_str": "36 seg", "views": 1964, "reach": 1426, "interactions": 42, "likes": 34, "comments": 0, "shares": 4, "saves": 4, "follows": 0, "engagement_rate_pct": 2.14, "permalink": "https://www.instagram.com/reel/DcJVvnVOQMb/"},
+    {"rank": 16, "post_id": "18011128139748153", "title": "El 12 de agosto la UNLP cumplió 121 años 🙌🏼", "full_text": "El 12 de agosto la UNLP cumplió 121 años y en Tinta y Soda lo celebramos.", "date": "16/08/2026 12:00 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "33 seg", "views": 1641, "reach": 906, "interactions": 50, "likes": 47, "comments": 0, "shares": 1, "saves": 2, "follows": 0, "engagement_rate_pct": 3.05, "permalink": "https://www.instagram.com/reel/DcGvEOSBxiK/"},
+    {"rank": 17, "post_id": "18013168574948092", "title": "Jorge Brito: Banco Macro, River y el verdadero outsider 2027 ⚪🔴🏦", "full_text": "Jorge Brito se proyecta como el verdadero outsider del círculo rojo para 2027.", "date": "30/08/2026 18:41 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "35 seg", "views": 1507, "reach": 1018, "interactions": 35, "likes": 23, "comments": 0, "shares": 8, "saves": 4, "follows": 0, "engagement_rate_pct": 2.32, "permalink": "https://www.instagram.com/reel/Dcrf6dBqsi9/"},
+    {"rank": 18, "post_id": "18105089357194435", "title": "¿Cuánto sale tener un hijo/a en Argentina? Canasta de Crianza", "full_text": "¿Cuánto sale tener un hijo/a en Argentina? Canasta de Crianza que supera los $600.000.", "date": "05/09/2026 19:19 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Datos Duros & Desmitificación", "type": "Reel", "duration_str": "32 seg", "views": 1484, "reach": 910, "interactions": 52, "likes": 44, "comments": 0, "shares": 6, "saves": 2, "follows": 0, "engagement_rate_pct": 3.50, "permalink": "https://www.instagram.com/reel/Dc7BID6qZTz/"},
+    {"rank": 19, "post_id": "17897397693582957", "title": "Secretaria de Hábitat de La Plata: Modificación de la Ley de Tierras", "full_text": "Cintia Mansilla habló sobre la modificación de la Ley de Tierras.", "date": "12/08/2026 12:46 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "31 seg", "views": 1346, "reach": 838, "interactions": 33, "likes": 25, "comments": 1, "shares": 3, "saves": 4, "follows": 1, "engagement_rate_pct": 2.45, "permalink": "https://www.instagram.com/reel/Db8g3oKuKB8/"},
+    {"rank": 20, "post_id": "18074185100411851", "title": "Nacen menos bebés en Argentina, pero las ITS alcanzaron récord", "full_text": "En 2025 se notificaron 46.779 casos de sífilis: salto del 75,6% en 3 años.", "date": "07/09/2026 17:40 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Datos Duros & Desmitificación", "type": "Reel", "duration_str": "45 seg", "views": 1251, "reach": 893, "interactions": 47, "likes": 36, "comments": 0, "shares": 7, "saves": 4, "follows": 1, "engagement_rate_pct": 3.76, "permalink": "https://www.instagram.com/reel/Dc__UfcKuwr/"},
+    {"rank": 21, "post_id": "17949274116258334", "title": "¿Sentís que ya no podés concentrarte ni 5 minutos seguidos? 📱😵‍💫", "full_text": "El algoritmo de TikTok y la pérdida de retención que nos llena de ansiedad.", "date": "24/08/2026 19:14 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "28 seg", "views": 1067, "reach": 733, "interactions": 54, "likes": 37, "comments": 5, "shares": 12, "saves": 0, "follows": 1, "engagement_rate_pct": 5.06, "permalink": "https://www.instagram.com/reel/DccHCXfKMv6/"},
+    {"rank": 22, "post_id": "18091532981643349", "title": "¿Por qué estaban disfrazados de Gandalf? Acá la respuesta", "full_text": "¿Por qué estaban disfrazados de Gandalf? Acá la respuesta.", "date": "20/08/2026 19:11 hs", "month": "Agosto 2026", "week": "Semana 2 (17-23 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "39 seg", "views": 1065, "reach": 741, "interactions": 49, "likes": 36, "comments": 1, "shares": 8, "saves": 4, "follows": 0, "engagement_rate_pct": 4.60, "permalink": "https://www.instagram.com/reel/DcRzI_Bq9cv/"},
+    {"rank": 23, "post_id": "18161433316478947", "title": "Mañana probamos cosas nuevas 😎", "full_text": "Mañana probamos cosas nuevas 😎 Nos vemos por YouTube.", "date": "11/08/2026 20:20 hs", "month": "Agosto 2026", "week": "Semana 1 (10-16 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "43 seg", "views": 1047, "reach": 613, "interactions": 38, "likes": 35, "comments": 1, "shares": 0, "saves": 2, "follows": 0, "engagement_rate_pct": 3.63, "permalink": "https://www.instagram.com/reel/Db6v2hXKwzM/"},
+    {"rank": 24, "post_id": "18086038202237581", "title": "MAÑANA EN TINTA Y SODA🥤 (Carrusel de temas)", "full_text": "Baja tasa de natalidad, moda de los outsiders y geopolítica.", "date": "25/08/2026 20:39 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Rosca Política & Sociedad", "type": "Carrusel", "duration_str": "-", "views": 1029, "reach": 330, "interactions": 30, "likes": 26, "comments": 3, "shares": 1, "saves": 0, "follows": 0, "engagement_rate_pct": 2.92, "permalink": "https://www.instagram.com/p/Dce1nB1FGPw/"},
+    {"rank": 25, "post_id": "18076437014379651", "title": "¿Daniel Hadad presidente? 🇦🇷", "full_text": "¿Para vos maneja más poder un presidente o el dueño de las noticias?", "date": "02/09/2026 11:47 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "38 seg", "views": 925, "reach": 649, "interactions": 23, "likes": 16, "comments": 0, "shares": 6, "saves": 1, "follows": 2, "engagement_rate_pct": 2.49, "permalink": "https://www.instagram.com/reel/Dcyenqruz97/"},
+    {"rank": 26, "post_id": "18089854811443252", "title": "El 90% de los chicos que apuestan lo hacen en billeteras virtuales", "full_text": "El 90% de los chicos que apuestan lo hacen a través de billeteras virtuales.", "date": "25/08/2026 18:00 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Hábitos & Ansiedad Digital", "type": "Reel", "duration_str": "42 seg", "views": 747, "reach": 525, "interactions": 21, "likes": 20, "comments": 0, "shares": 1, "saves": 0, "follows": 0, "engagement_rate_pct": 2.81, "permalink": "https://www.instagram.com/reel/DcejdnkBeQ7/"},
+    {"rank": 27, "post_id": "17894533674667453", "title": "El Papa Francisco defendió los derechos humanos", "full_text": "El Papa Francisco defendió los derechos humanos.", "date": "28/08/2026 12:00 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "29 seg", "views": 600, "reach": 448, "interactions": 29, "likes": 26, "comments": 0, "shares": 2, "saves": 1, "follows": 0, "engagement_rate_pct": 4.83, "permalink": "https://www.instagram.com/reel/DclotT9BisD/"},
+    {"rank": 28, "post_id": "17899614855582913", "title": "Cuando las votaciones en el Congreso abren preguntas necesarias 🏛️", "full_text": "¿Cuál es el camino frente al tablero judicial y el pliego de Yadarola?", "date": "03/09/2026 21:18 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Rosca Política & Sociedad", "type": "Reel", "duration_str": "37 seg", "views": 488, "reach": 337, "interactions": 23, "likes": 16, "comments": 1, "shares": 4, "saves": 2, "follows": 0, "engagement_rate_pct": 4.71, "permalink": "https://www.instagram.com/reel/Dc2FLxlKpCX/"},
+    {"rank": 29, "post_id": "18029656784846236", "title": "La 'PayPal Mafia' y el plan para rediseñar el mundo 💼🌐", "full_text": "Peter Thiel lidera al grupo de ex-fundadores de PayPal.", "date": "26/08/2026 12:00 hs", "month": "Agosto 2026", "week": "Semana 3 (24-31 Ago)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "41 seg", "views": 468, "reach": 352, "interactions": 20, "likes": 16, "comments": 0, "shares": 3, "saves": 1, "follows": 0, "engagement_rate_pct": 4.27, "permalink": "https://www.instagram.com/reel/DcgfEc3BUYa/"}
+  ]
+}
