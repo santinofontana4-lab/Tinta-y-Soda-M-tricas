@@ -222,6 +222,75 @@
       </div>
     </section>
 
+    <!-- SECCIÓN DESTACADA: GRÁFICO DE CRECIMIENTO / DECRECIMIENTO (ÚLTIMAS DOS SEMANAS) -->
+    <section id="heroWeeklyGrowthSection" class="glass-card rounded-2xl p-6 sm:p-7 relative overflow-hidden border-brand-500/40 shadow-2xl space-y-6">
+      <!-- Glow background accents -->
+      <div class="absolute -top-24 -right-24 w-80 h-80 bg-brand-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Header de la Métrica Más Destacada -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800/80 pb-5 relative">
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-brand-600 to-amber-500 text-white font-black text-[11px] tracking-wider uppercase shadow-md shadow-brand-600/30 flex items-center gap-1.5">
+              <i data-lucide="zap" class="w-3.5 h-3.5 fill-white"></i> Métrica Más Destacada
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-dark-850 border border-slate-700 text-slate-300 font-semibold text-xs flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Últimas 2 Semanas Registradas
+            </span>
+          </div>
+          <h2 id="heroWeeklyTitle" class="text-xl sm:text-2xl font-black text-white tracking-tight">
+            Crecimiento Semana Anterior vs. Actual: Semana 3 (24-31 Ago) ➔ Semana 4 (01-07 Sep)
+          </h2>
+          <p id="heroWeeklySubtitle" class="text-xs sm:text-sm text-slate-400">
+            Comparativa dinámica entre las dos semanas más recientes registradas oficialmente en Meta (@tintaysoda.stream).
+          </p>
+        </div>
+
+        <!-- Selector de visualización (Porcentaje % vs. Volumen) -->
+        <div class="flex items-center bg-dark-900/90 p-1.5 rounded-xl border border-slate-800 self-start lg:self-center gap-1 no-print">
+          <button id="heroBtnPct" onclick="setHeroChartMode('pct')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-brand-600 text-white shadow-sm">
+            <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> % Crecimiento
+          </button>
+          <button id="heroBtnVolume" onclick="setHeroChartMode('volume')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+            <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i> Comparativa de Volumen
+          </button>
+        </div>
+      </div>
+
+      <!-- Layout Principal: Gráfico Hero (7 cols) + Tarjetas Comparativas (5 cols) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        
+        <!-- Contenedor del Gráfico Hero -->
+        <div class="lg:col-span-7 bg-dark-900/60 rounded-xl p-4 sm:p-5 border border-slate-800/80 relative">
+          <div class="flex items-center justify-between mb-3 text-xs">
+            <span id="heroChartLegend" class="font-bold text-slate-300 flex items-center gap-2">
+              <i data-lucide="percent" class="w-4 h-4 text-emerald-400"></i>
+              % Variación de Crecimiento (Semana Anterior vs. Actual)
+            </span>
+            <span id="heroChartPill" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              Tasa de aceleración neta (%)
+            </span>
+          </div>
+          <div class="relative h-[290px] sm:h-[320px] w-full">
+            <canvas id="heroWeeklyGrowthChart"></canvas>
+          </div>
+        </div>
+
+        <!-- 5 Tarjetas Resumen de Métricas Clave -->
+        <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5" id="heroCardsContainer">
+          <!-- Inyectado dinámicamente por renderHeroWeeklyGrowthChart() -->
+        </div>
+
+      </div>
+
+      <!-- Footer Resumen Ejecutivo del Crecimiento Semanal -->
+      <div id="heroWeeklyFooter" class="bg-dark-850/80 rounded-xl p-4 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <!-- Inyectado dinámicamente por renderHeroWeeklyGrowthChart() -->
+      </div>
+    </section>
+
     <!-- Monthly Comparison Callout Box (Mes a Mes) Dinámico -->
     <section id="momComparisonSection" class="glass-card rounded-2xl p-6 relative overflow-hidden border-brand-500/20">
       <!-- Renderizado dinámicamente con JS comparando el último mes cerrado con el mes anterior -->
@@ -567,10 +636,10 @@
         "Rosca Política & Sociedad": { "avg_views": 1258 }
       },
       "weeks_stats": {
-        "Semana 1 (10-16 Ago)": { "total_views": 12059, "total_shares": 30, "top_video": "Tierras extranjerizadas La Plata", "top_views": 3190 },
-        "Semana 2 (17-23 Ago)": { "total_views": 22816, "total_shares": 31, "top_video": "Ansiedad al pedir la hora", "top_views": 5972 },
-        "Semana 3 (24-31 Ago)": { "total_views": 21697, "total_shares": 81, "top_video": "Peter Thiel / Palantir", "top_views": 10745 },
-        "Semana 4 (01-07 Sep)": { "total_views": 35812, "total_shares": 202, "top_video": "Guerra gamer", "top_views": 23067 }
+        "Semana 1 (10-16 Ago)": { "posts_count": 6, "total_views": 12059, "avg_views_per_post": 2010, "total_reach": 8617, "total_interactions": 346, "total_likes": 293, "avg_likes_per_post": 48.8, "total_shares": 30, "avg_shares_per_post": 5.0, "total_saves": 19, "avg_saves_per_post": 3.2, "total_comments": 4, "avg_comments_per_post": 0.7, "top_video": "Tierras extranjerizadas La Plata", "top_views": 3190 },
+        "Semana 2 (17-23 Ago)": { "posts_count": 7, "total_views": 22816, "avg_views_per_post": 3259, "total_reach": 15830, "total_interactions": 421, "total_likes": 343, "avg_likes_per_post": 49.0, "total_shares": 31, "avg_shares_per_post": 4.4, "total_saves": 36, "avg_saves_per_post": 5.1, "total_comments": 11, "avg_comments_per_post": 1.6, "top_video": "Ansiedad al pedir la hora", "top_views": 5972 },
+        "Semana 3 (24-31 Ago)": { "posts_count": 9, "total_views": 21697, "avg_views_per_post": 2411, "total_reach": 15152, "total_interactions": 567, "total_likes": 428, "avg_likes_per_post": 47.6, "total_shares": 81, "avg_shares_per_post": 9.0, "total_saves": 31, "avg_saves_per_post": 3.4, "total_comments": 27, "avg_comments_per_post": 3.0, "top_video": "Peter Thiel / Palantir", "top_views": 10745 },
+        "Semana 4 (01-07 Sep)": { "posts_count": 7, "total_views": 35812, "avg_views_per_post": 5116, "total_reach": 23038, "total_interactions": 1000, "total_likes": 654, "avg_likes_per_post": 93.4, "total_shares": 202, "avg_shares_per_post": 28.9, "total_saves": 76, "avg_saves_per_post": 10.9, "total_comments": 68, "avg_comments_per_post": 9.7, "top_video": "Guerra gamer", "top_views": 23067 }
       },
       "posts": [
         {"rank": 1, "title": "Puntos en una app por matar soldados: la guerra gamer 🎮💥", "full_text": "Puntos en una app por matar soldados: la guerra gamer 🎮💥 Operadores a distancia manejan drones con joysticks.", "date": "06/09/2026 12:35 hs", "month": "Septiembre 2026", "week": "Semana 4 (01-07 Sep)", "topic": "Tecnodistopía & Geopolítica", "type": "Reel", "duration_str": "35 seg", "views": 23067, "reach": 14796, "interactions": 565, "likes": 344, "comments": 23, "shares": 150, "saves": 48, "follows": 3, "engagement_rate_pct": 2.45, "permalink": "https://www.instagram.com/reel/Dc83mYOKCek/"},
@@ -605,8 +674,439 @@
       ]
     };
 
+    let heroChartInstance = null;
+    let heroChartCurrentMode = 'pct'; // 'pct' o 'volume'
     let chartEvolutionInstance = null;
     let chartTopicInstance = null;
+
+    // ==========================================
+    // 1. GRÁFICO HERO DESTACADO: SEMANA ANTERIOR VS. ACTUAL (ÚLTIMAS 2 SEMANAS REGISTRADAS)
+    // ==========================================
+    function getWeeklyComparisonData() {
+      const weekKeys = Object.keys(METRICS_SUMMARY.weeks_stats || {});
+      if (weekKeys.length < 2) return null;
+
+      const prevWeekKey = weekKeys[weekKeys.length - 2];
+      const currWeekKey = weekKeys[weekKeys.length - 1];
+
+      const prevPosts = METRICS_SUMMARY.posts.filter(p => p.week === prevWeekKey);
+      const currPosts = METRICS_SUMMARY.posts.filter(p => p.week === currWeekKey);
+
+      function aggregate(posts, weekName, fallbackStat) {
+        const count = posts.length || (fallbackStat ? fallbackStat.posts_count : 0);
+        const views = posts.reduce((acc, p) => acc + (p.views || 0), 0) || (fallbackStat ? fallbackStat.total_views : 0);
+        const reach = posts.reduce((acc, p) => acc + (p.reach || 0), 0) || (fallbackStat ? fallbackStat.total_reach : 0);
+        const shares = posts.reduce((acc, p) => acc + (p.shares || 0), 0) || (fallbackStat ? fallbackStat.total_shares : 0);
+        const likes = posts.reduce((acc, p) => acc + (p.likes || 0), 0) || (fallbackStat ? fallbackStat.total_likes : 0);
+        const comments = posts.reduce((acc, p) => acc + (p.comments || 0), 0) || (fallbackStat ? fallbackStat.total_comments : 0);
+        const saves = posts.reduce((acc, p) => acc + (p.saves || 0), 0) || (fallbackStat ? fallbackStat.total_saves : 0);
+        const interactions = posts.reduce((acc, p) => acc + (p.interactions || 0), 0) || (fallbackStat ? fallbackStat.total_interactions : 0);
+        const follows = posts.reduce((acc, p) => acc + (p.follows || 0), 0) || (fallbackStat ? fallbackStat.total_follows : 0);
+
+        return {
+          name: weekName,
+          count: count,
+          views: views,
+          avgViews: count > 0 ? Math.round(views / count) : 0,
+          reach: reach,
+          shares: shares,
+          avgShares: count > 0 ? +(shares / count).toFixed(1) : 0,
+          likes: likes,
+          avgLikes: count > 0 ? +(likes / count).toFixed(1) : 0,
+          comments: comments,
+          avgComments: count > 0 ? +(comments / count).toFixed(1) : 0,
+          saves: saves,
+          avgSaves: count > 0 ? +(saves / count).toFixed(1) : 0,
+          interactions: interactions,
+          follows: follows
+        };
+      }
+
+      const prev = aggregate(prevPosts, prevWeekKey, METRICS_SUMMARY.weeks_stats[prevWeekKey]);
+      const curr = aggregate(currPosts, currWeekKey, METRICS_SUMMARY.weeks_stats[currWeekKey]);
+
+      function calcVar(currVal, prevVal) {
+        if (!prevVal || prevVal === 0) return currVal > 0 ? 100 : 0;
+        return +(((currVal - prevVal) / prevVal) * 100).toFixed(1);
+      }
+
+      const pct = {
+        views: calcVar(curr.views, prev.views),
+        avgViews: calcVar(curr.avgViews, prev.avgViews),
+        shares: calcVar(curr.shares, prev.shares),
+        avgShares: calcVar(curr.avgShares, prev.avgShares),
+        comments: calcVar(curr.comments, prev.comments),
+        avgComments: calcVar(curr.avgComments, prev.avgComments),
+        saves: calcVar(curr.saves, prev.saves),
+        avgSaves: calcVar(curr.avgSaves, prev.avgSaves),
+        likes: calcVar(curr.likes, prev.likes),
+        avgLikes: calcVar(curr.avgLikes, prev.avgLikes),
+        interactions: calcVar(curr.interactions, prev.interactions),
+        reach: calcVar(curr.reach, prev.reach)
+      };
+
+      return { prev, curr, pct };
+    }
+
+    function setHeroChartMode(mode) {
+      heroChartCurrentMode = mode;
+      const btnPct = document.getElementById('heroBtnPct');
+      const btnVol = document.getElementById('heroBtnVolume');
+
+      if (btnPct && btnVol) {
+        if (mode === 'pct') {
+          btnPct.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-brand-600 text-white shadow-sm";
+          btnVol.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200";
+        } else {
+          btnVol.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-brand-600 text-white shadow-sm";
+          btnPct.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200";
+        }
+      }
+
+      renderHeroWeeklyGrowthChart();
+    }
+
+    function renderHeroWeeklyGrowthChart() {
+      const data = getWeeklyComparisonData();
+      if (!data) return;
+
+      const { prev, curr, pct } = data;
+
+      // Encabezado dinámico
+      const heroTitle = document.getElementById('heroWeeklyTitle');
+      const heroSubtitle = document.getElementById('heroWeeklySubtitle');
+      if (heroTitle) {
+        heroTitle.innerHTML = `Crecimiento Semana a Semana: <span class="text-slate-300 font-normal">${prev.name}</span> <span class="text-brand-400">➔</span> <span class="text-white">${curr.name}</span>`;
+      }
+      if (heroSubtitle) {
+        heroSubtitle.innerText = `Comparativa directa entre las dos semanas más recientes registradas con datos oficiales de Meta (${prev.count} posts vs. ${curr.count} posts).`;
+      }
+
+      // Renderizar las 5 Tarjetas Resumen Laterales
+      const cardsContainer = document.getElementById('heroCardsContainer');
+      if (cardsContainer) {
+        const metricsCards = [
+          {
+            name: "Compartidos (Viralidad)",
+            icon: "send",
+            iconColor: "text-amber-400",
+            bgIcon: "bg-amber-500/10 border border-amber-500/20",
+            prevVal: prev.shares,
+            currVal: curr.shares,
+            unit: "shares",
+            pct: pct.shares,
+            prevAvg: prev.avgShares,
+            currAvg: curr.avgShares,
+            avgPct: pct.avgShares,
+            badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30"
+          },
+          {
+            name: "Comentarios (Debate)",
+            icon: "message-circle",
+            iconColor: "text-purple-400",
+            bgIcon: "bg-purple-500/10 border border-purple-500/20",
+            prevVal: prev.comments,
+            currVal: curr.comments,
+            unit: "coms",
+            pct: pct.comments,
+            prevAvg: prev.avgComments,
+            currAvg: curr.avgComments,
+            avgPct: pct.avgComments,
+            badgeColor: "bg-purple-500/20 text-purple-300 border-purple-500/30"
+          },
+          {
+            name: "Guardados (Saves)",
+            icon: "bookmark",
+            iconColor: "text-cyan-400",
+            bgIcon: "bg-cyan-500/10 border border-cyan-500/20",
+            prevVal: prev.saves,
+            currVal: curr.saves,
+            unit: "saves",
+            pct: pct.saves,
+            prevAvg: prev.avgSaves,
+            currAvg: curr.avgSaves,
+            avgPct: pct.avgSaves,
+            badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30"
+          },
+          {
+            name: "Visualizaciones Totales",
+            icon: "play",
+            iconColor: "text-blue-400",
+            bgIcon: "bg-blue-500/10 border border-blue-500/20",
+            prevVal: prev.views.toLocaleString(),
+            currVal: curr.views.toLocaleString(),
+            unit: "views",
+            pct: pct.views,
+            prevAvg: prev.avgViews.toLocaleString(),
+            currAvg: curr.avgViews.toLocaleString(),
+            avgPct: pct.avgViews,
+            badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30"
+          },
+          {
+            name: "Me Gusta (MG / Likes)",
+            icon: "heart",
+            iconColor: "text-rose-400",
+            bgIcon: "bg-rose-500/10 border border-rose-500/20",
+            prevVal: prev.likes.toLocaleString(),
+            currVal: curr.likes.toLocaleString(),
+            unit: "likes",
+            pct: pct.likes,
+            prevAvg: prev.avgLikes,
+            currAvg: curr.avgLikes,
+            avgPct: pct.avgLikes,
+            badgeColor: "bg-rose-500/20 text-rose-300 border-rose-500/30"
+          }
+        ];
+
+        cardsContainer.innerHTML = metricsCards.map(c => {
+          const isPositive = c.pct >= 0;
+          const sign = isPositive ? '+' : '';
+          const arrow = isPositive ? '↗' : '↘';
+          const avgSign = c.avgPct >= 0 ? '+' : '';
+          return `
+            <div class="bg-dark-850 p-3.5 rounded-xl border border-slate-800 hover:border-slate-700 transition flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <span class="p-2 rounded-lg ${c.bgIcon} ${c.iconColor} shrink-0">
+                  <i data-lucide="${c.icon}" class="w-4 h-4"></i>
+                </span>
+                <div class="min-w-0">
+                  <span class="text-[11px] font-bold text-slate-300 block truncate">${c.name}</span>
+                  <div class="text-xs text-slate-400 flex items-center gap-1.5 mt-0.5">
+                    <span class="text-slate-500">${c.prevVal}</span>
+                    <i data-lucide="arrow-right" class="w-3 h-3 text-slate-600"></i>
+                    <strong class="text-white font-mono font-bold">${c.currVal}</strong>
+                    <span class="text-[10px] text-slate-500">(${c.prevAvg} ➔ ${c.currAvg} prom)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right shrink-0">
+                <span class="px-2 py-1 rounded-md text-xs font-mono font-black border ${c.badgeColor}">
+                  ${sign}${c.pct}% ${arrow}
+                </span>
+                <span class="block text-[10px] text-emerald-400 font-semibold mt-1">
+                  ${avgSign}${c.avgPct}% / reel
+                </span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Renderizar Footer de la sección
+      const heroFooter = document.getElementById('heroWeeklyFooter');
+      if (heroFooter) {
+        const diffViews = curr.views - prev.views;
+        const diffViewsSign = diffViews >= 0 ? '+' : '';
+        heroFooter.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
+              <i data-lucide="trending-up" class="w-4 h-4"></i>
+            </span>
+            <span class="text-slate-300">
+              <strong>Conclusión Clave:</strong> ${curr.name} sumó <strong>${diffViewsSign}${diffViews.toLocaleString()} visualizaciones adicionales</strong> y multiplicó la viralidad por mensaje directo (<strong>${curr.avgShares} shares/reel</strong> vs. ${prev.avgShares}) con 2 videos menos producidos (${curr.count} vs. ${prev.count}).
+            </span>
+          </div>
+          <div class="flex items-center gap-3 shrink-0 text-slate-400">
+            <span>Interacciones: <strong class="text-white font-mono">${prev.interactions.toLocaleString()} ➔ ${curr.interactions.toLocaleString()} (+${pct.interactions}%)</strong></span>
+            <span>&bull;</span>
+            <span>Alcance: <strong class="text-white font-mono">${prev.reach.toLocaleString()} ➔ ${curr.reach.toLocaleString()} (+${pct.reach}%)</strong></span>
+          </div>
+        `;
+      }
+
+      // Renderizar Gráfico Hero con Chart.js
+      if (heroChartInstance) {
+        heroChartInstance.destroy();
+      }
+
+      const canvas = document.getElementById('heroWeeklyGrowthChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const legendSpan = document.getElementById('heroChartLegend');
+      const pillSpan = document.getElementById('heroChartPill');
+
+      if (heroChartCurrentMode === 'pct') {
+        if (legendSpan) legendSpan.innerHTML = `<i data-lucide="percent" class="w-4 h-4 text-emerald-400"></i> % Variación de Crecimiento (${prev.name} vs. ${curr.name})`;
+        if (pillSpan) pillSpan.innerText = "Tasa de aceleración neta (%)";
+
+        const labels = [
+          "Comentarios (Debate)",
+          "Compartidos (Viral)",
+          "Guardados (Saves)",
+          "Vistas Prom. / Reel",
+          "Vistas Totales",
+          "Me Gusta (MG / Likes)"
+        ];
+
+        const values = [
+          pct.comments,
+          pct.shares,
+          pct.saves,
+          pct.avgViews,
+          pct.views,
+          pct.likes
+        ];
+
+        const barColors = [
+          'rgba(192, 132, 252, 0.85)', // purple
+          'rgba(245, 158, 11, 0.85)',  // amber
+          'rgba(34, 211, 238, 0.85)',  // cyan
+          'rgba(16, 185, 129, 0.85)',  // emerald
+          'rgba(59, 130, 246, 0.85)',  // blue
+          'rgba(244, 63, 94, 0.85)'    // rose
+        ];
+
+        const borderColors = [
+          '#c084fc',
+          '#f59e0b',
+          '#22d3ee',
+          '#10b981',
+          '#3b82f6',
+          '#f43f5e'
+        ];
+
+        heroChartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: '% Crecimiento',
+              data: values,
+              backgroundColor: barColors,
+              borderColor: borderColors,
+              borderWidth: 1.5,
+              borderRadius: 6
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: '#0f172a',
+                borderColor: 'rgba(255, 255, 255, 0.15)',
+                borderWidth: 1,
+                callbacks: {
+                  label: function(context) {
+                    const idx = context.dataIndex;
+                    const val = values[idx];
+                    const sign = val >= 0 ? '+' : '';
+                    if (idx === 0) return `Comentarios: ${prev.comments} ➔ ${curr.comments} (${sign}${val}%)`;
+                    if (idx === 1) return `Shares: ${prev.shares} ➔ ${curr.shares} (${sign}${val}%)`;
+                    if (idx === 2) return `Guardados: ${prev.saves} ➔ ${curr.saves} (${sign}${val}%)`;
+                    if (idx === 3) return `Vistas/Reel: ${prev.avgViews} ➔ ${curr.avgViews} (${sign}${val}%)`;
+                    if (idx === 4) return `Vistas Totales: ${prev.views.toLocaleString()} ➔ ${curr.views.toLocaleString()} (${sign}${val}%)`;
+                    if (idx === 5) return `Likes (MG): ${prev.likes} ➔ ${curr.likes} (${sign}${val}%)`;
+                    return `${sign}${val}%`;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                ticks: {
+                  color: '#94a3b8',
+                  callback: function(v) { return (v >= 0 ? '+' : '') + v + '%'; },
+                  font: { family: 'Plus Jakarta Sans', size: 10 }
+                }
+              },
+              y: {
+                grid: { display: false },
+                ticks: {
+                  color: '#e2e8f0',
+                  font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' }
+                }
+              }
+            }
+          }
+        });
+      } else {
+        // Modo 'volume' (Comparativa de volumen absoluto)
+        if (legendSpan) legendSpan.innerHTML = `<i data-lucide="bar-chart-2" class="w-4 h-4 text-brand-400"></i> Volumen Comparado: ${prev.name} vs. ${curr.name}`;
+        if (pillSpan) pillSpan.innerText = "Cantidades absolutas registradas";
+
+        const volumeLabels = [
+          "Compartidos",
+          "Guardados",
+          "Comentarios",
+          "Me Gusta (Likes)",
+          "Vistas (÷100)"
+        ];
+
+        const prevVolData = [
+          prev.shares,
+          prev.saves,
+          prev.comments,
+          prev.likes,
+          Math.round(prev.views / 100)
+        ];
+
+        const currVolData = [
+          curr.shares,
+          curr.saves,
+          curr.comments,
+          curr.likes,
+          Math.round(curr.views / 100)
+        ];
+
+        heroChartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: volumeLabels,
+            datasets: [
+              {
+                label: prev.name,
+                data: prevVolData,
+                backgroundColor: 'rgba(59, 130, 246, 0.75)',
+                borderColor: '#3b82f6',
+                borderWidth: 1.5,
+                borderRadius: 6
+              },
+              {
+                label: curr.name,
+                data: currVolData,
+                backgroundColor: 'rgba(244, 63, 94, 0.85)',
+                borderColor: '#f43f5e',
+                borderWidth: 1.5,
+                borderRadius: 6
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: {
+                labels: { color: '#cbd5e1', font: { family: 'Plus Jakarta Sans', size: 11, weight: 'bold' } }
+              },
+              tooltip: {
+                backgroundColor: '#0f172a',
+                borderColor: 'rgba(255, 255, 255, 0.15)',
+                borderWidth: 1,
+                callbacks: {
+                  label: function(context) {
+                    const isVistas = context.dataIndex === 4;
+                    const rawVal = isVistas ? context.raw * 100 : context.raw;
+                    return ` ${context.dataset.label}: ${rawVal.toLocaleString()}` + (isVistas ? ' visualizaciones' : '');
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8', font: { family: 'Plus Jakarta Sans', size: 10 } } },
+              y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8', font: { family: 'Plus Jakarta Sans', size: 10 } } }
+            }
+          }
+        });
+      }
+
+      lucide.createIcons();
+    }
 
     // Poblar los menús desplegables de Mes y Semana dinámicamente
     function populateDropdowns() {
@@ -1124,6 +1624,7 @@
     // Inicialización al cargar la página
     window.addEventListener('DOMContentLoaded', () => {
       populateDropdowns();
+      renderHeroWeeklyGrowthChart();
       renderMoMComparison();
       onFilterChange();
     });
