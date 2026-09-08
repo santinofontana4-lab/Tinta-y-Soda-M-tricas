@@ -127,6 +127,80 @@
       </div>
     </header>
 
+    <!-- SECCIÓN DESTACADA: GRÁFICO DE CRECIMIENTO / DECRECIMIENTO (ÚLTIMAS DOS SEMANAS) -->
+    <section id="heroWeeklyGrowthSection" class="glass-card rounded-2xl p-6 sm:p-7 relative overflow-hidden border-brand-500/40 shadow-2xl space-y-6">
+      <!-- Glow background accents -->
+      <div class="absolute -top-24 -right-24 w-80 h-80 bg-brand-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Header de la Métrica Más Destacada -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800/80 pb-5 relative">
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-brand-600 to-amber-500 text-white font-black text-[11px] tracking-wider uppercase shadow-md shadow-brand-600/30 flex items-center gap-1.5">
+              <i data-lucide="zap" class="w-3.5 h-3.5 fill-white"></i> Métrica Más Destacada
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-dark-850 border border-slate-700 text-slate-300 font-semibold text-xs flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Últimas 2 Semanas Registradas
+            </span>
+          </div>
+          <h2 id="heroWeeklyTitle" class="text-xl sm:text-2xl font-black text-white tracking-tight">
+            Crecimiento Semana Anterior vs. Actual: Semana 3 (24-31 Ago) ➔ Semana 4 (01-07 Sep)
+          </h2>
+          <p id="heroWeeklySubtitle" class="text-xs sm:text-sm text-slate-400">
+            Comparativa dinámica entre las dos semanas más recientes registradas oficialmente en Meta (@tintaysoda.stream).
+          </p>
+        </div>
+
+        <!-- Selector de visualización (Porcentaje % vs. Volumen) -->
+        <div class="flex items-center bg-dark-900/90 p-1.5 rounded-xl border border-slate-800 self-start lg:self-center gap-1 no-print">
+          <button id="heroBtnPct" onclick="setHeroChartMode('pct')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-brand-600 text-white shadow-sm">
+            <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> % Crecimiento
+          </button>
+          <button id="heroBtnVolume" onclick="setHeroChartMode('volume')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+            <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i> Comparativa de Volumen
+          </button>
+        </div>
+      </div>
+
+      <!-- Layout Principal: Gráfico Hero (7 cols) + Tarjetas Comparativas (5 cols) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        
+        <!-- Contenedor del Gráfico Hero -->
+        <div class="lg:col-span-7 bg-dark-900/60 rounded-xl p-4 sm:p-5 border border-slate-800/80 relative">
+          <div class="flex items-center justify-between mb-3 text-xs">
+            <span id="heroChartLegend" class="font-bold text-slate-300 flex items-center gap-2">
+              <i data-lucide="percent" class="w-4 h-4 text-emerald-400"></i>
+              % Variación de Crecimiento (Semana Anterior vs. Actual)
+            </span>
+            <span id="heroChartPill" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              Tasa de aceleración neta (%)
+            </span>
+          </div>
+          <div class="relative h-[290px] sm:h-[320px] w-full">
+            <canvas id="heroWeeklyGrowthChart"></canvas>
+          </div>
+        </div>
+
+        <!-- 5 Tarjetas Resumen de Métricas Clave -->
+        <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5" id="heroCardsContainer">
+          <!-- Inyectado dinámicamente por renderHeroWeeklyGrowthChart() -->
+        </div>
+
+      </div>
+
+      <!-- Footer Resumen Ejecutivo del Crecimiento Semanal -->
+      <div id="heroWeeklyFooter" class="bg-dark-850/80 rounded-xl p-4 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <!-- Inyectado dinámicamente por renderHeroWeeklyGrowthChart() -->
+      </div>
+    </section>
+
+    <!-- Monthly Comparison Callout Box (Mes a Mes) Dinámico -->
+    <section id="momComparisonSection" class="glass-card rounded-2xl p-6 relative overflow-hidden border-brand-500/20">
+      <!-- Renderizado dinámicamente con JS comparando el último mes cerrado con el mes anterior -->
+    </section>
+
     <!-- Toolbar de Filtrado Ordenado con Menús Desplegables -->
     <section class="glass-card rounded-2xl p-5 space-y-4 shadow-xl border-slate-800/80">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
@@ -220,80 +294,6 @@
         </div>
 
       </div>
-    </section>
-
-    <!-- SECCIÓN DESTACADA: GRÁFICO DE CRECIMIENTO / DECRECIMIENTO (ÚLTIMAS DOS SEMANAS) -->
-    <section id="heroWeeklyGrowthSection" class="glass-card rounded-2xl p-6 sm:p-7 relative overflow-hidden border-brand-500/40 shadow-2xl space-y-6">
-      <!-- Glow background accents -->
-      <div class="absolute -top-24 -right-24 w-80 h-80 bg-brand-500/15 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <!-- Header de la Métrica Más Destacada -->
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800/80 pb-5 relative">
-        <div class="space-y-1.5">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-brand-600 to-amber-500 text-white font-black text-[11px] tracking-wider uppercase shadow-md shadow-brand-600/30 flex items-center gap-1.5">
-              <i data-lucide="zap" class="w-3.5 h-3.5 fill-white"></i> Métrica Más Destacada
-            </span>
-            <span class="px-2.5 py-1 rounded-lg bg-dark-850 border border-slate-700 text-slate-300 font-semibold text-xs flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              Últimas 2 Semanas Registradas
-            </span>
-          </div>
-          <h2 id="heroWeeklyTitle" class="text-xl sm:text-2xl font-black text-white tracking-tight">
-            Crecimiento Semana Anterior vs. Actual: Semana 3 (24-31 Ago) ➔ Semana 4 (01-07 Sep)
-          </h2>
-          <p id="heroWeeklySubtitle" class="text-xs sm:text-sm text-slate-400">
-            Comparativa dinámica entre las dos semanas más recientes registradas oficialmente en Meta (@tintaysoda.stream).
-          </p>
-        </div>
-
-        <!-- Selector de visualización (Porcentaje % vs. Volumen) -->
-        <div class="flex items-center bg-dark-900/90 p-1.5 rounded-xl border border-slate-800 self-start lg:self-center gap-1 no-print">
-          <button id="heroBtnPct" onclick="setHeroChartMode('pct')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-brand-600 text-white shadow-sm">
-            <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> % Crecimiento
-          </button>
-          <button id="heroBtnVolume" onclick="setHeroChartMode('volume')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
-            <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i> Comparativa de Volumen
-          </button>
-        </div>
-      </div>
-
-      <!-- Layout Principal: Gráfico Hero (7 cols) + Tarjetas Comparativas (5 cols) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-        
-        <!-- Contenedor del Gráfico Hero -->
-        <div class="lg:col-span-7 bg-dark-900/60 rounded-xl p-4 sm:p-5 border border-slate-800/80 relative">
-          <div class="flex items-center justify-between mb-3 text-xs">
-            <span id="heroChartLegend" class="font-bold text-slate-300 flex items-center gap-2">
-              <i data-lucide="percent" class="w-4 h-4 text-emerald-400"></i>
-              % Variación de Crecimiento (Semana Anterior vs. Actual)
-            </span>
-            <span id="heroChartPill" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-              Tasa de aceleración neta (%)
-            </span>
-          </div>
-          <div class="relative h-[290px] sm:h-[320px] w-full">
-            <canvas id="heroWeeklyGrowthChart"></canvas>
-          </div>
-        </div>
-
-        <!-- 5 Tarjetas Resumen de Métricas Clave -->
-        <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5" id="heroCardsContainer">
-          <!-- Inyectado dinámicamente por renderHeroWeeklyGrowthChart() -->
-        </div>
-
-      </div>
-
-      <!-- Footer Resumen Ejecutivo del Crecimiento Semanal -->
-      <div id="heroWeeklyFooter" class="bg-dark-850/80 rounded-xl p-4 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-        <!-- Inyectado dinámicamente por renderHeroWeeklyGrowthChart() -->
-      </div>
-    </section>
-
-    <!-- Monthly Comparison Callout Box (Mes a Mes) Dinámico -->
-    <section id="momComparisonSection" class="glass-card rounded-2xl p-6 relative overflow-hidden border-brand-500/20">
-      <!-- Renderizado dinámicamente con JS comparando el último mes cerrado con el mes anterior -->
     </section>
 
     <!-- Dynamic KPI Cards Grid (7 Métricas Clave Incluyendo Nuevos Seguidores y MG) -->
