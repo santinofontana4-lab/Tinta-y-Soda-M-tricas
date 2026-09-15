@@ -178,24 +178,44 @@ def load_existing_summary():
 
 
 def recalculate_summary(all_posts):
-    all_posts.sort(key=lambda x: x["views"], reverse=True)
+    # Normalizar cada publicación para asegurar que ninguna clave falte
+    for p in all_posts:
+        if not isinstance(p, dict):
+            continue
+        p.setdefault("views", 0)
+        p.setdefault("reach", p.get("views", 0))
+        p.setdefault("interactions", 0)
+        p.setdefault("likes", 0)
+        p.setdefault("comments", 0)
+        p.setdefault("shares", 0)
+        p.setdefault("saves", 0)
+        p.setdefault("follows", 0)
+        p.setdefault("title", "Publicación")
+        p.setdefault("duration_str", "-")
+        p.setdefault("month", "Sin fecha")
+        p.setdefault("week", "Sin fecha")
+        p.setdefault("topic", "Rosca Política & Sociedad")
+        if not p.get("date_dt"):
+            p["date_dt"] = "1970-01-01"
+
+    all_posts.sort(key=lambda x: x.get("views", 0), reverse=True)
     for idx, p in enumerate(all_posts):
         p["rank"] = idx + 1
 
-    detected_months = list(set(p["month"] for p in all_posts if p["month"] != "Sin fecha"))
+    detected_months = list(set(p.get("month", "Sin fecha") for p in all_posts if p.get("month") != "Sin fecha"))
     months_list = sorted(detected_months, key=get_month_sort_key)
 
     monthly_stats = {}
     for idx, m in enumerate(months_list):
-        m_posts = [p for p in all_posts if p["month"] == m]
+        m_posts = [p for p in all_posts if p.get("month") == m]
         m_count = len(m_posts)
-        m_views = sum(p["views"] for p in m_posts)
-        m_reach = sum(p["reach"] for p in m_posts)
-        m_interactions = sum(p["interactions"] for p in m_posts)
-        m_shares = sum(p["shares"] for p in m_posts)
-        m_saves = sum(p["saves"] for p in m_posts)
-        m_comments = sum(p["comments"] for p in m_posts)
-        m_likes = sum(p["likes"] for p in m_posts)
+        m_views = sum(p.get("views", 0) for p in m_posts)
+        m_reach = sum(p.get("reach", 0) for p in m_posts)
+        m_interactions = sum(p.get("interactions", 0) for p in m_posts)
+        m_shares = sum(p.get("shares", 0) for p in m_posts)
+        m_saves = sum(p.get("saves", 0) for p in m_posts)
+        m_comments = sum(p.get("comments", 0) for p in m_posts)
+        m_likes = sum(p.get("likes", 0) for p in m_posts)
         m_follows = sum(p.get("follows", 0) for p in m_posts)
 
         avg_views = int(m_views / m_count) if m_count > 0 else 0
@@ -203,7 +223,7 @@ def recalculate_summary(all_posts):
         avg_saves = round(m_saves / m_count, 1) if m_count > 0 else 0
         avg_comments = round(m_comments / m_count, 1) if m_count > 0 else 0
 
-        top_post = max(m_posts, key=lambda x: x["views"]) if m_posts else None
+        top_post = max(m_posts, key=lambda x: x.get("views", 0)) if m_posts else None
 
         crecimiento_mom = None
         if idx > 0:
@@ -249,36 +269,36 @@ def recalculate_summary(all_posts):
             "engagement_rate_pct": round(m_interactions / m_views * 100, 2) if m_views > 0 else 0,
             "crecimiento_vs_mes_anterior": crecimiento_mom,
             "top_performer": {
-                "title": top_post["title"],
-                "views": top_post["views"],
-                "shares": top_post["shares"],
-                "saves": top_post["saves"],
-                "comments": top_post["comments"],
-                "duration_str": top_post["duration_str"]
+                "title": top_post.get("title", ""),
+                "views": top_post.get("views", 0),
+                "shares": top_post.get("shares", 0),
+                "saves": top_post.get("saves", 0),
+                "comments": top_post.get("comments", 0),
+                "duration_str": top_post.get("duration_str", "-")
             } if top_post else None
         }
 
     def get_week_min_date(w_name):
-        w_posts = [p for p in all_posts if p["week"] == w_name]
-        return min(p["date_dt"] for p in w_posts) if w_posts else "9999"
+        w_posts = [p for p in all_posts if p.get("week") == w_name]
+        return min((p.get("date_dt") or "9999") for p in w_posts) if w_posts else "9999"
 
-    detected_weeks = list(set(p["week"] for p in all_posts if p["week"] != "Sin fecha"))
+    detected_weeks = list(set(p.get("week", "Sin fecha") for p in all_posts if p.get("week") != "Sin fecha"))
     weeks_order = sorted(detected_weeks, key=get_week_min_date)
 
     weeks_stats = {}
     for w in weeks_order:
-        w_posts = [p for p in all_posts if p["week"] == w]
+        w_posts = [p for p in all_posts if p.get("week") == w]
         w_count = len(w_posts)
-        w_views = sum(p["views"] for p in w_posts)
-        w_reach = sum(p["reach"] for p in w_posts)
-        w_interactions = sum(p["interactions"] for p in w_posts)
-        w_shares = sum(p["shares"] for p in w_posts)
-        w_saves = sum(p["saves"] for p in w_posts)
-        w_comments = sum(p["comments"] for p in w_posts)
-        w_likes = sum(p["likes"] for p in w_posts)
+        w_views = sum(p.get("views", 0) for p in w_posts)
+        w_reach = sum(p.get("reach", 0) for p in w_posts)
+        w_interactions = sum(p.get("interactions", 0) for p in w_posts)
+        w_shares = sum(p.get("shares", 0) for p in w_posts)
+        w_saves = sum(p.get("saves", 0) for p in w_posts)
+        w_comments = sum(p.get("comments", 0) for p in w_posts)
+        w_likes = sum(p.get("likes", 0) for p in w_posts)
         w_follows = sum(p.get("follows", 0) for p in w_posts)
 
-        top_w = max(w_posts, key=lambda x: x["views"]) if w_posts else None
+        top_w = max(w_posts, key=lambda x: x.get("views", 0)) if w_posts else None
 
         weeks_stats[w] = {
             "week": w,
@@ -297,8 +317,8 @@ def recalculate_summary(all_posts):
             "avg_comments_per_post": round(w_comments / w_count, 1) if w_count > 0 else 0,
             "total_follows": w_follows,
             "engagement_rate_pct": round(w_interactions / w_views * 100, 2) if w_views > 0 else 0,
-            "top_video": top_w["title"] if top_w else "-",
-            "top_views": top_w["views"] if top_w else 0
+            "top_video": top_w.get("title", "-") if top_w else "-",
+            "top_views": top_w.get("views", 0) if top_w else 0
         }
 
     topics_list = [
@@ -309,13 +329,13 @@ def recalculate_summary(all_posts):
     ]
     topic_stats = {}
     for t in topics_list:
-        t_posts = [p for p in all_posts if p["topic"] == t]
+        t_posts = [p for p in all_posts if p.get("topic") == t]
         t_count = len(t_posts)
-        t_views = sum(p["views"] for p in t_posts)
-        t_shares = sum(p["shares"] for p in t_posts)
-        t_saves = sum(p["saves"] for p in t_posts)
-        t_comms = sum(p["comments"] for p in t_posts)
-        t_interactions = sum(p["interactions"] for p in t_posts)
+        t_views = sum(p.get("views", 0) for p in t_posts)
+        t_shares = sum(p.get("shares", 0) for p in t_posts)
+        t_saves = sum(p.get("saves", 0) for p in t_posts)
+        t_comms = sum(p.get("comments", 0) for p in t_posts)
+        t_interactions = sum(p.get("interactions", 0) for p in t_posts)
         topic_stats[t] = {
             "topic": t,
             "count": t_count,
@@ -329,16 +349,16 @@ def recalculate_summary(all_posts):
             "engagement_pct": round(t_interactions / t_views * 100, 2) if t_views > 0 else 0
         }
 
-    total_views = sum(p["views"] for p in all_posts)
-    total_interactions = sum(p["interactions"] for p in all_posts)
-    total_likes = sum(p["likes"] for p in all_posts)
-    total_shares = sum(p["shares"] for p in all_posts)
-    total_saves = sum(p["saves"] for p in all_posts)
-    total_comments = sum(p["comments"] for p in all_posts)
-    total_reach = sum(p["reach"] for p in all_posts)
+    total_views = sum(p.get("views", 0) for p in all_posts)
+    total_interactions = sum(p.get("interactions", 0) for p in all_posts)
+    total_likes = sum(p.get("likes", 0) for p in all_posts)
+    total_shares = sum(p.get("shares", 0) for p in all_posts)
+    total_saves = sum(p.get("saves", 0) for p in all_posts)
+    total_comments = sum(p.get("comments", 0) for p in all_posts)
+    total_reach = sum(p.get("reach", 0) for p in all_posts)
     total_follows = sum(p.get("follows", 0) for p in all_posts)
 
-    all_dates = [p["date_dt"] for p in all_posts if p.get("date_dt") and p["date_dt"] != "1970-01-01"]
+    all_dates = [p.get("date_dt", "") for p in all_posts if p.get("date_dt") and p.get("date_dt") != "1970-01-01"]
     min_date_str = min(all_dates)[:10] if all_dates else ""
     max_date_str = max(all_dates)[:10] if all_dates else ""
 
