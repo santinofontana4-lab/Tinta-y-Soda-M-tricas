@@ -17,7 +17,7 @@
 | CLIP 2 | Tirar una moneda para voltear un edificio ($300 vs $40M) | "Estado en guerra", "misil 40 millones", "balas" | 46:22 — 47:33 | 44:24 — 45:35 | ~24 seg | 67 palabras |
 | CLIP 3 | La guerra de los gamers: Matar por puntos en la app | "el gobierno ucraniano", "Counter", "tanque" | 47:49 — 49:45 | 45:51 — 47:47 | ~28 seg | 83 palabras |
 | CLIP 4 | El gobierno ruso, inhibidores y nidos con fibra óptica | "Rusia", "gobierno ucraniano", "nidos" | 50:50 — 52:46 | 48:52 — 50:48 | ~26 seg | 77 palabras |
-| CLIP 5 | Drones con IA: La máquina decidió a quién matar | "drones ucranianos", "Rusia", "IA" | 53:57 — 55:20 | 51:59 — 53:22 | ~28 seg | 84 palabras |
+| CLIP 5 | Drones con IA: La máquina decidió a quién matar | "agosto de este año", "drones", "IA" | 54:34 — 55:20 | 52:36 — 53:22 | ~25-27 seg | 56 palabras |
 | CLIP 6 | La Killzone y la Dronofobia: El terror del mosquito | "drones ucranianos y rusos", "Killzone", "zumbido" | 55:40 — 56:58 | 53:42 — 55:00 | ~26 seg | 78 palabras |
 
 ---
@@ -141,28 +141,34 @@ Rusia empezó a usar inhibidores de señales. [RECORTAR: "¿Por qué? Porque el 
 ### [CLIP 5] - DRONES CON IA: LA MÁQUINA DECIDIÓ A QUIÉN MATAR (Inteligencia Artificial & Autonomía Letal)
 
 * Ubicación / Timecodes exactos:
-  - MP4 Local: Inicio 53:57 a Fin 55:20
-  - YouTube: Inicio 51:59 a Fin 53:22
-* Duración limpia estimada: 28 segundos (84 palabras limpias).
+  - MP4 Local: Inicio 54:34 a Fin 55:20
+  - YouTube: Inicio 52:36 a Fin 53:22
+* Duración limpia estimada: 25 a 27 segundos netos en timeline (56 palabras limpias).
 * Remate (Punchline): "Esto es lo más peligroso porque ya es la IA pensada como objeto para matar gente."
 * Hook en pantalla para el Editor (Texto gigante en los primeros 3 segundos):
-  - Opción A (Provocador / Pregunta incómoda): "¿TERMINATOR EN LA VIDA REAL? CHIPS DE $100 QUE DECIDEN MATAR"
+  - Opción A (Provocador / Pregunta incómoda): "¿TERMINATOR EN UCRANIA? LA IA DECIDIÓ A QUIÉN MATAR"
   - Opción B (Dato revelador / Quiebre de expectativa): "EL PRIMER ATAQUE DONDE LA IA DECIDIÓ A QUIÉN ELIMINAR"
-  - Opción C (Tensión / Conflicto directo): "DRONES AUTÓNOMOS ATACANDO LA FRONTERA DE RUSIA"
+  - Opción C (Tensión / Conflicto directo): "10 DRONES AUTÓNOMOS DECIDIERON A QUIÉN MATAR"
 * Guion de Montaje con Tijera Fina (Texto exacto con [RECORTAR: "..."]):
-Les empezaron a plantar chips de 100 dólares que tenían reconocimiento visual: [RECORTAR: "Esto que hace cuando vos entrás a la zona a donde querés atacar a tu objetivo, podés marcarlo."] si lo marcás antes de que te bajen la señal a un inhibidor, el dron actúa igual. [RECORTAR: "Actúa igual, no necesita que lo dirijas vos. Entonces va eh teledirigido hacia ese objetivo. Em, ¿y qué pasó? Bueno, esto fue creciendo, esto fue creciendo cada vez más distancia, cada vez más distancia, cada vez más distancia."] En agosto de este año se documentó el primer ataque de diez drones únicamente manejados por IA: [RECORTAR: "Claro. Y ahí"] la máquina decidió a quién matar. [RECORTAR: "O sea, ya estamos hablando de la de la IA, de las máquinas. También había visto propiamente dichas, con propia conciencia de elegir a quién matar, ¿no? Utilizadas para la guerra, ¿no? Y también cada vez habían leído que"] Se extendía más el alcance de los drones ucranianos por sobre la distancia de frontera en Rusia. [RECORTAR: "tipo que cada vez eran iban más lejos esos drones. Bueno, ahora están atacando. Hace poco se difundieron un video donde atacan una petrolera y hacen un quilombo tremendo. E es tremendo. Espanto."] Esto es lo más peligroso porque ya es la IA pensada como objeto para matar gente.
+[RECORTAR: "Les empezaron a plantar chips de 100 dólares que tenían reconocimiento visual: Esto que hace cuando vos entrás a la zona a donde querés atacar a tu objetivo, podés marcarlo. si lo marcás antes de que te bajen la señal a un inhibidor, el dron actúa igual. Actúa igual, no necesita que lo dirijas vos. Entonces va eh teledirigido hacia ese objetivo. Em, ¿y qué pasó? Bueno, esto fue creciendo, esto fue creciendo cada vez más distancia, cada vez más distancia, cada vez más distancia."] En agosto de este año se documentó el primer ataque de diez drones únicamente manejados por IA: [RECORTAR: "Claro. Y ahí"] la máquina decidió a quién matar. [RECORTAR: "O sea, ya estamos hablando de la de la IA, de las máquinas. También había visto propiamente dichas, con propia conciencia de elegir a quién matar, ¿no? Utilizadas para la guerra, ¿no? Y también cada vez habían leído que"] Se extendía más el alcance de los drones ucranianos por sobre la distancia de frontera en Rusia. [RECORTAR: "tipo que cada vez eran iban más lejos esos drones. Bueno, ahora están atacando. Hace poco se difundieron un video donde atacan una petrolera y hacen un quilombo tremendo. E es tremendo. Espanto."] Esto es lo más peligroso porque ya es la IA pensada como objeto para matar gente.
 * Texto Limpio Resultante (Palabras textuales exactas para locución y subtítulos):
-"Les empezaron a plantar chips de 100 dólares que tenían reconocimiento visual: si lo marcás antes de que te bajen la señal a un inhibidor, el dron actúa igual. En agosto de este año se documentó el primer ataque de diez drones únicamente manejados por IA: la máquina decidió a quién matar. Se extendía más el alcance de los drones ucranianos por sobre la distancia de frontera en Rusia. Esto es lo más peligroso porque ya es la IA pensada como objeto para matar gente."
+"En agosto de este año se documentó el primer ataque de diez drones únicamente manejados por IA: la máquina decidió a quién matar. Se extendía más el alcance de los drones ucranianos por sobre la distancia de frontera en Rusia. Esto es lo más peligroso porque ya es la IA pensada como objeto para matar gente."
 * Cierre en Video (CTA nativo para @tintaysoda.stream):
 "Seguí a @tintaysoda.stream para anticiparte a las nuevas distopías tecnológicas."
 * Copy para Instagram / TikTok:
-  - Título gancho con emoji: La Inteligencia Artificial ya decide a quién matar en el campo de batalla 🤖💀
-  - Bajada de contexto breve: Con chips de 100 dólares y reconocimiento óptico, los drones atacan sin piloto humano. Ya se registró el primer ataque donde un algoritmo tomó la decisión letal.
-  - Pregunta polarizante en disyuntiva: ¿Avance militar inevitable o cruzamos una línea sin retorno ético? Te leemos en comentarios 👇
-  - Palabra clave en mayúsculas para automatización por DM (ManyChat): Comentá TERMINATOR y te mandamos el informe técnico por privado.
-  - 4 hashtags estratégicos de nicho: #InteligenciaArtificial #GuerraUcrania #BlackMirror #TecnologiaBelica
+¿La Inteligencia Artificial ya decide a quién matar? 🤖💀
+
+En la guerra de Ucrania y Rusia se documentó el primer ataque donde un enjambre de drones operó de forma 100% autónoma. Ya no es una persona frente a una pantalla: fue un algoritmo el que seleccionó a los objetivos letales en el campo de batalla.
+
+¿Avance militar inevitable o cruzamos el límite de Terminator? Los leemos abajo 👇
+
+👉 Seguí a @tintaysoda.stream para sumarte al debate.
+
+.
+.
+#inteligenciaartificial #guerraucrania #rusiaucrania #tecnologiabelica #drones #tintaysoda
 * Primer Comentario Fijado (Postura provocadora lista para encender el algoritmo):
-📌 "Nos vendieron que la IA venía para redactar correos y generar imágenes, y hoy ya le cargan chips de 100 dólares para que un código elija a quién matar en el barro."
+📌 "Nos vendieron que la IA venía para redactar correos o generar imágenes, y hoy ya hay algoritmos decidiendo de forma autónoma a quién liquidar en una guerra. Escalofriante."
 
 ---
 
