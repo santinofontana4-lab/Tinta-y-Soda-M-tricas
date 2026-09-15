@@ -2,9 +2,8 @@ name: Actualización Automática de Métricas (Martes)
 
 on:
   schedule:
-    # Se ejecuta automáticamente todos los martes a las 12:00 UTC (09:00 hs Argentina)
     - cron: '0 12 * * 2'
-  workflow_dispatch: # Permite disparar la actualización manualmente con un clic en GitHub
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -38,7 +37,7 @@ jobs:
           git add metricas/
           if git status --porcelain | grep -q "metricas/"; then
             echo "Nuevas métricas detectadas. Guardando en repositorio..."
-       git commit -m "Auto: Actualización semanal de métricas (Martes)"
+            git commit -m "Auto: Actualización semanal de métricas (Martes)"
             git push
           else
             echo "No hay cambios nuevos en las métricas hoy."
