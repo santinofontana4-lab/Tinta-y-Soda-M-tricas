@@ -1,368 +1,4 @@
 {
-  "metadata": {
-    "account": "@tintaysoda.stream",
-    "periodo": "2026-07-26 al 2026-09-13 (Consolidado Histórico Multimes)",
-    "generated_at": "15/09/2026 20:12:58",
-    "total_posts": 49,
-    "meses_procesados": [
-      "Julio 2026",
-      "Agosto 2026",
-      "Septiembre 2026"
-    ],
-    "fuente": "Meta Graph API Oficial & Exportaciones Anexadas"
-  },
-  "kpis": {
-    "total_views": 119611,
-    "total_interactions": 3522,
-    "total_likes": 2656,
-    "total_comments": 158,
-    "total_shares": 486,
-    "total_saves": 222,
-    "total_reach": 80375,
-    "total_follows": 18,
-    "save_rate_pct": 0.19,
-    "share_rate_pct": 0.41,
-    "engagement_rate_pct": 2.94,
-    "top_performer": {
-      "post_id": "18181798924423792",
-      "title": "Puntos en una app por matar soldados: la guerra gamer 🎮💥",
-      "full_text": "Puntos en una app por matar soldados: la guerra gamer 🎮💥\n\nOperadores a distancia manejan drones con joysticks. En Ucrania crearon una plataforma donde cada baja confirmada suma puntos canjeables por armamento real.\n\n¿Estamos ante la mayor deshumanización de la historia? Opiná en comentarios 👇\n\n#GuerraUcrania #Gamer #CounterStrike #geopolítica",
-      "date": "06/09/2026 12:35 hs",
-      "date_dt": "2026-09-06 12:35",
-      "month": "Septiembre 2026",
-      "week": "Semana 4 (31 Ago - 06 Sep)",
-      "topic": "Tecnodistopía & Geopolítica",
-      "type": "Reel",
-      "permalink": "https://www.instagram.com/reel/Dc83mYOKCek/",
-      "duration_sec": 0,
-      "duration_str": "35 seg",
-      "views": 23442,
-      "reach": 14506,
-      "interactions": 625,
-      "likes": 355,
-      "comments": 25,
-      "shares": 195,
-      "saves": 50,
-      "follows": 1,
-      "save_rate_pct": 0.21,
-      "share_rate_pct": 0.83,
-      "engagement_rate_pct": 2.67,
-      "rank": 1
-    }
-  },
-  "monthly_stats": {
-    "Julio 2026": {
-      "month": "Julio 2026",
-      "posts_count": 8,
-      "total_views": 7607,
-      "avg_views_per_post": 950,
-      "total_reach": 5339,
-      "total_interactions": 320,
-      "avg_interactions_per_post": 40,
-      "total_shares": 27,
-      "avg_shares_per_post": 3.4,
-      "total_saves": 10,
-      "avg_saves_per_post": 1.2,
-      "total_comments": 22,
-      "avg_comments_per_post": 2.8,
-      "total_likes": 261,
-      "total_follows": 0,
-      "save_rate_pct": 0.13,
-      "share_rate_pct": 0.35,
-      "engagement_rate_pct": 4.21,
-      "crecimiento_vs_mes_anterior": null,
-      "top_performer": {
-        "title": "Se enojó Marquitos 😡",
-        "views": 2065,
-        "shares": 2,
-        "saves": 1,
-        "comments": 5,
-        "duration_str": "-"
-      }
-    },
-    "Agosto 2026": {
-      "month": "Agosto 2026",
-      "posts_count": 29,
-      "total_views": 67679,
-      "avg_views_per_post": 2333,
-      "total_reach": 46360,
-      "total_interactions": 1723,
-      "avg_interactions_per_post": 59,
-      "total_shares": 164,
-      "avg_shares_per_post": 5.7,
-      "total_saves": 105,
-      "avg_saves_per_post": 3.6,
-      "total_comments": 59,
-      "avg_comments_per_post": 2.0,
-      "total_likes": 1395,
-      "total_follows": 13,
-      "save_rate_pct": 0.16,
-      "share_rate_pct": 0.24,
-      "engagement_rate_pct": 2.55,
-      "crecimiento_vs_mes_anterior": {
-        "mes_referencia": "Julio 2026",
-        "views_promedio": "+145.6%",
-        "shares_promedio": "+67.6%",
-        "saves_promedio": "+200.0%",
-        "comments_promedio": "-28.6%"
-      },
-      "top_performer": {
-        "title": "Peter Thiel llevó la tecnología de The Dark Knight a la realidad con Palantir 👁️🏙️",
-        "views": 10777,
-        "shares": 29,
-        "saves": 15,
-        "comments": 2,
-        "duration_str": "27 seg"
-      }
-    },
-    "Septiembre 2026": {
-      "month": "Septiembre 2026",
-      "posts_count": 12,
-      "total_views": 44325,
-      "avg_views_per_post": 3693,
-      "total_reach": 28676,
-      "total_interactions": 1479,
-      "avg_interactions_per_post": 123,
-      "total_shares": 295,
-      "avg_shares_per_post": 24.6,
-      "total_saves": 107,
-      "avg_saves_per_post": 8.9,
-      "total_comments": 77,
-      "avg_comments_per_post": 6.4,
-      "total_likes": 1000,
-      "total_follows": 5,
-      "save_rate_pct": 0.24,
-      "share_rate_pct": 0.67,
-      "engagement_rate_pct": 3.34,
-      "crecimiento_vs_mes_anterior": {
-        "mes_referencia": "Agosto 2026",
-        "views_promedio": "+58.3%",
-        "shares_promedio": "+331.6%",
-        "saves_promedio": "+147.2%",
-        "comments_promedio": "+220.0%"
-      },
-      "top_performer": {
-        "title": "Puntos en una app por matar soldados: la guerra gamer 🎮💥",
-        "views": 23442,
-        "shares": 195,
-        "saves": 50,
-        "comments": 25,
-        "duration_str": "35 seg"
-      }
-    }
-  },
-  "weeks_stats": {
-    "Semana (20-26 Jul)": {
-      "week": "Semana (20-26 Jul)",
-      "posts_count": 2,
-      "total_views": 680,
-      "avg_views_per_post": 340,
-      "total_reach": 1013,
-      "total_interactions": 52,
-      "total_likes": 49,
-      "avg_likes_per_post": 24.5,
-      "total_shares": 0,
-      "avg_shares_per_post": 0.0,
-      "total_saves": 1,
-      "avg_saves_per_post": 0.5,
-      "total_comments": 2,
-      "avg_comments_per_post": 1.0,
-      "total_follows": 0,
-      "engagement_rate_pct": 7.65,
-      "top_video": "La señorita \"aceituna de cerro\" y el \"mapita\" de las Malvinas.",
-      "top_views": 656
-    },
-    "Semana (27 Jul - 02 Ago)": {
-      "week": "Semana (27 Jul - 02 Ago)",
-      "posts_count": 7,
-      "total_views": 8425,
-      "avg_views_per_post": 1203,
-      "total_reach": 5295,
-      "total_interactions": 319,
-      "total_likes": 254,
-      "avg_likes_per_post": 36.3,
-      "total_shares": 30,
-      "avg_shares_per_post": 4.3,
-      "total_saves": 13,
-      "avg_saves_per_post": 1.9,
-      "total_comments": 22,
-      "avg_comments_per_post": 3.1,
-      "total_follows": 0,
-      "engagement_rate_pct": 3.79,
-      "top_video": "Se enojó Marquitos 😡",
-      "top_views": 2065
-    },
-    "Semana (03-09 Ago)": {
-      "week": "Semana (03-09 Ago)",
-      "posts_count": 6,
-      "total_views": 9445,
-      "avg_views_per_post": 1574,
-      "total_reach": 5788,
-      "total_interactions": 336,
-      "total_likes": 286,
-      "avg_likes_per_post": 47.7,
-      "total_shares": 19,
-      "avg_shares_per_post": 3.2,
-      "total_saves": 16,
-      "avg_saves_per_post": 2.7,
-      "total_comments": 15,
-      "avg_comments_per_post": 2.5,
-      "total_follows": 0,
-      "engagement_rate_pct": 3.56,
-      "top_video": "¿Qué onda con Liechtenstein?🫣",
-      "top_views": 2655
-    },
-    "Semana 1 (10-16 Ago)": {
-      "week": "Semana 1 (10-16 Ago)",
-      "posts_count": 6,
-      "total_views": 12081,
-      "avg_views_per_post": 2013,
-      "total_reach": 7597,
-      "total_interactions": 346,
-      "total_likes": 293,
-      "avg_likes_per_post": 48.8,
-      "total_shares": 30,
-      "avg_shares_per_post": 5.0,
-      "total_saves": 19,
-      "avg_saves_per_post": 3.2,
-      "total_comments": 4,
-      "avg_comments_per_post": 0.7,
-      "total_follows": 5,
-      "engagement_rate_pct": 2.86,
-      "top_video": "En La Plata hay 6.375 hectáreas de tierras extranjerizadas 🌎",
-      "top_views": 3199
-    },
-    "Semana 2 (17-23 Ago)": {
-      "week": "Semana 2 (17-23 Ago)",
-      "posts_count": 7,
-      "total_views": 22849,
-      "avg_views_per_post": 3264,
-      "total_reach": 16874,
-      "total_interactions": 422,
-      "total_likes": 345,
-      "avg_likes_per_post": 49.3,
-      "total_shares": 31,
-      "avg_shares_per_post": 4.4,
-      "total_saves": 35,
-      "avg_saves_per_post": 5.0,
-      "total_comments": 11,
-      "avg_comments_per_post": 1.6,
-      "total_follows": 5,
-      "engagement_rate_pct": 1.85,
-      "top_video": "Preguntar la hora o qué micro tomarte ahora nos causa ansiedad📱👀 ¿En qué momento nos volvimos tan tímidos en la calle?",
-      "top_views": 5984
-    },
-    "Semana 3 (24-30 Ago)": {
-      "week": "Semana 3 (24-30 Ago)",
-      "posts_count": 8,
-      "total_views": 19445,
-      "avg_views_per_post": 2430,
-      "total_reach": 13304,
-      "total_interactions": 486,
-      "total_likes": 376,
-      "avg_likes_per_post": 47.0,
-      "total_shares": 61,
-      "avg_shares_per_post": 7.6,
-      "total_saves": 26,
-      "avg_saves_per_post": 3.2,
-      "total_comments": 23,
-      "avg_comments_per_post": 2.9,
-      "total_follows": 3,
-      "engagement_rate_pct": 2.5,
-      "top_video": "Peter Thiel llevó la tecnología de The Dark Knight a la realidad con Palantir 👁️🏙️",
-      "top_views": 10777
-    },
-    "Semana 4 (31 Ago - 06 Sep)": {
-      "week": "Semana 4 (31 Ago - 06 Sep)",
-      "posts_count": 7,
-      "total_views": 37728,
-      "avg_views_per_post": 5389,
-      "total_reach": 23820,
-      "total_interactions": 1164,
-      "total_likes": 745,
-      "avg_likes_per_post": 106.4,
-      "total_shares": 265,
-      "avg_shares_per_post": 37.9,
-      "total_saves": 79,
-      "avg_saves_per_post": 11.3,
-      "total_comments": 75,
-      "avg_comments_per_post": 10.7,
-      "total_follows": 4,
-      "engagement_rate_pct": 3.09,
-      "top_video": "Puntos en una app por matar soldados: la guerra gamer 🎮💥",
-      "top_views": 23442
-    },
-    "Semana 5 (07-13 Sep)": {
-      "week": "Semana 5 (07-13 Sep)",
-      "posts_count": 6,
-      "total_views": 8958,
-      "avg_views_per_post": 1493,
-      "total_reach": 6684,
-      "total_interactions": 397,
-      "total_likes": 308,
-      "avg_likes_per_post": 51.3,
-      "total_shares": 50,
-      "avg_shares_per_post": 8.3,
-      "total_saves": 33,
-      "avg_saves_per_post": 5.5,
-      "total_comments": 6,
-      "avg_comments_per_post": 1.0,
-      "total_follows": 1,
-      "engagement_rate_pct": 4.43,
-      "top_video": "¿CUÁNDO FUE LA ÚLTIMA VEZ QUE UN AMIGO TE DIJO CÓMO SE SIENTE?",
-      "top_views": 2765
-    }
-  },
-  "topic_stats": {
-    "Tecnodistopía & Geopolítica": {
-      "topic": "Tecnodistopía & Geopolítica",
-      "count": 7,
-      "total_views": 47413,
-      "avg_views": 6773,
-      "total_shares": 258,
-      "avg_shares": 36.9,
-      "total_saves": 82,
-      "total_comments": 34,
-      "total_interactions": 1079,
-      "engagement_pct": 2.28
-    },
-    "Datos Duros & Desmitificación": {
-      "topic": "Datos Duros & Desmitificación",
-      "count": 13,
-      "total_views": 27073,
-      "avg_views": 2082,
-      "total_shares": 88,
-      "avg_shares": 6.8,
-      "total_saves": 63,
-      "total_comments": 56,
-      "total_interactions": 999,
-      "engagement_pct": 3.69
-    },
-    "Hábitos & Ansiedad Digital": {
-      "topic": "Hábitos & Ansiedad Digital",
-      "count": 4,
-      "total_views": 12817,
-      "avg_views": 3204,
-      "total_shares": 23,
-      "avg_shares": 5.8,
-      "total_saves": 19,
-      "total_comments": 10,
-      "total_interactions": 251,
-      "engagement_pct": 1.96
-    },
-    "Rosca Política & Sociedad": {
-      "topic": "Rosca Política & Sociedad",
-      "count": 25,
-      "total_views": 32308,
-      "avg_views": 1292,
-      "total_shares": 117,
-      "avg_shares": 4.7,
-      "total_saves": 58,
-      "total_comments": 58,
-      "total_interactions": 1193,
-      "engagement_pct": 3.69
-    }
-  },
   "posts": [
     {
       "post_id": "18181798924423792",
@@ -391,6 +27,32 @@
       "rank": 1
     },
     {
+      "post_id": "18455477650188308",
+      "title": "👉🏼 LO QUE NADIE TE DIJO DEL MAPA DE ARGENTINA",
+      "full_text": "👉🏼 LO QUE NADIE TE DIJO DEL MAPA DE ARGENTINA\n\nDesde 2010 la ley establece el mapa bicontinental: el centro geográfico real está en Tierra del Fuego y nuestra superficie marítima duplica la terrestre 🌎\n\n#Soberania #Geopolitica #Patagonia #ArgentinaBicontinental",
+      "date": "14/09/2026 12:30 hs",
+      "date_dt": "2026-09-14 12:30",
+      "month": "Septiembre 2026",
+      "week": "Semana 6 (14-20 Sep)",
+      "topic": "Rosca Política & Sociedad",
+      "type": "Reel",
+      "permalink": "https://www.instagram.com/reel/DdRdjJxB09g/",
+      "duration_sec": 0,
+      "duration_str": "-",
+      "views": 15779,
+      "reach": 11533,
+      "interactions": 357,
+      "likes": 286,
+      "comments": 23,
+      "shares": 25,
+      "saves": 23,
+      "follows": 0,
+      "save_rate_pct": 0.15,
+      "share_rate_pct": 0.16,
+      "engagement_rate_pct": 2.26,
+      "rank": 2
+    },
+    {
       "post_id": "17909683902281914",
       "title": "Peter Thiel llevó la tecnología de The Dark Knight a la realidad con Palantir 👁️🏙️",
       "full_text": "Peter Thiel llevó la tecnología de The Dark Knight a la realidad con Palantir 👁️🏙️\n\nVigilancia masiva, análisis de datos y una oficina bautizada como \"Gotham\". La realidad siempre supera a la ficción.\n\n¿Conocías la historia detrás de esta empresa? 👇",
@@ -414,7 +76,7 @@
       "save_rate_pct": 0.14,
       "share_rate_pct": 0.27,
       "engagement_rate_pct": 1.61,
-      "rank": 2
+      "rank": 3
     },
     {
       "post_id": "18148091458526174",
@@ -440,7 +102,7 @@
       "save_rate_pct": 0.15,
       "share_rate_pct": 0.05,
       "engagement_rate_pct": 1.29,
-      "rank": 3
+      "rank": 4
     },
     {
       "post_id": "18107449337525696",
@@ -466,7 +128,7 @@
       "save_rate_pct": 0.1,
       "share_rate_pct": 0.27,
       "engagement_rate_pct": 2.12,
-      "rank": 4
+      "rank": 5
     },
     {
       "post_id": "18112253363007002",
@@ -492,7 +154,7 @@
       "save_rate_pct": 0.14,
       "share_rate_pct": 0.09,
       "engagement_rate_pct": 1.43,
-      "rank": 5
+      "rank": 6
     },
     {
       "post_id": "17984639174876161",
@@ -518,7 +180,7 @@
       "save_rate_pct": 0.38,
       "share_rate_pct": 0.54,
       "engagement_rate_pct": 6.63,
-      "rank": 6
+      "rank": 7
     },
     {
       "post_id": "18007295015973246",
@@ -544,7 +206,7 @@
       "save_rate_pct": 0.05,
       "share_rate_pct": 0.11,
       "engagement_rate_pct": 1.94,
-      "rank": 7
+      "rank": 8
     },
     {
       "post_id": "17958307269078968",
@@ -570,7 +232,7 @@
       "save_rate_pct": 0.18,
       "share_rate_pct": 0.15,
       "engagement_rate_pct": 2.49,
-      "rank": 8
+      "rank": 9
     },
     {
       "post_id": "17911979964526738",
@@ -596,7 +258,7 @@
       "save_rate_pct": 0.13,
       "share_rate_pct": 0.47,
       "engagement_rate_pct": 3.22,
-      "rank": 9
+      "rank": 10
     },
     {
       "post_id": "18102210263352943",
@@ -622,7 +284,7 @@
       "save_rate_pct": 0.16,
       "share_rate_pct": 0.16,
       "engagement_rate_pct": 3.86,
-      "rank": 10
+      "rank": 11
     },
     {
       "post_id": "18103466729586360",
@@ -648,7 +310,7 @@
       "save_rate_pct": 0.18,
       "share_rate_pct": 0.11,
       "engagement_rate_pct": 2.82,
-      "rank": 11
+      "rank": 12
     },
     {
       "post_id": "18091939442164687",
@@ -674,7 +336,7 @@
       "save_rate_pct": 0.29,
       "share_rate_pct": 0.51,
       "engagement_rate_pct": 3.8,
-      "rank": 12
+      "rank": 13
     },
     {
       "post_id": "17873600832629087",
@@ -700,7 +362,7 @@
       "save_rate_pct": 0.23,
       "share_rate_pct": 0.3,
       "engagement_rate_pct": 3.09,
-      "rank": 13
+      "rank": 14
     },
     {
       "post_id": "18074185100411851",
@@ -726,7 +388,7 @@
       "save_rate_pct": 0.36,
       "share_rate_pct": 0.59,
       "engagement_rate_pct": 4.73,
-      "rank": 14
+      "rank": 15
     },
     {
       "post_id": "17888937792436214",
@@ -752,7 +414,7 @@
       "save_rate_pct": 0.16,
       "share_rate_pct": 0.12,
       "engagement_rate_pct": 1.54,
-      "rank": 15
+      "rank": 16
     },
     {
       "post_id": "18208931791364014",
@@ -778,7 +440,7 @@
       "save_rate_pct": 0.21,
       "share_rate_pct": 0.85,
       "engagement_rate_pct": 3.47,
-      "rank": 16
+      "rank": 17
     },
     {
       "post_id": "17878674174503654",
@@ -804,7 +466,7 @@
       "save_rate_pct": 0.05,
       "share_rate_pct": 0.1,
       "engagement_rate_pct": 3.1,
-      "rank": 17
+      "rank": 18
     },
     {
       "post_id": "18011228708954645",
@@ -830,10 +492,10 @@
       "save_rate_pct": 0.0,
       "share_rate_pct": 0.34,
       "engagement_rate_pct": 3.96,
-      "rank": 18
+      "rank": 19
     },
     {
-      "rank": 19,
+      "rank": 20,
       "post_id": "18060972725758179",
       "title": "Un poco de geopolítica de la mano de Marquitos: Migraciones a Ceuta 🌎",
       "full_text": "Un poco de geopolítica de la mano de Marquitos sobre las migraciones a Ceuta.",
@@ -856,7 +518,7 @@
       "date_dt": "2026-08-16 21:09"
     },
     {
-      "rank": 20,
+      "rank": 21,
       "post_id": "18106744876885723",
       "title": "8 de cada 10 trabajadores sufren ajustes alimentarios (UCA)",
       "full_text": "8 de cada 10 trabajadores sufren ajustes alimentarios según la UCA.",
@@ -902,7 +564,7 @@
       "save_rate_pct": 0.12,
       "share_rate_pct": 0.06,
       "engagement_rate_pct": 3.04,
-      "rank": 21
+      "rank": 22
     },
     {
       "post_id": "18105089357194435",
@@ -928,7 +590,7 @@
       "save_rate_pct": 0.12,
       "share_rate_pct": 0.37,
       "engagement_rate_pct": 3.43,
-      "rank": 22
+      "rank": 23
     },
     {
       "post_id": "18007185239760719",
@@ -954,7 +616,7 @@
       "save_rate_pct": 0.06,
       "share_rate_pct": 0.06,
       "engagement_rate_pct": 3.55,
-      "rank": 23
+      "rank": 24
     },
     {
       "post_id": "18013168574948092",
@@ -980,7 +642,7 @@
       "save_rate_pct": 0.26,
       "share_rate_pct": 0.52,
       "engagement_rate_pct": 2.3,
-      "rank": 24
+      "rank": 25
     },
     {
       "post_id": "18062018804578385",
@@ -1006,7 +668,7 @@
       "save_rate_pct": 0.27,
       "share_rate_pct": 0.2,
       "engagement_rate_pct": 3.4,
-      "rank": 25
+      "rank": 26
     },
     {
       "post_id": "17929259565370143",
@@ -1032,7 +694,7 @@
       "save_rate_pct": 0.27,
       "share_rate_pct": 0.07,
       "engagement_rate_pct": 3.51,
-      "rank": 26
+      "rank": 27
     },
     {
       "post_id": "18117179639285491",
@@ -1058,7 +720,7 @@
       "save_rate_pct": 0.76,
       "share_rate_pct": 0.07,
       "engagement_rate_pct": 4.68,
-      "rank": 27
+      "rank": 28
     },
     {
       "post_id": "17897397693582957",
@@ -1084,7 +746,7 @@
       "save_rate_pct": 0.3,
       "share_rate_pct": 0.22,
       "engagement_rate_pct": 2.44,
-      "rank": 28
+      "rank": 29
     },
     {
       "post_id": "18123560137704851",
@@ -1110,7 +772,7 @@
       "save_rate_pct": 0.08,
       "share_rate_pct": 0.39,
       "engagement_rate_pct": 4.34,
-      "rank": 29
+      "rank": 30
     },
     {
       "post_id": "17924163972402766",
@@ -1136,7 +798,7 @@
       "save_rate_pct": 0.25,
       "share_rate_pct": 0.17,
       "engagement_rate_pct": 2.97,
-      "rank": 30
+      "rank": 31
     },
     {
       "post_id": "18088320038556220",
@@ -1162,7 +824,7 @@
       "save_rate_pct": 0.26,
       "share_rate_pct": 0.17,
       "engagement_rate_pct": 4.23,
-      "rank": 31
+      "rank": 32
     },
     {
       "post_id": "18087937598215675",
@@ -1188,7 +850,7 @@
       "save_rate_pct": 0.26,
       "share_rate_pct": 0.44,
       "engagement_rate_pct": 4.02,
-      "rank": 32
+      "rank": 33
     },
     {
       "post_id": "17949274116258334",
@@ -1214,10 +876,10 @@
       "save_rate_pct": 0.0,
       "share_rate_pct": 1.12,
       "engagement_rate_pct": 5.04,
-      "rank": 33
+      "rank": 34
     },
     {
-      "rank": 34,
+      "rank": 35,
       "post_id": "18091532981643349",
       "title": "¿Por qué estaban disfrazados de Gandalf? Acá la respuesta",
       "full_text": "¿Por qué estaban disfrazados de Gandalf? Acá la respuesta.",
@@ -1240,7 +902,7 @@
       "date_dt": "2026-08-20 19:11"
     },
     {
-      "rank": 35,
+      "rank": 36,
       "post_id": "18161433316478947",
       "title": "Mañana probamos cosas nuevas 😎",
       "full_text": "Mañana probamos cosas nuevas 😎 Nos vemos por YouTube.",
@@ -1286,7 +948,7 @@
       "save_rate_pct": 0.19,
       "share_rate_pct": 0.29,
       "engagement_rate_pct": 2.98,
-      "rank": 36
+      "rank": 37
     },
     {
       "post_id": "18086038202237581",
@@ -1312,7 +974,7 @@
       "save_rate_pct": 0.0,
       "share_rate_pct": 0.1,
       "engagement_rate_pct": 2.91,
-      "rank": 37
+      "rank": 38
     },
     {
       "post_id": "18076437014379651",
@@ -1338,7 +1000,7 @@
       "save_rate_pct": 0.1,
       "share_rate_pct": 0.62,
       "engagement_rate_pct": 2.48,
-      "rank": 38
+      "rank": 39
     },
     {
       "post_id": "18610609006017801",
@@ -1364,7 +1026,7 @@
       "save_rate_pct": 0.0,
       "share_rate_pct": 0.24,
       "engagement_rate_pct": 2.69,
-      "rank": 39
+      "rank": 40
     },
     {
       "post_id": "18089854811443252",
@@ -1390,7 +1052,7 @@
       "save_rate_pct": 0.0,
       "share_rate_pct": 0.13,
       "engagement_rate_pct": 2.75,
-      "rank": 40
+      "rank": 41
     },
     {
       "post_id": "18123850804743302",
@@ -1416,7 +1078,7 @@
       "save_rate_pct": 0.15,
       "share_rate_pct": 0.0,
       "engagement_rate_pct": 4.27,
-      "rank": 41
+      "rank": 42
     },
     {
       "post_id": "18130614253737018",
@@ -1442,7 +1104,7 @@
       "save_rate_pct": 0.16,
       "share_rate_pct": 0.0,
       "engagement_rate_pct": 3.17,
-      "rank": 42
+      "rank": 43
     },
     {
       "post_id": "17894533674667453",
@@ -1468,7 +1130,7 @@
       "save_rate_pct": 0.16,
       "share_rate_pct": 0.33,
       "engagement_rate_pct": 4.73,
-      "rank": 43
+      "rank": 44
     },
     {
       "post_id": "18095493149041116",
@@ -1494,7 +1156,7 @@
       "save_rate_pct": 0.35,
       "share_rate_pct": 2.25,
       "engagement_rate_pct": 8.12,
-      "rank": 44
+      "rank": 45
     },
     {
       "post_id": "17899614855582913",
@@ -1520,7 +1182,7 @@
       "save_rate_pct": 0.38,
       "share_rate_pct": 0.77,
       "engagement_rate_pct": 4.79,
-      "rank": 45
+      "rank": 46
     },
     {
       "post_id": "18615062557033749",
@@ -1546,7 +1208,7 @@
       "save_rate_pct": 0.39,
       "share_rate_pct": 0.0,
       "engagement_rate_pct": 5.92,
-      "rank": 46
+      "rank": 47
     },
     {
       "post_id": "18029656784846236",
@@ -1572,7 +1234,7 @@
       "save_rate_pct": 0.21,
       "share_rate_pct": 0.63,
       "engagement_rate_pct": 4.21,
-      "rank": 47
+      "rank": 48
     },
     {
       "post_id": "17973549429137238",
@@ -1598,7 +1260,7 @@
       "save_rate_pct": 0.23,
       "share_rate_pct": 3.48,
       "engagement_rate_pct": 8.82,
-      "rank": 48
+      "rank": 49
     },
     {
       "post_id": "18084247925199858",
@@ -1624,7 +1286,33 @@
       "save_rate_pct": 0.0,
       "share_rate_pct": 0.0,
       "engagement_rate_pct": 100.0,
-      "rank": 49
+      "rank": 50
+    },
+    {
+      "post_id": "18098034554065566",
+      "title": "APOSTAR MULTIPLICA EL RIESGO DE SUICIDIO",
+      "full_text": "APOSTAR MULTIPLICA EL RIESGO DE SUICIDIO\n\n🔎 En el marco del Día Mundial para la Prevención del Suicidio, la Universidad de Zaragoza dio a conocer los resultados de una investigación que expone que en casos de adicción al juego las conductas suicidas aumentan más de un 30%. El estrés financiero también aparece como un factor asociado a mayor riesgo.\n\n👉🏼 No podemos pensar el suicidio como una problemática individual.\n\n#SaludMental #ApuestasOnline #Juventud #CrisisEconomica",
+      "date": "15/09/2026 19:40 hs",
+      "date_dt": "2026-09-15 19:40",
+      "month": "Septiembre 2026",
+      "week": "Semana 6 (14-20 Sep)",
+      "topic": "Datos Duros & Desmitificación",
+      "type": "Reel",
+      "permalink": "https://www.instagram.com/reel/DdUyqjZqSzO/",
+      "duration_sec": 0,
+      "duration_str": "-",
+      "views": 20,
+      "reach": 20,
+      "interactions": 3,
+      "likes": 3,
+      "comments": 0,
+      "shares": 0,
+      "saves": 0,
+      "follows": 0,
+      "save_rate_pct": 0.0,
+      "share_rate_pct": 0.0,
+      "engagement_rate_pct": 15.0,
+      "rank": 51
     }
   ]
 }

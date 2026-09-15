@@ -209,7 +209,14 @@ foreach ($file in $csvFiles) {
     }
 }
 
-$allPosts = @($postsById.Values | Sort-Object -Property @{Expression={$_.views}; Descending=$true})
+$now = (Get-Date).AddYears(2026 - (Get-Date).Year)
+$dayOfWeek = [int]$now.DayOfWeek
+$daysSinceSunday = if ($dayOfWeek -ne 0) { $dayOfWeek } else { 7 }
+$lastSunday = $now.AddDays(-$daysSinceSunday)
+$cutoffDateStr = "$($lastSunday.ToString('yyyy-MM-dd')) 23:59"
+
+$rawPosts = @($postsById.Values)
+$allPosts = @($rawPosts | Where-Object { -not $_.date_dt -or $_.date_dt -eq "1970-01-01" -or $_.date_dt -le $cutoffDateStr } | Sort-Object -Property @{Expression={$_.views}; Descending=$true})
 for ($i = 0; $i -lt $allPosts.Count; $i++) {
     $allPosts[$i]["rank"] = $i + 1
 }

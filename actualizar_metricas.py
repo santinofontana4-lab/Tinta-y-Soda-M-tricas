@@ -135,6 +135,15 @@ def get_month_sort_key(month_str):
     return 0
 
 
+def get_last_completed_sunday(dt_now=None):
+    if dt_now is None:
+        dt_now = datetime.now()
+    dt_now = dt_now.replace(year=2026)
+    days_since_sunday = (dt_now.weekday() + 1) if dt_now.weekday() != 6 else 7
+    last_sunday = (dt_now - timedelta(days=days_since_sunday)).date()
+    return datetime(last_sunday.year, last_sunday.month, last_sunday.day, 23, 59, 59)
+
+
 def process_all_exports():
     if not os.path.exists(METRICAS_DIR):
         print(f"[ERROR] No existe la carpeta {METRICAS_DIR}")
@@ -262,7 +271,10 @@ def process_all_exports():
             else:
                 posts_by_id[post_id] = post_obj
 
-    all_posts = list(posts_by_id.values())
+    cutoff_dt = get_last_completed_sunday()
+    cutoff_str = cutoff_dt.strftime("%Y-%m-%d %H:%M")
+    all_raw = list(posts_by_id.values())
+    all_posts = [p for p in all_raw if not p.get("date_dt") or p.get("date_dt") == "1970-01-01" or p.get("date_dt") <= cutoff_str]
     all_posts.sort(key=lambda x: x["views"], reverse=True)
     for idx, p in enumerate(all_posts):
         p["rank"] = idx + 1

@@ -25,6 +25,7 @@ if hasattr(sys.stdout, "reconfigure"):
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 METRICAS_DIR = os.path.join(BASE_DIR, "metricas")
 JSON_OUTPUT = os.path.join(METRICAS_DIR, "historico_metricas.json")
+RAW_JSON_OUTPUT = os.path.join(METRICAS_DIR, "historico_crudo.json")
 HTML_OUTPUT = os.path.join(METRICAS_DIR, "dashboard.html")
 INDEX_OUTPUT = os.path.join(METRICAS_DIR, "index.html")
 ROOT_INDEX = os.path.join(BASE_DIR, "index.html")
@@ -181,6 +182,19 @@ def fetch_media_insights(media_id, media_product_type, token):
     return insights
 
 
+def get_last_completed_sunday(dt_now=None):
+    if dt_now is None:
+        # Hora actual en Argentina (UTC-3)
+        dt_now = datetime.utcnow() - timedelta(hours=3)
+    dt_now = dt_now.replace(year=2026)
+    # Lunes=0, Martes=1, ..., Domingo=6
+    # Si hoy es lunes a sábado (0..5), el domingo cerrado fue hace (weekday + 1) días.
+    # Si hoy es domingo (6), el domingo en curso no terminó, el cerrado fue hace 7 días.
+    days_since_sunday = (dt_now.weekday() + 1) if dt_now.weekday() != 6 else 7
+    last_sunday = (dt_now - timedelta(days=days_since_sunday)).date()
+    return datetime(last_sunday.year, last_sunday.month, last_sunday.day, 23, 59, 59)
+
+
 def load_existing_summary():
     if os.path.exists(JSON_OUTPUT):
         try:
@@ -191,7 +205,18 @@ def load_existing_summary():
     return {"posts": []}
 
 
-def recalculate_summary(all_posts):
+def load_existing_raw_posts():
+    if os.path.exists(RAW_JSON_OUTPUT):
+        try:
+            with open(RAW_JSON_OUTPUT, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                return data.get("posts", [])
+        except Exception:
+            pass
+    return load_existing_summary().get("posts", [])
+
+
+def recalculate_summary(all_posts, filter_closed_weeks=True):
     for p in all_posts:
         if not isinstance(p, dict):
             continue
@@ -229,6 +254,22 @@ def recalculate_summary(all_posts):
                 p["week"] = w_lbl
             except Exception:
                 pass
+
+    # Filtrar estrictamente solo publicaciones de semanas concluidas (hasta el último domingo cerrado)
+    if filter_closed_weeks:
+        cutoff_dt = get_last_completed_sunday()
+        cutoff_str = cutoff_dt.strftime("%Y-%m-%d %H:%M")
+        active_posts = []
+        for p in all_posts:
+            ds = p.get("date_dt", "")
+            if not ds or ds == "1970-01-01" or ds <= cutoff_str:
+                active_posts.append(p)
+        print(f"[INFO] Corte semanal aplicado: semanas concluidas hasta {cutoff_dt.strftime('%d/%m/%Y')}.")
+        print(f"[INFO] Posts consolidados: {len(active_posts)} (En curso omitidos: {len(all_posts) - len(active_posts)})")
+    else:
+        active_posts = all_posts
+
+    all_posts = active_posts
 
     all_posts.sort(key=lambda x: x.get("views", 0), reverse=True)
     for idx, p in enumerate(all_posts):
@@ -473,8 +514,8 @@ def sync():
         print(f"[ERROR] Error inesperado al conectar con Meta API: {e}")
         return
 
-    existing_summary = load_existing_summary()
-    posts_by_id = {str(p["post_id"]): p for p in existing_summary.get("posts", []) if "post_id" in p}
+    existing_posts = load_existing_raw_posts()
+    posts_by_id = {str(p["post_id"]): p for p in existing_posts if isinstance(p, dict) and "post_id" in p}
 
     nuevos_posts_count = 0
     actualizados_posts_count = 0
@@ -567,8 +608,14 @@ def sync():
             posts_by_id[media_id] = post_obj
             nuevos_posts_count += 1
 
-    all_posts = list(posts_by_id.values())
-    summary = recalculate_summary(all_posts)
+    all_raw_posts = list(posts_by_id.values())
+    try:
+        with open(RAW_JSON_OUTPUT, "w", encoding="utf-8") as f:
+            json.dump({"posts": all_raw_posts}, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"[WARN] No se pudo guardar el pool crudo: {e}")
+
+    summary = recalculate_summary(all_raw_posts, filter_closed_weeks=True)
 
     print(f"[OK] Sincronización completada:")
     print(f"     - Nuevos posts agregados: {nuevos_posts_count}")
