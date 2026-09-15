@@ -1,9 +1,9 @@
-﻿name: Actualización Automática de Métricas (Lunes 00:00)
+﻿name: Actualización Automática Diaria de Métricas (00:00)
 
 on:
   schedule:
-    # Se ejecuta automáticamente todos los lunes a las 03:00 UTC (00:00 hs Argentina ART = UTC-3)
-    - cron: '0 3 * * 1'
+    # Se ejecuta automáticamente todos los días a las 03:00 UTC (00:00 hs Argentina ART = UTC-3)
+    - cron: '0 3 * * *'
   workflow_dispatch:
 
 permissions:
@@ -38,7 +38,7 @@ jobs:
           git add metricas/ index.html
           if git status --porcelain | grep -E "metricas/|index.html"; then
             echo "Nuevas métricas detectadas. Guardando en repositorio..."
-            git commit -m "Auto: Actualización semanal de métricas (Lunes 00:00)"
+            git commit -m "Auto: Actualización diaria de métricas (00:00)"
             git push
           else
             echo "No hay cambios nuevos en las métricas hoy."
