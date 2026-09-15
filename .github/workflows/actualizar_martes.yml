@@ -1,0 +1,45 @@
+name: Actualización Automática de Métricas (Martes)
+
+on:
+  schedule:
+    # Se ejecuta automáticamente todos los martes a las 12:00 UTC (09:00 hs Argentina)
+    - cron: '0 12 * * 2'
+  workflow_dispatch: # Permite disparar la actualización manualmente con un clic en GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar-metricas:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Ejecutar sincronización con Instagram Graph API
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_ACCOUNT_ID: ${{ secrets.IG_ACCOUNT_ID }}
+        run: |
+          python scripts/sync_instagram_api.py
+
+      - name: Comprobar cambios y publicar automáticamente
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add metricas/
+          if git status --porcelain | grep -q "metricas/"; then
+            echo "Nuevas métricas detectadas. Guardando en repositorio..."
+            git commit -m "Auto: Actualización semanal de métricas (Martes) [skip ci]"
+            git push
+          else
+            echo "No hay cambios nuevos en las métricas hoy."
+          fi

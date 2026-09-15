@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.system_generated/
+.gemini/
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wav
+*.mp3
