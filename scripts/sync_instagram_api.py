@@ -37,6 +37,11 @@ MONTH_NAMES_ES = {
     5: "Mayo", 6: "Junio", 7: "Julio", 8: "Agosto",
     9: "Septiembre", 10: "Octubre", 11: "Noviembre", 12: "Diciembre"
 }
+MONTH_SHORT_ES = {
+    1: "Ene", 2: "Feb", 3: "Mar", 4: "Abr",
+    5: "May", 6: "Jun", 7: "Jul", 8: "Ago",
+    9: "Sep", 10: "Oct", 11: "Nov", 12: "Dic"
+}
 MONTH_REV_ES = {v.lower(): k for k, v in MONTH_NAMES_ES.items()}
 
 
@@ -72,40 +77,35 @@ def assign_temporal_groups(dt_arg):
     # Alinear año a la línea de tiempo auditada del canal (2026)
     year = 2026
     month = dt_arg.month
-    day = dt_arg.day
 
     month_name = MONTH_NAMES_ES.get(month, "Desconocido")
     month_label = f"{month_name} {year}"
 
-    # Asignación semanal por rangos de días del mes
-    if month == 8:
-        if day <= 16:
-            week_label = "Semana 1 (10-16 Ago)"
-        elif day <= 23:
-            week_label = "Semana 2 (17-23 Ago)"
-        else:
-            week_label = "Semana 3 (24-31 Ago)"
-    elif month == 9:
-        if day <= 7:
-            week_label = "Semana 4 (01-07 Sep)"
-        elif day <= 14:
-            week_label = "Semana 5 (08-14 Sep)"
-        elif day <= 21:
-            week_label = "Semana 6 (15-21 Sep)"
-        else:
-            week_label = "Semana 7 (22-30 Sep)"
+    # Normalizar a 2026 para cálculo de semanas Lunes a Domingo
+    dt_norm = dt_arg.replace(year=2026)
+    monday = dt_norm - timedelta(days=dt_norm.weekday())
+    sunday = monday + timedelta(days=6)
+
+    # Semana auditada oficial del canal: Semana 1 arranca el Lunes 10 de Agosto de 2026
+    base_monday = datetime(2026, 8, 10)
+    diff_days = (monday.date() - base_monday.date()).days
+    week_num = (diff_days // 7) + 1
+
+    m_mon = MONTH_SHORT_ES.get(monday.month, "")
+    m_sun = MONTH_SHORT_ES.get(sunday.month, "")
+
+    if m_mon == m_sun:
+        range_str = f"{monday.day:02d}-{sunday.day:02d} {m_mon}"
     else:
-        abbr = month_name[:3]
-        if day <= 7:
-            week_label = f"Sem 1 (01-07 {abbr})"
-        elif day <= 14:
-            week_label = f"Sem 2 (08-14 {abbr})"
-        elif day <= 21:
-            week_label = f"Sem 3 (15-21 {abbr})"
-        else:
-            week_label = f"Sem 4 (22-fin {abbr})"
+        range_str = f"{monday.day:02d} {m_mon} - {sunday.day:02d} {m_sun}"
+
+    if week_num >= 1:
+        week_label = f"Semana {week_num} ({range_str})"
+    else:
+        week_label = f"Semana ({range_str})"
 
     return month_label, week_label
+
 
 
 def make_api_request(url, token):
@@ -208,8 +208,27 @@ def recalculate_summary(all_posts):
         p.setdefault("month", "Sin fecha")
         p.setdefault("week", "Sin fecha")
         p.setdefault("topic", "Rosca Política & Sociedad")
-        if not p.get("date_dt"):
-            p["date_dt"] = "1970-01-01"
+        
+        # Normalizar fecha si es 1970-01-01 o falta, extrayéndola del campo date
+        if not p.get("date_dt") or p.get("date_dt") == "1970-01-01":
+            date_str = p.get("date", "")
+            m = re.search(r"(\d{2})/(\d{2})/(\d{4})\s+(\d{2}):(\d{2})", date_str)
+            if m:
+                d, mo, y, h, mi = map(int, m.groups())
+                p["date_dt"] = f"{y:04d}-{mo:02d}-{d:02d} {h:02d}:{mi:02d}"
+            else:
+                p["date_dt"] = "1970-01-01"
+
+        # Reasignar mes y semana de forma dinámica con el ciclo oficial Lunes a Domingo
+        if p.get("date_dt") and p.get("date_dt") != "1970-01-01":
+            try:
+                clean_ds = p["date_dt"][:16]
+                dt_p = datetime.fromisoformat(clean_ds)
+                m_lbl, w_lbl = assign_temporal_groups(dt_p)
+                p["month"] = m_lbl
+                p["week"] = w_lbl
+            except Exception:
+                pass
 
     all_posts.sort(key=lambda x: x.get("views", 0), reverse=True)
     for idx, p in enumerate(all_posts):
