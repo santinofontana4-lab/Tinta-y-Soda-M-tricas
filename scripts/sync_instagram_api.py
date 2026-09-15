@@ -27,6 +27,7 @@ METRICAS_DIR = os.path.join(BASE_DIR, "metricas")
 JSON_OUTPUT = os.path.join(METRICAS_DIR, "historico_metricas.json")
 HTML_OUTPUT = os.path.join(METRICAS_DIR, "dashboard.html")
 INDEX_OUTPUT = os.path.join(METRICAS_DIR, "index.html")
+ROOT_INDEX = os.path.join(BASE_DIR, "index.html")
 
 GRAPH_API_VERSION = "v19.0"
 GRAPH_BASE_URL = f"https://graph.facebook.com/{GRAPH_API_VERSION}"
@@ -178,7 +179,6 @@ def load_existing_summary():
 
 
 def recalculate_summary(all_posts):
-    # Normalizar cada publicación para asegurar que ninguna clave falte
     for p in all_posts:
         if not isinstance(p, dict):
             continue
@@ -407,6 +407,9 @@ def recalculate_summary(all_posts):
                     f.write(updated_html)
                 with open(INDEX_OUTPUT, "w", encoding="utf-8") as f:
                     f.write(updated_html)
+                with open(ROOT_INDEX, "w", encoding="utf-8") as f:
+                    f.write(updated_html)
+                print(f"[INFO] dashboard.html, index.html y root index.html actualizados con éxito.")
         except Exception as e:
             print(f"[WARN] Error al actualizar HTMLs: {e}")
 
