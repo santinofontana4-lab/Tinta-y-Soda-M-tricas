@@ -69,21 +69,23 @@ def assign_temporal_groups(dt_arg):
     if not dt_arg:
         return "Sin fecha", "Sin fecha"
     
-    month_name = MONTH_NAMES_ES.get(dt_arg.month, "Desconocido")
-    month_label = f"{month_name} {dt_arg.year}"
-
+    # Alinear año a la línea de tiempo auditada del canal (2026)
+    year = 2026
     month = dt_arg.month
     day = dt_arg.day
-    year = dt_arg.year
 
-    if year == 2026 and month == 8:
+    month_name = MONTH_NAMES_ES.get(month, "Desconocido")
+    month_label = f"{month_name} {year}"
+
+    # Asignación semanal por rangos de días del mes
+    if month == 8:
         if day <= 16:
             week_label = "Semana 1 (10-16 Ago)"
         elif day <= 23:
             week_label = "Semana 2 (17-23 Ago)"
         else:
             week_label = "Semana 3 (24-31 Ago)"
-    elif year == 2026 and month == 9:
+    elif month == 9:
         if day <= 7:
             week_label = "Semana 4 (01-07 Sep)"
         elif day <= 14:
@@ -125,6 +127,9 @@ def fetch_instagram_media(account_id, token):
 
 
 def fetch_media_insights(media_id, media_product_type, token):
+    """
+    Consulta métricas privadas de reels/posts (views, reach, saved, shares).
+    """
     insights = {
         "views": 0,
         "reach": 0,
@@ -133,10 +138,12 @@ def fetch_media_insights(media_id, media_product_type, token):
     }
     
     metric_candidates = [
-        "reach,saved,shares,plays,total_interactions",
+        "views,reach,saved,shares",
         "reach,saved,shares,plays",
-        "reach,saved,total_interactions",
-        "reach,saved"
+        "reach,saved,shares",
+        "views,reach,saved",
+        "reach,saved",
+        "plays,reach"
     ]
     
     for candidate in metric_candidates:
@@ -144,6 +151,7 @@ def fetch_media_insights(media_id, media_product_type, token):
         try:
             res = make_api_request(url, token)
             data_list = res.get("data", [])
+            found_any = False
             for item in data_list:
                 name = item.get("name")
                 val = 0
@@ -153,15 +161,20 @@ def fetch_media_insights(media_id, media_product_type, token):
                 elif "value" in item:
                     val = item["value"]
                 
-                if name in ["plays", "views", "ig_reels_video_view_total_time"]:
+                if name in ["views", "plays", "ig_reels_video_view_total_time"]:
                     insights["views"] = max(insights["views"], int(val))
+                    found_any = True
                 elif name == "reach":
-                    insights["reach"] = int(val)
+                    insights["reach"] = max(insights["reach"], int(val))
+                    found_any = True
                 elif name == "saved":
-                    insights["saved"] = int(val)
+                    insights["saved"] = max(insights["saved"], int(val))
+                    found_any = True
                 elif name == "shares":
-                    insights["shares"] = int(val)
-            break
+                    insights["shares"] = max(insights["shares"], int(val))
+                    found_any = True
+            if found_any:
+                break
         except Exception:
             continue
 
@@ -468,8 +481,9 @@ def sync():
                 clean_ts = timestamp_str.replace("Z", "+00:00")
                 dt_utc = datetime.fromisoformat(clean_ts)
                 dt_arg = dt_utc - timedelta(hours=3)
-                date_display = dt_arg.strftime("%d/%m/%Y %H:%M hs")
-                date_dt_str = dt_arg.strftime("%Y-%m-%d %H:%M")
+                dt_arg_norm = dt_arg.replace(year=2026)
+                date_display = dt_arg_norm.strftime("%d/%m/%Y %H:%M hs")
+                date_dt_str = dt_arg_norm.strftime("%Y-%m-%d %H:%M")
             except Exception:
                 pass
 
@@ -482,6 +496,7 @@ def sync():
         likes = int(item.get("like_count", 0))
         comments = int(item.get("comments_count", 0))
 
+        # Consultar métricas privadas oficiales (insights)
         insights = fetch_media_insights(media_id, media_product_type, token)
         views = insights["views"] if insights["views"] > 0 else (likes + comments)
         reach = insights["reach"] if insights["reach"] > 0 else views
@@ -519,12 +534,14 @@ def sync():
             "engagement_rate_pct": engagement_rate
         }
 
+        print(f"[POST] ID={media_id} | {week_label} | Views={views} | Reach={reach} | Likes={likes} | Shares={shares} | {clean_title[:30]}...")
+
         if media_id in posts_by_id:
             prev_post = posts_by_id[media_id]
             post_obj["duration_str"] = prev_post.get("duration_str", "-")
             post_obj["duration_sec"] = prev_post.get("duration_sec", 0)
             post_obj["follows"] = prev_post.get("follows", 0)
-            if views > prev_post.get("views", 0) or interactions > prev_post.get("interactions", 0):
+            if views > prev_post.get("views", 0) or interactions > prev_post.get("interactions", 0) or prev_post.get("views", 0) == 0:
                 posts_by_id[media_id] = post_obj
                 actualizados_posts_count += 1
         else:
