@@ -402,7 +402,7 @@ def recalculate_summary(all_posts):
             summary_json_str = json.dumps(summary, ensure_ascii=False, indent=2)
             pattern = r"(const METRICS_SUMMARY\s*=\s*)\{[\s\S]*?\n\s*\};"
             if re.search(pattern, html_code):
-                updated_html = re.sub(pattern, r"\1" + summary_json_str + ";", html_code, count=1)
+                updated_html = re.sub(pattern, lambda m: m.group(1) + summary_json_str + ";", html_code, count=1)
                 with open(HTML_OUTPUT, "w", encoding="utf-8") as f:
                     f.write(updated_html)
                 with open(INDEX_OUTPUT, "w", encoding="utf-8") as f:
