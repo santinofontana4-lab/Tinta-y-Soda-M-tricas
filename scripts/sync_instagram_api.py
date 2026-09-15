@@ -71,7 +71,7 @@ def classify_topic(title, full_text):
         return "Rosca Política & Sociedad"
 
 
-def assign_temporal_groups(dt_arg):
+def assign_temporal_groups(dt_arg, dt_now=None):
     if not dt_arg:
         return "Sin fecha", "Sin fecha"
     
@@ -100,10 +100,20 @@ def assign_temporal_groups(dt_arg):
     else:
         range_str = f"{monday.day:02d} {m_mon} - {sunday.day:02d} {m_sun}"
 
-    if week_num >= 1:
-        week_label = f"Semana {week_num} ({range_str})"
+    # Detectar si la semana está actualmente en curso
+    if dt_now is None:
+        dt_now = datetime.now().replace(year=2026)
     else:
-        week_label = f"Semana ({range_str})"
+        dt_now = dt_now.replace(year=2026)
+    now_monday = dt_now - timedelta(days=dt_now.weekday())
+
+    is_ongoing = (monday.date() == now_monday.date()) and (dt_now < sunday.replace(hour=23, minute=59, second=59))
+    suffix = " (En curso)" if is_ongoing else ""
+
+    if week_num >= 1:
+        week_label = f"Semana {week_num} ({range_str}){suffix}"
+    else:
+        week_label = f"Semana ({range_str}){suffix}"
 
     return month_label, week_label
 
@@ -254,22 +264,6 @@ def recalculate_summary(all_posts, filter_closed_weeks=True):
                 p["week"] = w_lbl
             except Exception:
                 pass
-
-    # Filtrar estrictamente solo publicaciones de semanas concluidas (hasta el último domingo cerrado)
-    if filter_closed_weeks:
-        cutoff_dt = get_last_completed_sunday()
-        cutoff_str = cutoff_dt.strftime("%Y-%m-%d %H:%M")
-        active_posts = []
-        for p in all_posts:
-            ds = p.get("date_dt", "")
-            if not ds or ds == "1970-01-01" or ds <= cutoff_str:
-                active_posts.append(p)
-        print(f"[INFO] Corte semanal aplicado: semanas concluidas hasta {cutoff_dt.strftime('%d/%m/%Y')}.")
-        print(f"[INFO] Posts consolidados: {len(active_posts)} (En curso omitidos: {len(all_posts) - len(active_posts)})")
-    else:
-        active_posts = all_posts
-
-    all_posts = active_posts
 
     all_posts.sort(key=lambda x: x.get("views", 0), reverse=True)
     for idx, p in enumerate(all_posts):
@@ -615,12 +609,12 @@ def sync():
     except Exception as e:
         print(f"[WARN] No se pudo guardar el pool crudo: {e}")
 
-    summary = recalculate_summary(all_raw_posts, filter_closed_weeks=True)
+    summary = recalculate_summary(all_raw_posts)
 
     print(f"[OK] Sincronización completada:")
     print(f"     - Nuevos posts agregados: {nuevos_posts_count}")
     print(f"     - Posts actualizados con métricas más recientes: {actualizados_posts_count}")
-    print(f"     - Total de publicaciones en el dashboard: {len(all_posts)}")
+    print(f"     - Total de publicaciones en el dashboard: {len(all_raw_posts)}")
     print(f"     - Total visualizaciones acumuladas: {summary['kpis']['total_views']:,}")
 
 

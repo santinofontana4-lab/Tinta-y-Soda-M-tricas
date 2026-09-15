@@ -85,7 +85,7 @@ def classify_topic(title, full_text):
         return "Rosca Política & Sociedad"
 
 
-def assign_temporal_groups(dt_arg):
+def assign_temporal_groups(dt_arg, dt_now=None):
     if not dt_arg:
         return "Sin fecha", "Sin fecha"
     
@@ -114,10 +114,19 @@ def assign_temporal_groups(dt_arg):
     else:
         range_str = f"{monday.day:02d} {m_mon} - {sunday.day:02d} {m_sun}"
 
-    if week_num >= 1:
-        week_label = f"Semana {week_num} ({range_str})"
+    if dt_now is None:
+        dt_now = datetime.now().replace(year=2026)
     else:
-        week_label = f"Semana ({range_str})"
+        dt_now = dt_now.replace(year=2026)
+    now_monday = dt_now - timedelta(days=dt_now.weekday())
+
+    is_ongoing = (monday.date() == now_monday.date()) and (dt_now < sunday.replace(hour=23, minute=59, second=59))
+    suffix = " (En curso)" if is_ongoing else ""
+
+    if week_num >= 1:
+        week_label = f"Semana {week_num} ({range_str}){suffix}"
+    else:
+        week_label = f"Semana ({range_str}){suffix}"
 
     return month_label, week_label
 
@@ -271,10 +280,7 @@ def process_all_exports():
             else:
                 posts_by_id[post_id] = post_obj
 
-    cutoff_dt = get_last_completed_sunday()
-    cutoff_str = cutoff_dt.strftime("%Y-%m-%d %H:%M")
-    all_raw = list(posts_by_id.values())
-    all_posts = [p for p in all_raw if not p.get("date_dt") or p.get("date_dt") == "1970-01-01" or p.get("date_dt") <= cutoff_str]
+    all_posts = list(posts_by_id.values())
     all_posts.sort(key=lambda x: x["views"], reverse=True)
     for idx, p in enumerate(all_posts):
         p["rank"] = idx + 1
