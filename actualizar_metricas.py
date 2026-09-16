@@ -31,6 +31,7 @@ SNAPSHOTS_JSON = os.path.join(METRICAS_DIR, "historico_snapshots.json")
 HTML_OUTPUT = os.path.join(METRICAS_DIR, "dashboard.html")
 INDEX_OUTPUT = os.path.join(METRICAS_DIR, "index.html")
 ROOT_INDEX = os.path.join(BASE_DIR, "index.html")
+MANUAL_DURATIONS_JSON = os.path.join(METRICAS_DIR, "duraciones_manuales.json")
 
 MONTH_NAMES_ES = {
     1: "Enero", 2: "Febrero", 3: "Marzo", 4: "Abril",
@@ -169,6 +170,26 @@ def process_all_exports():
 
     posts_by_id = {}
 
+    if os.path.exists(RAW_JSON_OUTPUT):
+        try:
+            with open(RAW_JSON_OUTPUT, "r", encoding="utf-8") as f:
+                raw_data = json.load(f)
+                for rp in raw_data.get("posts", []):
+                    r_id = str(rp.get("post_id", ""))
+                    if r_id:
+                        posts_by_id[r_id] = rp
+            print(f"[INFO] Se precargaron {len(posts_by_id)} publicaciones del pool crudo.")
+        except Exception:
+            pass
+
+    manual_durations = {}
+    if os.path.exists(MANUAL_DURATIONS_JSON):
+        try:
+            with open(MANUAL_DURATIONS_JSON, "r", encoding="utf-8") as f:
+                manual_durations = json.load(f)
+        except Exception:
+            pass
+
     for file_path in sorted(all_files):
         try:
             rows = load_file(file_path)
@@ -228,10 +249,20 @@ def process_all_exports():
                         continue
 
             duration_sec = int(get_val(row, ["duracion_segundos", "duracion"]))
-            duration_str = f"{duration_sec} seg" if duration_sec > 0 else "-"
             permalink = get_val(row, ["enlace_permanente", "permalink"], default="", is_numeric=False)
             post_type = get_val(row, ["tipo_de_publicacion", "post_type"], default="Reel", is_numeric=False)
             clean_type = "Reel" if "reel" in post_type.lower() or "video" in post_type.lower() else "Carrusel"
+
+            if clean_type == "Carrusel":
+                duration_sec = 0
+                duration_str = "Carrusel"
+            elif post_id in manual_durations and duration_sec <= 0:
+                duration_sec = manual_durations[post_id].get("duration_sec", 0)
+                duration_str = manual_durations[post_id].get("duration_str", f"{duration_sec} seg")
+            elif duration_sec > 0:
+                duration_str = f"{duration_sec} seg"
+            else:
+                duration_str = "-"
 
             views = int(get_val(row, ["visualizaciones", "views", "plays"]))
             reach = int(get_val(row, ["alcance", "reach"]))
@@ -283,6 +314,18 @@ def process_all_exports():
                 posts_by_id[post_id] = post_obj
 
     all_posts = list(posts_by_id.values())
+    for p in all_posts:
+        pid = str(p.get("post_id", ""))
+        p_type = str(p.get("type", "")).lower()
+        if "carrusel" in p_type or "carousel" in p_type or "album" in p_type:
+            p["duration_str"] = "Carrusel"
+            p["duration_sec"] = 0
+        elif pid in manual_durations and (p.get("duration_sec", 0) <= 0 or p.get("duration_str") in ["-", ""]):
+            p["duration_sec"] = manual_durations[pid].get("duration_sec", p.get("duration_sec", 0))
+            p["duration_str"] = manual_durations[pid].get("duration_str", f"{p['duration_sec']} seg")
+        elif p.get("duration_sec", 0) > 0 and (p.get("duration_str") in ["-", ""] or not p.get("duration_str")):
+            p["duration_str"] = f"{p['duration_sec']} seg"
+
     all_posts.sort(key=lambda x: x["views"], reverse=True)
     for idx, p in enumerate(all_posts):
         p["rank"] = idx + 1

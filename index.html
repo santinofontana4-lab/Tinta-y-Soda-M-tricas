@@ -154,46 +154,53 @@
           </p>
         </div>
 
-        <!-- Selector de visualización (Porcentaje % vs. Volumen) -->
-        <div class="flex items-center bg-slate-900 p-1.5 rounded-xl border-2 border-slate-700 self-start lg:self-center gap-1.5 no-print shadow-md">
-          <button id="heroBtnPct" onclick="setHeroChartMode('pct')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-gradient-to-r from-brand-600 to-brand-500 text-white shadow-md border border-brand-400/50">
-            <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> % Crecimiento
-          </button>
-          <button id="heroBtnVolume" onclick="setHeroChartMode('volume')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 shadow-sm hover:text-white">
-            <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i> Comparativa de Volumen
+        <!-- Selector de visualización (Porcentaje % vs. Volumen) y Botón Minimizar -->
+        <div class="flex items-center gap-2 self-start lg:self-center flex-wrap no-print">
+          <div class="flex items-center bg-slate-900 p-1.5 rounded-xl border-2 border-slate-700 gap-1.5 shadow-md">
+            <button id="heroBtnPct" onclick="setHeroChartMode('pct')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-gradient-to-r from-brand-600 to-brand-500 text-white shadow-md border border-brand-400/50">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> % Crecimiento
+            </button>
+            <button id="heroBtnVolume" onclick="setHeroChartMode('volume')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 shadow-sm hover:text-white">
+              <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i> Comparativa de Volumen
+            </button>
+          </div>
+          <button id="btnToggleHero" onclick="toggleSection('heroWeeklyContent', this)" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border-2 border-slate-600 shadow-md text-xs font-bold transition flex items-center gap-1.5 hover:text-white" title="Minimizar / Expandir gráfico hero">
+            <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i> <span class="toggle-text">Minimizar</span>
           </button>
         </div>
       </div>
 
-      <!-- Layout Principal: Gráfico Hero (7 cols) + Tarjetas Comparativas (5 cols) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-        
-        <!-- Contenedor del Gráfico Hero -->
-        <div class="lg:col-span-7 bg-[#0b1220] rounded-2xl p-4 sm:p-5 border-2 border-slate-700 shadow-xl relative">
-          <div class="flex items-center justify-between mb-3 text-xs">
-            <span id="heroChartLegend" class="font-bold text-slate-200 flex items-center gap-2">
-              <i data-lucide="percent" class="w-4 h-4 text-emerald-400"></i>
-              % Variación de Crecimiento (Semana Anterior vs. Actual)
-            </span>
-            <span id="heroChartPill" class="px-2.5 py-1 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-300 border-2 border-emerald-500/40 shadow-sm">
-              Tasa de aceleración neta (%)
-            </span>
+      <div id="heroWeeklyContent" class="space-y-6 mt-6">
+        <!-- Layout Principal: Gráfico Hero (7 cols) + Tarjetas Comparativas (5 cols) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          
+          <!-- Contenedor del Gráfico Hero -->
+          <div class="lg:col-span-7 bg-[#0b1220] rounded-2xl p-4 sm:p-5 border-2 border-slate-700 shadow-xl relative">
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span id="heroChartLegend" class="font-bold text-slate-200 flex items-center gap-2">
+                <i data-lucide="percent" class="w-4 h-4 text-emerald-400"></i>
+                % Variación de Crecimiento (Semana Anterior vs. Actual)
+              </span>
+              <span id="heroChartPill" class="px-2.5 py-1 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-300 border-2 border-emerald-500/40 shadow-sm">
+                Tasa de aceleración neta (%)
+              </span>
+            </div>
+            <div class="relative h-[290px] sm:h-[320px] w-full">
+              <canvas id="heroWeeklyGrowthChart"></canvas>
+            </div>
           </div>
-          <div class="relative h-[290px] sm:h-[320px] w-full">
-            <canvas id="heroWeeklyGrowthChart"></canvas>
+
+          <!-- 5 Tarjetas Resumen de Métricas Clave -->
+          <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5" id="heroCardsContainer">
+            <!-- Inyectado dinámicamente por renderHeroWeeklyGrowthChart() -->
           </div>
+
         </div>
 
-        <!-- 5 Tarjetas Resumen de Métricas Clave -->
-        <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5" id="heroCardsContainer">
+        <!-- Footer Resumen Ejecutivo del Crecimiento Semanal -->
+        <div id="heroWeeklyFooter" class="bg-[#0b1220] rounded-xl p-4 border-2 border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-md">
           <!-- Inyectado dinámicamente por renderHeroWeeklyGrowthChart() -->
         </div>
-
-      </div>
-
-      <!-- Footer Resumen Ejecutivo del Crecimiento Semanal -->
-      <div id="heroWeeklyFooter" class="bg-[#0b1220] rounded-xl p-4 border-2 border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-md">
-        <!-- Inyectado dinámicamente por renderHeroWeeklyGrowthChart() -->
       </div>
     </section>
 
@@ -203,7 +210,7 @@
     </section>
 
     <!-- Toolbar de Filtrado Ordenado con Menús Desplegables -->
-    <section class="glass-card rounded-2xl p-5 sm:p-6 space-y-4 shadow-2xl border-2 border-slate-700">
+    <section id="filtersSection" class="glass-card rounded-2xl p-5 sm:p-6 space-y-4 shadow-2xl border-2 border-slate-700">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-700/80 pb-3">
         <div class="flex items-center gap-2.5">
           <div class="p-2.5 rounded-xl bg-brand-500/20 text-brand-400 border-2 border-brand-500/40 shadow-sm">
@@ -216,16 +223,19 @@
         </div>
         <div class="flex items-center gap-2 flex-wrap">
           <span id="activeFilterBadge" class="text-xs px-3.5 py-1.5 rounded-xl bg-brand-950 text-brand-200 border-2 border-brand-500 font-bold shadow-sm">
-            Mostrando: Consolidado Total (29 posts)
+            Mostrando: Consolidado Total (51 posts)
           </span>
           <button onclick="resetFilters()" class="text-xs px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold transition flex items-center gap-1.5 border-2 border-slate-600 shadow-md hover:border-slate-400">
             <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-brand-400"></i> Restablecer
+          </button>
+          <button id="btnToggleFilters" onclick="toggleSection('filtersContent', this)" class="text-xs px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition flex items-center gap-1.5 border-2 border-slate-600 shadow-md hover:border-slate-400" title="Minimizar / Expandir menús de filtro">
+            <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i> <span class="toggle-text">Minimizar</span>
           </button>
         </div>
       </div>
 
       <!-- Menús Desplegables (Dropdowns Grid) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+      <div id="filtersContent" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
         
         <!-- Desplegable 1: Mes -->
         <div class="space-y-1.5">
@@ -449,106 +459,145 @@
     </section>
 
     <!-- Charts Grid (Reactivos a los Filtros de Mes) -->
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      
-      <!-- Chart 1: Evolución Cronológica (7 cols) -->
-      <div class="lg:col-span-7 glass-card rounded-2xl p-6 space-y-4 border-2 border-slate-700 shadow-xl">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-700/80 pb-4">
+    <section id="chartsSection" class="glass-card rounded-2xl p-5 sm:p-6 space-y-4 shadow-xl border-2 border-slate-700">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-700/80 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="p-2 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shadow-sm">
+            <i data-lucide="line-chart" class="w-4 h-4"></i>
+          </div>
           <div>
-            <h2 id="chart1Title" class="text-base font-black text-white flex items-center gap-2">
-              <i data-lucide="trending-up" class="w-5 h-5 text-emerald-400"></i>
-              Evolución de Visualizaciones y Shares
-            </h2>
-            <p id="chart1Subtitle" class="text-xs text-slate-300">Visualizaciones (barras) y Veces Compartido (línea dorada)</p>
+            <h2 class="text-base font-black text-white uppercase tracking-wider">Gráficos de Rendimiento y Evolución</h2>
+            <p class="text-xs text-slate-300">Evolución temporal de vistas/compartidos y rendimiento por pilar temático</p>
           </div>
         </div>
-        <div class="relative h-[310px] w-full bg-[#0b1220] p-3 rounded-xl border border-slate-700/80 shadow-inner">
-          <canvas id="weeklyEvolutionChart"></canvas>
-        </div>
+        <button id="btnToggleCharts" onclick="toggleSection('chartsContent', this)" class="text-xs px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition flex items-center gap-1.5 border-2 border-slate-600 shadow-md hover:border-slate-400 self-start sm:self-auto" title="Minimizar / Expandir gráficos">
+          <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i> <span class="toggle-text">Minimizar</span>
+        </button>
       </div>
 
-      <!-- Chart 2: Rendimiento por Pilar Temático (5 cols) -->
-      <div class="lg:col-span-5 glass-card rounded-2xl p-6 space-y-4 flex flex-col justify-between border-2 border-slate-700 shadow-xl">
-        <div class="border-b border-slate-700/80 pb-4">
-          <h2 id="chart2Title" class="text-base font-black text-white flex items-center gap-2">
-            <i data-lucide="layers" class="w-5 h-5 text-brand-500"></i>
-            Vistas Promedio por Pilar Temático
-          </h2>
-          <p id="chart2Subtitle" class="text-xs text-slate-300">Rendimiento comparativo según enfoque editorial en el filtro actual</p>
-        </div>
+      <div id="chartsContent" class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-1">
         
-        <div class="relative h-[250px] w-full bg-[#0b1220] p-3 rounded-xl border border-slate-700/80 shadow-inner">
-          <canvas id="topicBarChart"></canvas>
+        <!-- Chart 1: Evolución Cronológica (7 cols) -->
+        <div class="lg:col-span-7 bg-[#0f172a] rounded-xl p-5 space-y-4 border border-slate-700 shadow-md">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-700/80 pb-3">
+            <div>
+              <h3 id="chart1Title" class="text-sm font-black text-white flex items-center gap-2">
+                <i data-lucide="trending-up" class="w-4 h-4 text-emerald-400"></i>
+                Evolución de Visualizaciones y Shares
+              </h3>
+              <p id="chart1Subtitle" class="text-[11px] text-slate-400">Visualizaciones (barras) y Veces Compartido (línea dorada)</p>
+            </div>
+          </div>
+          <div class="relative h-[300px] w-full bg-[#0b1220] p-3 rounded-xl border border-slate-700/80 shadow-inner">
+            <canvas id="weeklyEvolutionChart"></canvas>
+          </div>
         </div>
 
-        <div id="chart2Footer" class="pt-3 border-t-2 border-slate-700/80 text-xs text-slate-200 leading-relaxed bg-[#0b1220] p-3 rounded-xl border border-slate-700/80">
-          💡 <strong>Tecnodistopía &amp; Geopolítica</strong> promedia <strong class="text-emerald-300 font-mono">7.778 views/video</strong>, liderando el alcance algorítmico del canal.
+        <!-- Chart 2: Rendimiento por Pilar Temático (5 cols) -->
+        <div class="lg:col-span-5 bg-[#0f172a] rounded-xl p-5 space-y-4 flex flex-col justify-between border border-slate-700 shadow-md">
+          <div class="border-b border-slate-700/80 pb-3">
+            <h3 id="chart2Title" class="text-sm font-black text-white flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4 text-brand-500"></i>
+              Vistas Promedio por Pilar Temático
+            </h3>
+            <p id="chart2Subtitle" class="text-[11px] text-slate-400">Rendimiento comparativo según enfoque editorial en el filtro actual</p>
+          </div>
+          
+          <div class="relative h-[240px] w-full bg-[#0b1220] p-3 rounded-xl border border-slate-700/80 shadow-inner">
+            <canvas id="topicBarChart"></canvas>
+          </div>
+
+          <div id="chart2Footer" class="pt-3 border-t border-slate-700/80 text-xs text-slate-200 leading-relaxed bg-[#0b1220] p-3 rounded-xl border border-slate-700/80">
+            💡 <strong>Tecnodistopía &amp; Geopolítica</strong> promedia <strong class="text-emerald-300 font-mono">7.778 views/video</strong>, liderando el alcance algorítmico del canal.
+          </div>
         </div>
+
       </div>
-
     </section>
 
     <!-- Table Section: Ranking Detallado -->
-    <section class="glass-card rounded-2xl p-6 space-y-5 border-2 border-slate-700 shadow-xl">
+    <section id="tableSection" class="glass-card rounded-2xl p-6 space-y-5 border-2 border-slate-700 shadow-xl">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-700/80 pb-4">
         <div>
           <h2 class="text-lg sm:text-xl font-black text-white flex items-center gap-2">
             <i data-lucide="table-properties" class="w-5 h-5 text-blue-400"></i>
             Listado de Publicaciones
           </h2>
-          <p class="text-xs text-slate-300">Ordenado en tiempo real con enlaces directos a Instagram, mes y métricas completas</p>
+          <p class="text-xs text-slate-300">Catálogo interactivo paginado (15 por página) con métricas detalladas y enlaces a Instagram</p>
         </div>
-        <div class="text-xs text-slate-300 font-medium">
-          Mostrando <span id="tableCount" class="font-black text-white bg-slate-800 px-2 py-1 rounded-lg border border-slate-600">29</span> publicaciones
+        <div class="flex items-center gap-3">
+          <div class="text-xs text-slate-300 font-medium">
+            Mostrando <span id="tableCount" class="font-black text-white bg-slate-800 px-2 py-1 rounded-lg border border-slate-600">51</span> publicaciones
+          </div>
+          <button id="btnToggleTable" onclick="toggleSection('tableContent', this)" class="text-xs px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition flex items-center gap-1.5 border-2 border-slate-600 shadow-md hover:border-slate-400" title="Minimizar / Expandir listado">
+            <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i> <span class="toggle-text">Minimizar</span>
+          </button>
         </div>
       </div>
 
-      <!-- Responsive Table -->
-      <div class="overflow-x-auto rounded-xl border-2 border-slate-700 shadow-lg">
-        <table class="w-full text-left border-collapse text-xs">
-          <thead>
-            <tr class="bg-slate-900 text-slate-200 border-b-2 border-slate-700 font-bold uppercase tracking-wider">
-              <th class="py-3.5 px-4 w-12 text-center">#</th>
-              <th class="py-3.5 px-4 min-w-[280px]">Título y Copy del Video</th>
-              <th class="py-3.5 px-4 text-center">Mes</th>
-              <th class="py-3.5 px-4">Pilar Temático</th>
-              <th class="py-3.5 px-4 text-right font-bold text-white">Views</th>
-              <th class="py-3.5 px-4 text-right font-bold text-rose-400">MG (Likes)</th>
-              <th class="py-3.5 px-4 text-right font-bold text-blue-400">Shares</th>
-              <th class="py-3.5 px-4 text-right font-bold text-purple-400">Coms</th>
-              <th class="py-3.5 px-4 text-right font-bold text-cyan-400">Saves</th>
-              <th class="py-3.5 px-4 text-center font-bold text-emerald-400">Seguidores</th>
-              <th class="py-3.5 px-4 text-center">Duración</th>
-              <th class="py-3.5 px-4 text-center">Tasa Int.</th>
-              <th class="py-3.5 px-4 text-center no-print">Link</th>
-            </tr>
-          </thead>
-          <tbody id="rankingTableBody" class="divide-y divide-slate-700/80 bg-[#0c1322]">
-            <!-- Rendered by JS -->
-          </tbody>
-        </table>
-      </div>
+      <div id="tableContent" class="space-y-4">
+        <!-- Responsive Table -->
+        <div class="overflow-x-auto rounded-xl border-2 border-slate-700 shadow-lg">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-900 text-slate-200 border-b-2 border-slate-700 font-bold uppercase tracking-wider">
+                <th class="py-3.5 px-4 w-12 text-center">#</th>
+                <th class="py-3.5 px-4 min-w-[280px]">Título y Copy del Video</th>
+                <th class="py-3.5 px-4 text-center">Mes</th>
+                <th class="py-3.5 px-4">Pilar Temático</th>
+                <th class="py-3.5 px-4 text-right font-bold text-white">Views</th>
+                <th class="py-3.5 px-4 text-right font-bold text-rose-400">MG (Likes)</th>
+                <th class="py-3.5 px-4 text-right font-bold text-blue-400">Shares</th>
+                <th class="py-3.5 px-4 text-right font-bold text-purple-400">Coms</th>
+                <th class="py-3.5 px-4 text-right font-bold text-cyan-400">Saves</th>
+                <th class="py-3.5 px-4 text-center font-bold text-emerald-400">Seguidores</th>
+                <th class="py-3.5 px-4 text-center">Duración</th>
+                <th class="py-3.5 px-4 text-center">Tasa Int.</th>
+                <th class="py-3.5 px-4 text-center no-print">Link</th>
+              </tr>
+            </thead>
+            <tbody id="rankingTableBody" class="divide-y divide-slate-700/80 bg-[#0c1322]">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
 
-      <div id="emptyNotice" class="hidden text-center py-10 text-slate-400 text-sm font-semibold">
-        No se encontraron publicaciones con los filtros seleccionados.
+        <div id="emptyNotice" class="hidden text-center py-10 text-slate-400 text-sm font-semibold">
+          No se encontraron publicaciones con los filtros seleccionados.
+        </div>
+
+        <!-- Controles de Paginación (15 posts por página) -->
+        <div id="tablePagination" class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-700/80 text-xs">
+          <div id="paginationInfo" class="text-slate-300 font-medium">
+            <!-- Inyectado dinámicamente -->
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap" id="paginationControls">
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Strategic Growth Section (Media Kit / Presentación a Marcas) -->
-    <section id="strategySection" class="glass-card rounded-2xl p-6 sm:p-8 space-y-8 border-2 border-brand-500/50 relative shadow-xl">
-      <div class="border-b border-slate-700/80 pb-5">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-950 text-brand-200 border-2 border-brand-500 text-xs font-bold uppercase tracking-wider mb-2 shadow-sm">
-          <i data-lucide="briefcase" class="w-3.5 h-3.5"></i> Presentación para Marcas &bull; @tintaysoda.stream
+    <section id="strategySection" class="glass-card rounded-2xl p-6 sm:p-8 space-y-6 border-2 border-brand-500/50 relative shadow-xl">
+      <div class="border-b border-slate-700/80 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-950 text-brand-200 border-2 border-brand-500 text-xs font-bold uppercase tracking-wider mb-2 shadow-sm">
+            <i data-lucide="briefcase" class="w-3.5 h-3.5"></i> Presentación para Marcas &bull; @tintaysoda.stream
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-white">
+            Perfil de Audiencia, Crecimiento y Oportunidad de Sponsoring
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 mt-1">
+            Un canal de streaming político de nueva generación con llegada masiva al público joven de 18 a 35 años y debate de alta intensidad.
+          </p>
         </div>
-        <h2 class="text-xl sm:text-2xl font-black text-white">
-          Perfil de Audiencia, Crecimiento y Oportunidad de Sponsoring
-        </h2>
-        <p class="text-xs sm:text-sm text-slate-300 mt-1">
-          Un canal de streaming político de nueva generación con llegada masiva al público joven de 18 a 35 años y debate de alta intensidad.
-        </p>
+        <button id="btnToggleStrategy" onclick="toggleSection('strategyContent', this)" class="text-xs px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition flex items-center gap-1.5 border-2 border-slate-600 shadow-md hover:border-slate-400 self-start sm:self-center" title="Minimizar / Expandir presentación">
+          <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i> <span class="toggle-text">Minimizar</span>
+        </button>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div id="strategyContent" class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-[#0f172a] p-5 rounded-xl border-2 border-slate-700 space-y-3 shadow-md">
           <div class="flex items-center gap-2.5 text-brand-400 font-bold text-sm">
             <span class="w-7 h-7 rounded-lg bg-brand-500/20 border border-brand-500/40 flex items-center justify-center font-black text-brand-300">1</span>
@@ -602,14 +651,14 @@
   "metadata": {
     "account": "@tintaysoda.stream",
     "periodo": "2026-07-26 al 2026-09-15 (Consolidado Histórico Multimes)",
-    "generated_at": "15/09/2026 20:57:42",
+    "generated_at": "15/09/2026 21:33:58",
     "total_posts": 51,
     "meses_procesados": [
       "Julio 2026",
       "Agosto 2026",
       "Septiembre 2026"
     ],
-    "fuente": "Meta Graph API Oficial & Exportaciones Anexadas"
+    "fuente": "Meta Business Suite Oficial (Exportaciones Anexadas)"
   },
   "kpis": {
     "total_views": 135410,
@@ -679,7 +728,7 @@
         "shares": 2,
         "saves": 1,
         "comments": 5,
-        "duration_str": "-"
+        "duration_str": "32 seg"
       }
     },
     "Agosto 2026": {
@@ -965,8 +1014,8 @@
         }
       ]
     },
-    "Semana 6 (14-20 Sep) (En curso)": {
-      "week": "Semana 6 (14-20 Sep) (En curso)",
+    "Semana 6 (14-20 Sep)": {
+      "week": "Semana 6 (14-20 Sep)",
       "posts_count": 2,
       "total_views": 15799,
       "views_new_posts": 15799,
@@ -993,14 +1042,14 @@
   "topic_stats": {
     "Tecnodistopía & Geopolítica": {
       "topic": "Tecnodistopía & Geopolítica",
-      "count": 7,
-      "total_views": 47413,
-      "avg_views": 6773,
-      "total_shares": 258,
-      "avg_shares": 36.9,
-      "total_saves": 82,
-      "total_comments": 34,
-      "total_interactions": 1079,
+      "count": 6,
+      "total_views": 45412,
+      "avg_views": 7568,
+      "total_shares": 250,
+      "avg_shares": 41.7,
+      "total_saves": 80,
+      "total_comments": 33,
+      "total_interactions": 1037,
       "engagement_pct": 2.28
     },
     "Datos Duros & Desmitificación": {
@@ -1029,15 +1078,15 @@
     },
     "Rosca Política & Sociedad": {
       "topic": "Rosca Política & Sociedad",
-      "count": 26,
-      "total_views": 48087,
-      "avg_views": 1849,
-      "total_shares": 142,
-      "avg_shares": 5.5,
-      "total_saves": 81,
-      "total_comments": 81,
-      "total_interactions": 1550,
-      "engagement_pct": 3.22
+      "count": 27,
+      "total_views": 50088,
+      "avg_views": 1855,
+      "total_shares": 150,
+      "avg_shares": 5.6,
+      "total_saves": 83,
+      "total_comments": 82,
+      "total_interactions": 1592,
+      "engagement_pct": 3.18
     }
   },
   "posts": [
@@ -1076,12 +1125,12 @@
       "date": "14/09/2026 12:30 hs",
       "date_dt": "2026-09-14 12:30",
       "month": "Septiembre 2026",
-      "week": "Semana 6 (14-20 Sep) (En curso)",
+      "week": "Semana 6 (14-20 Sep)",
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DdRdjJxB09g/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 42,
+      "duration_str": "42 seg",
       "views": 15779,
       "reach": 11533,
       "interactions": 357,
@@ -1388,8 +1437,8 @@
       "topic": "Datos Duros & Desmitificación",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DdH9sEKK_aU/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 38,
+      "duration_str": "38 seg",
       "views": 2765,
       "reach": 2181,
       "interactions": 105,
@@ -1416,8 +1465,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/Dbl6uUmq_cL/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 40,
+      "duration_str": "40 seg",
       "views": 2655,
       "reach": 1882,
       "interactions": 82,
@@ -1528,8 +1577,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbVz8y4hAVu/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 32,
+      "duration_str": "32 seg",
       "views": 2065,
       "reach": 1655,
       "interactions": 64,
@@ -1556,8 +1605,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbrgdkoqjgQ/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 25,
+      "duration_str": "25 seg",
       "views": 2048,
       "reach": 1093,
       "interactions": 81,
@@ -1574,15 +1623,17 @@
       "is_evergreen": false
     },
     {
-      "rank": 20,
       "post_id": "18060972725758179",
-      "title": "Un poco de geopolítica de la mano de Marquitos: Migraciones a Ceuta 🌎",
-      "full_text": "Un poco de geopolítica de la mano de Marquitos sobre las migraciones a Ceuta.",
+      "title": "Un poco de geopolítica de la mano de Marquitos 🤝🏼",
+      "full_text": "Un poco de geopolítica de la mano de Marquitos 🤝🏼\n\nSi queres saber más sobre el contexto de las migraciones a Ceuta podes ver el último programa por Youtube 🌎",
       "date": "16/08/2026 21:09 hs",
+      "date_dt": "2026-08-16 21:09",
       "month": "Agosto 2026",
       "week": "Semana 1 (10-16 Ago)",
-      "topic": "Tecnodistopía & Geopolítica",
+      "topic": "Rosca Política & Sociedad",
       "type": "Reel",
+      "permalink": "https://www.instagram.com/reel/DcHtAouqqCe/",
+      "duration_sec": 55,
       "duration_str": "55 seg",
       "views": 2001,
       "reach": 1478,
@@ -1592,22 +1643,25 @@
       "shares": 8,
       "saves": 2,
       "follows": 0,
+      "save_rate_pct": 0.1,
+      "share_rate_pct": 0.4,
       "engagement_rate_pct": 2.1,
-      "permalink": "https://www.instagram.com/reel/DcHtAouqqCe/",
-      "date_dt": "2026-08-16 21:09",
+      "rank": 20,
       "growth_7d_views": 0,
       "is_evergreen": false
     },
     {
-      "rank": 21,
       "post_id": "18106744876885723",
-      "title": "8 de cada 10 trabajadores sufren ajustes alimentarios (UCA)",
-      "full_text": "8 de cada 10 trabajadores sufren ajustes alimentarios según la UCA.",
+      "title": "8 de cada 10 trabajadores sufren ajustes alimentarios en su jornada laboral según el Observatorio de la Deuda Social Argentina de la UCA.",
+      "full_text": "8 de cada 10 trabajadores sufren ajustes alimentarios en su jornada laboral según el Observatorio de la Deuda Social Argentina de la UCA.\n\n👉🏼 Programa completo disponible en YouTube.",
       "date": "17/08/2026 12:17 hs",
+      "date_dt": "2026-08-17 12:17",
       "month": "Agosto 2026",
       "week": "Semana 2 (17-23 Ago)",
       "topic": "Datos Duros & Desmitificación",
       "type": "Reel",
+      "permalink": "https://www.instagram.com/reel/DcJVvnVOQMb/",
+      "duration_sec": 36,
       "duration_str": "36 seg",
       "views": 1964,
       "reach": 1426,
@@ -1617,9 +1671,10 @@
       "shares": 4,
       "saves": 4,
       "follows": 0,
+      "save_rate_pct": 0.2,
+      "share_rate_pct": 0.2,
       "engagement_rate_pct": 2.14,
-      "permalink": "https://www.instagram.com/reel/DcJVvnVOQMb/",
-      "date_dt": "2026-08-17 12:17",
+      "rank": 21,
       "growth_7d_views": 0,
       "is_evergreen": false
     },
@@ -1690,8 +1745,8 @@
       "topic": "Datos Duros & Desmitificación",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbwYlnLKepz/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 44,
+      "duration_str": "44 seg",
       "views": 1576,
       "reach": 1034,
       "interactions": 56,
@@ -1746,8 +1801,8 @@
       "topic": "Datos Duros & Desmitificación",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbgipPPhY_r/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 30,
+      "duration_str": "30 seg",
       "views": 1498,
       "reach": 969,
       "interactions": 51,
@@ -1774,8 +1829,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/Db1ZN57KBRo/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 36,
+      "duration_str": "36 seg",
       "views": 1480,
       "reach": 889,
       "interactions": 52,
@@ -1802,8 +1857,8 @@
       "topic": "Datos Duros & Desmitificación",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DdFeHxaKPRy/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 26,
+      "duration_str": "26 seg",
       "views": 1453,
       "reach": 966,
       "interactions": 68,
@@ -1858,8 +1913,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbUc9FssAg8/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 29,
+      "duration_str": "29 seg",
       "views": 1268,
       "reach": 709,
       "interactions": 55,
@@ -1886,8 +1941,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbtouwNK7dN/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 33,
+      "duration_str": "33 seg",
       "views": 1179,
       "reach": 726,
       "interactions": 35,
@@ -1914,8 +1969,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbbW_CCq2rh/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 41,
+      "duration_str": "41 seg",
       "views": 1159,
       "reach": 692,
       "interactions": 49,
@@ -1942,8 +1997,8 @@
       "topic": "Tecnodistopía & Geopolítica",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DdCA2InB7ny/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 28,
+      "duration_str": "28 seg",
       "views": 1144,
       "reach": 914,
       "interactions": 46,
@@ -1988,15 +2043,17 @@
       "is_evergreen": false
     },
     {
-      "rank": 35,
       "post_id": "18091532981643349",
-      "title": "¿Por qué estaban disfrazados de Gandalf? Acá la respuesta",
-      "full_text": "¿Por qué estaban disfrazados de Gandalf? Acá la respuesta.",
+      "title": "¿Por qué estaban disfrazados de Gandalf? Acá la respuesta.",
+      "full_text": "¿Por qué estaban disfrazados de Gandalf? Acá la respuesta.\n\n🔗 Ya está disponible nuestro último programa en el canal de YouTube. Link en bio.",
       "date": "20/08/2026 19:11 hs",
+      "date_dt": "2026-08-20 19:11",
       "month": "Agosto 2026",
       "week": "Semana 2 (17-23 Ago)",
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
+      "permalink": "https://www.instagram.com/reel/DcRzI_Bq9cv/",
+      "duration_sec": 39,
       "duration_str": "39 seg",
       "views": 1065,
       "reach": 741,
@@ -2006,22 +2063,25 @@
       "shares": 8,
       "saves": 4,
       "follows": 0,
+      "save_rate_pct": 0.38,
+      "share_rate_pct": 0.75,
       "engagement_rate_pct": 4.6,
-      "permalink": "https://www.instagram.com/reel/DcRzI_Bq9cv/",
-      "date_dt": "2026-08-20 19:11",
+      "rank": 35,
       "growth_7d_views": 0,
       "is_evergreen": false
     },
     {
-      "rank": 36,
       "post_id": "18161433316478947",
       "title": "Mañana probamos cosas nuevas 😎",
-      "full_text": "Mañana probamos cosas nuevas 😎 Nos vemos por YouTube.",
+      "full_text": "Mañana probamos cosas nuevas 😎\n\n🔴 Nos vemos a las 17:30 hs por nuestro canal de YouTube",
       "date": "11/08/2026 20:20 hs",
+      "date_dt": "2026-08-11 20:20",
       "month": "Agosto 2026",
       "week": "Semana 1 (10-16 Ago)",
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
+      "permalink": "https://www.instagram.com/reel/Db6v2hXKwzM/",
+      "duration_sec": 43,
       "duration_str": "43 seg",
       "views": 1047,
       "reach": 613,
@@ -2031,9 +2091,10 @@
       "shares": 0,
       "saves": 2,
       "follows": 0,
+      "save_rate_pct": 0.19,
+      "share_rate_pct": 0.0,
       "engagement_rate_pct": 3.63,
-      "permalink": "https://www.instagram.com/reel/Db6v2hXKwzM/",
-      "date_dt": "2026-08-11 20:20",
+      "rank": 36,
       "growth_7d_views": 0,
       "is_evergreen": false
     },
@@ -2048,8 +2109,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbZZCxzKkKM/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 37,
+      "duration_str": "37 seg",
       "views": 1039,
       "reach": 581,
       "interactions": 31,
@@ -2077,7 +2138,7 @@
       "type": "Carrusel",
       "permalink": "https://www.instagram.com/p/Dce1nB1FGPw/",
       "duration_sec": 0,
-      "duration_str": "-",
+      "duration_str": "Carrusel",
       "views": 1031,
       "reach": 344,
       "interactions": 30,
@@ -2133,7 +2194,7 @@
       "type": "Carrusel",
       "permalink": "https://www.instagram.com/p/DbXD2FwDK_U/",
       "duration_sec": 0,
-      "duration_str": "-",
+      "duration_str": "Carrusel",
       "views": 817,
       "reach": 362,
       "interactions": 22,
@@ -2188,8 +2249,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbRw1fYME6i/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 39,
+      "duration_str": "39 seg",
       "views": 656,
       "reach": 424,
       "interactions": 28,
@@ -2216,8 +2277,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DdKluCFqo03/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 27,
+      "duration_str": "27 seg",
       "views": 630,
       "reach": 460,
       "interactions": 20,
@@ -2272,8 +2333,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbeKaZsKXA2/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 34,
+      "duration_str": "34 seg",
       "views": 579,
       "reach": 327,
       "interactions": 47,
@@ -2329,7 +2390,7 @@
       "type": "Carrusel",
       "permalink": "https://www.instagram.com/p/DbpGBgXDJB8/",
       "duration_sec": 0,
-      "duration_str": "-",
+      "duration_str": "Carrusel",
       "views": 507,
       "reach": 164,
       "interactions": 30,
@@ -2384,8 +2445,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DdPgsnChoV3/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 45,
+      "duration_str": "45 seg",
       "views": 431,
       "reach": 306,
       "interactions": 38,
@@ -2412,8 +2473,8 @@
       "topic": "Rosca Política & Sociedad",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DbRVQjAqTyT/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 31,
+      "duration_str": "31 seg",
       "views": 24,
       "reach": 589,
       "interactions": 24,
@@ -2436,12 +2497,12 @@
       "date": "15/09/2026 19:40 hs",
       "date_dt": "2026-09-15 19:40",
       "month": "Septiembre 2026",
-      "week": "Semana 6 (14-20 Sep) (En curso)",
+      "week": "Semana 6 (14-20 Sep)",
       "topic": "Datos Duros & Desmitificación",
       "type": "Reel",
       "permalink": "https://www.instagram.com/reel/DdUyqjZqSzO/",
-      "duration_sec": 0,
-      "duration_str": "-",
+      "duration_sec": 35,
+      "duration_str": "35 seg",
       "views": 20,
       "reach": 20,
       "interactions": 3,
@@ -2919,6 +2980,24 @@
       lucide.createIcons();
     }
 
+    // Función global para minimizar / expandir secciones y menús
+    function toggleSection(contentId, btn) {
+      const content = document.getElementById(contentId);
+      if (!content) return;
+      const isHidden = content.classList.toggle('hidden');
+      if (btn) {
+        const textSpan = btn.querySelector('.toggle-text');
+        const icon = btn.querySelector('i');
+        if (textSpan) {
+          textSpan.innerText = isHidden ? 'Expandir' : 'Minimizar';
+        }
+        if (icon) {
+          icon.setAttribute('data-lucide', isHidden ? 'chevron-down' : 'chevron-up');
+          lucide.createIcons();
+        }
+      }
+    }
+
     // Poblar los menús desplegables de Mes y Semana dinámicamente
     function populateDropdowns() {
       const selectMonth = document.getElementById('selectMonth');
@@ -2978,12 +3057,17 @@
             </h2>
             <p class="text-xs text-slate-300">Aceleración de rendimiento por video y eficiencia de conversión</p>
           </div>
-          <span class="text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border-2 border-emerald-500/40 self-start md:self-auto shadow-sm">
-            ${currMonthName} duplicó la velocidad promedio
-          </span>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border-2 border-emerald-500/40 self-start md:self-auto shadow-sm">
+              ${currMonthName} duplicó la velocidad promedio
+            </span>
+            <button onclick="toggleSection('momComparisonContent', this)" class="text-xs px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition flex items-center gap-1.5 border-2 border-slate-600 shadow-md hover:border-slate-400" title="Minimizar / Expandir comparativa">
+              <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i> <span class="toggle-text">Minimizar</span>
+            </button>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-5">
+        <div id="momComparisonContent" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-5">
           <!-- Metric 1: Vistas Promedio -->
           <div class="bg-[#0f172a] p-4 rounded-xl border-2 border-slate-700 shadow-md">
             <span class="text-xs text-slate-300 uppercase font-bold block">Vistas / Video</span>
@@ -3124,8 +3208,8 @@
       // 2. Actualizar Gráficos dinámicos para este filtro
       updateCharts(filtered, selectedMonth);
 
-      // 3. Renderizar Tabla filtrada
-      renderTable(filtered);
+      // 3. Renderizar Tabla filtrada (reiniciando a página 1)
+      renderTable(filtered, true);
     }
 
     function resetFilters() {
@@ -3350,20 +3434,52 @@
       lucide.createIcons();
     }
 
-    // Renderizado de la Tabla
-    function renderTable(posts) {
+    let currentTablePage = 1;
+    const PAGE_SIZE = 15;
+    let currentFilteredPosts = [];
+
+    function changeTablePage(newPage) {
+      const totalPages = Math.ceil(currentFilteredPosts.length / PAGE_SIZE) || 1;
+      if (newPage < 1 || newPage > totalPages) return;
+      currentTablePage = newPage;
+      renderTable(currentFilteredPosts, false);
+      const tableElem = document.getElementById('tableSection');
+      if (tableElem) {
+        tableElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Renderizado de la Tabla con Paginación (15 por página)
+    function renderTable(posts, resetPage = false) {
+      if (resetPage) {
+        currentTablePage = 1;
+      }
+      currentFilteredPosts = posts;
+
       const tbody = document.getElementById('rankingTableBody');
       const emptyNotice = document.getElementById('emptyNotice');
-      document.getElementById('tableCount').innerText = posts.length;
+      const paginationContainer = document.getElementById('tablePagination');
+      const totalPosts = posts.length;
+      document.getElementById('tableCount').innerText = totalPosts;
       tbody.innerHTML = '';
 
-      if (posts.length === 0) {
+      if (totalPosts === 0) {
         emptyNotice.classList.remove('hidden');
+        if (paginationContainer) paginationContainer.classList.add('hidden');
         return;
       }
       emptyNotice.classList.add('hidden');
+      if (paginationContainer) paginationContainer.classList.remove('hidden');
 
-      posts.forEach((p, idx) => {
+      const totalPages = Math.ceil(totalPosts / PAGE_SIZE) || 1;
+      if (currentTablePage > totalPages) currentTablePage = totalPages;
+      if (currentTablePage < 1) currentTablePage = 1;
+
+      const startIndex = (currentTablePage - 1) * PAGE_SIZE;
+      const endIndex = Math.min(startIndex + PAGE_SIZE, totalPosts);
+      const pagePosts = posts.slice(startIndex, endIndex);
+
+      pagePosts.forEach((p, idx) => {
         const tr = document.createElement('tr');
         tr.className = "hover:bg-slate-800/80 transition group border-b border-slate-800/80";
 
@@ -3371,7 +3487,7 @@
         if (p.rank === 1) rankBadge = '<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-500/25 text-amber-200 font-bold border-2 border-amber-400 text-xs shadow-sm">🥇</span>';
         else if (p.rank === 2) rankBadge = '<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-400/25 text-slate-100 font-bold border-2 border-slate-300 text-xs shadow-sm">🥈</span>';
         else if (p.rank === 3) rankBadge = '<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-700/30 text-amber-300 font-bold border-2 border-amber-500 text-xs shadow-sm">🥉</span>';
-        else rankBadge = `<span class="text-slate-300 font-mono font-bold text-xs bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">${p.rank || (idx + 1)}</span>`;
+        else rankBadge = `<span class="text-slate-300 font-mono font-bold text-xs bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">${p.rank || (startIndex + idx + 1)}</span>`;
 
         let topicBadgeClass = "bg-slate-800 text-slate-300 border border-slate-700";
         if (p.topic.includes("Tecnodistopía")) topicBadgeClass = "bg-brand-500/20 text-brand-300 border-2 border-brand-500/50 font-bold";
@@ -3406,6 +3522,12 @@
           ? `<div class="text-[10px] text-emerald-400 font-semibold">+${p.growth_7d_views.toLocaleString()} sem</div>`
           : '';
 
+        const durBadge = (p.duration_str === 'Carrusel')
+          ? `<span class="px-2 py-0.5 rounded-full text-[10px] bg-slate-800 text-slate-300 border border-slate-700 font-medium">Carrusel</span>`
+          : (p.duration_str && p.duration_str !== '-' 
+              ? `<span class="font-mono text-slate-200">${p.duration_str}</span>` 
+              : `<span class="text-slate-600">-</span>`);
+
         tr.innerHTML = `
           <td class="py-3.5 px-4 text-center font-medium">${rankBadge}</td>
           <td class="py-3.5 px-4 font-semibold text-slate-100">
@@ -3413,7 +3535,7 @@
               ${p.title}
             </div>
             <div class="text-[11px] text-slate-400 font-normal line-clamp-1 mt-0.5 flex items-center gap-1.5">
-              <span>${p.date} &bull; ${p.duration_str}</span>
+              <span>${p.date} &bull; ${durBadge}</span>
               ${growthBadge}
             </div>
           </td>
@@ -3432,7 +3554,7 @@
           <td class="py-3.5 px-4 text-right font-mono font-bold ${p.comments > 0 ? 'text-purple-300' : 'text-slate-600'}">${p.comments.toLocaleString()}</td>
           <td class="py-3.5 px-4 text-right font-mono font-bold text-cyan-400">${p.saves.toLocaleString()}</td>
           <td class="py-3.5 px-4 text-center whitespace-nowrap">${followsBadge}</td>
-          <td class="py-3.5 px-4 text-center font-mono text-slate-300 text-[11px]">${p.duration_str}</td>
+          <td class="py-3.5 px-4 text-center font-mono text-slate-300 text-[11px]">${durBadge}</td>
           <td class="py-3.5 px-4 text-center">
             <span class="px-2 py-0.5 rounded-full text-[11px] ${engColor}">
               ${eng}%
@@ -3444,6 +3566,47 @@
         `;
         tbody.appendChild(tr);
       });
+
+      // Controles de Paginación
+      const paginationInfo = document.getElementById('paginationInfo');
+      if (paginationInfo) {
+        paginationInfo.innerHTML = `Mostrando <strong class="text-white">${startIndex + 1}</strong> - <strong class="text-white">${endIndex}</strong> de <strong class="text-brand-400">${totalPosts}</strong> publicaciones &bull; Página <strong class="text-white">${currentTablePage}</strong> de <strong class="text-white">${totalPages}</strong>`;
+      }
+
+      const controls = document.getElementById('paginationControls');
+      if (controls) {
+        controls.innerHTML = '';
+
+        // Botón Anterior
+        const prevBtn = document.createElement('button');
+        prevBtn.className = `px-3 py-1.5 rounded-lg border-2 font-bold transition flex items-center gap-1 text-xs ${currentTablePage === 1 ? 'border-slate-800 text-slate-600 cursor-not-allowed bg-slate-900/50' : 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white shadow-sm'}`;
+        prevBtn.disabled = currentTablePage === 1;
+        prevBtn.onclick = () => changeTablePage(currentTablePage - 1);
+        prevBtn.innerHTML = `<i data-lucide="chevron-left" class="w-3.5 h-3.5"></i> Anterior`;
+        controls.appendChild(prevBtn);
+
+        // Botones de Páginas Numéricos
+        for (let i = 1; i <= totalPages; i++) {
+          const pageBtn = document.createElement('button');
+          if (i === currentTablePage) {
+            pageBtn.className = "w-8 h-8 rounded-lg bg-gradient-to-r from-brand-600 to-brand-500 text-white font-black border border-brand-400 shadow-md text-xs";
+          } else {
+            pageBtn.className = "w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-bold border border-slate-700 text-xs transition shadow-sm";
+          }
+          pageBtn.innerText = i;
+          pageBtn.onclick = () => changeTablePage(i);
+          controls.appendChild(pageBtn);
+        }
+
+        // Botón Siguiente
+        const nextBtn = document.createElement('button');
+        nextBtn.className = `px-3 py-1.5 rounded-lg border-2 font-bold transition flex items-center gap-1 text-xs ${currentTablePage === totalPages ? 'border-slate-800 text-slate-600 cursor-not-allowed bg-slate-900/50' : 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white shadow-sm'}`;
+        nextBtn.disabled = currentTablePage === totalPages;
+        nextBtn.onclick = () => changeTablePage(currentTablePage + 1);
+        nextBtn.innerHTML = `Siguiente <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>`;
+        controls.appendChild(nextBtn);
+      }
+
       lucide.createIcons();
     }
 

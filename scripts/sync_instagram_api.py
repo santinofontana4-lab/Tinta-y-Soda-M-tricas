@@ -30,6 +30,7 @@ SNAPSHOTS_JSON = os.path.join(METRICAS_DIR, "historico_snapshots.json")
 HTML_OUTPUT = os.path.join(METRICAS_DIR, "dashboard.html")
 INDEX_OUTPUT = os.path.join(METRICAS_DIR, "index.html")
 ROOT_INDEX = os.path.join(BASE_DIR, "index.html")
+MANUAL_DURATIONS_JSON = os.path.join(METRICAS_DIR, "duraciones_manuales.json")
 
 GRAPH_API_VERSION = "v19.0"
 GRAPH_BASE_URL = f"https://graph.facebook.com/{GRAPH_API_VERSION}"
@@ -273,6 +274,14 @@ def load_existing_raw_posts():
 
 
 def recalculate_summary(all_posts, filter_closed_weeks=True):
+    manual_durations = {}
+    if os.path.exists(MANUAL_DURATIONS_JSON):
+        try:
+            with open(MANUAL_DURATIONS_JSON, "r", encoding="utf-8") as f:
+                manual_durations = json.load(f)
+        except Exception as e:
+            print(f"[WARN] Error cargando duraciones manuales: {e}")
+
     for p in all_posts:
         if not isinstance(p, dict):
             continue
@@ -286,9 +295,24 @@ def recalculate_summary(all_posts, filter_closed_weeks=True):
         p.setdefault("follows", 0)
         p.setdefault("title", "Publicación")
         p.setdefault("duration_str", "-")
+        p.setdefault("duration_sec", 0)
         p.setdefault("month", "Sin fecha")
         p.setdefault("week", "Sin fecha")
         p.setdefault("topic", "Rosca Política & Sociedad")
+
+        # Asignar duración manual o tipo carrusel
+        pid = str(p.get("post_id", ""))
+        p_type = str(p.get("type", "")).lower()
+        if "carrusel" in p_type or "carousel" in p_type or "album" in p_type:
+            p["duration_str"] = "Carrusel"
+            p["duration_sec"] = 0
+        elif pid in manual_durations:
+            p["duration_sec"] = manual_durations[pid].get("duration_sec", p.get("duration_sec", 0))
+            p["duration_str"] = manual_durations[pid].get("duration_str", p.get("duration_str", "-"))
+        elif p.get("duration_sec", 0) > 0:
+            p["duration_str"] = f"{p['duration_sec']} seg"
+        elif not p.get("duration_str") or p.get("duration_str") == "-":
+            p["duration_str"] = "-"
         
         # Normalizar fecha si es 1970-01-01 o falta, extrayéndola del campo date
         if not p.get("date_dt") or p.get("date_dt") == "1970-01-01":
@@ -617,6 +641,14 @@ def sync():
     existing_posts = load_existing_raw_posts()
     posts_by_id = {str(p["post_id"]): p for p in existing_posts if isinstance(p, dict) and "post_id" in p}
 
+    manual_durations = {}
+    if os.path.exists(MANUAL_DURATIONS_JSON):
+        try:
+            with open(MANUAL_DURATIONS_JSON, "r", encoding="utf-8") as f:
+                manual_durations = json.load(f)
+        except Exception as e:
+            print(f"[WARN] Error cargando duraciones manuales: {e}")
+
     nuevos_posts_count = 0
     actualizados_posts_count = 0
 
@@ -638,7 +670,7 @@ def sync():
         date_dt_str = "1970-01-01"
         if timestamp_str:
             try:
-                clean_ts = timestamp_str.replace("Z", "+00:00")
+                clean_ts = timestamp_str.replace("+0000", "").replace("Z", "").strip()
                 dt_utc = datetime.fromisoformat(clean_ts)
                 dt_arg = dt_utc - timedelta(hours=3)
                 dt_arg_norm = dt_arg.replace(year=2026)
@@ -668,6 +700,17 @@ def sync():
         share_rate = round((shares / views * 100), 2) if views > 0 else 0
         engagement_rate = round((interactions / views * 100), 2) if views > 0 else 0
 
+        # Duración de video o carrusel
+        if clean_type == "Carrusel":
+            dur_sec = 0
+            dur_str = "Carrusel"
+        elif media_id in manual_durations:
+            dur_sec = manual_durations[media_id].get("duration_sec", 0)
+            dur_str = manual_durations[media_id].get("duration_str", f"{dur_sec} seg")
+        else:
+            dur_sec = 0
+            dur_str = "-"
+
         post_obj = {
             "post_id": media_id,
             "title": clean_title,
@@ -679,8 +722,8 @@ def sync():
             "topic": topic,
             "type": clean_type,
             "permalink": permalink,
-            "duration_sec": 0,
-            "duration_str": "-",
+            "duration_sec": dur_sec,
+            "duration_str": dur_str,
             "views": views,
             "reach": reach,
             "interactions": interactions,
@@ -698,8 +741,9 @@ def sync():
 
         if media_id in posts_by_id:
             prev_post = posts_by_id[media_id]
-            post_obj["duration_str"] = prev_post.get("duration_str", "-")
-            post_obj["duration_sec"] = prev_post.get("duration_sec", 0)
+            if post_obj["duration_str"] in ["-", ""] and prev_post.get("duration_str") not in ["-", ""]:
+                post_obj["duration_str"] = prev_post.get("duration_str")
+                post_obj["duration_sec"] = prev_post.get("duration_sec", 0)
             post_obj["follows"] = prev_post.get("follows", 0)
             if views > prev_post.get("views", 0) or interactions > prev_post.get("interactions", 0) or prev_post.get("views", 0) == 0:
                 posts_by_id[media_id] = post_obj
