@@ -26,6 +26,8 @@ if hasattr(sys.stdout, "reconfigure"):
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 METRICAS_DIR = os.path.join(BASE_DIR, "metricas")
 JSON_OUTPUT = os.path.join(METRICAS_DIR, "historico_metricas.json")
+RAW_JSON_OUTPUT = os.path.join(METRICAS_DIR, "historico_crudo.json")
+SNAPSHOTS_JSON = os.path.join(METRICAS_DIR, "historico_snapshots.json")
 HTML_OUTPUT = os.path.join(METRICAS_DIR, "dashboard.html")
 INDEX_OUTPUT = os.path.join(METRICAS_DIR, "index.html")
 ROOT_INDEX = os.path.join(BASE_DIR, "index.html")
@@ -285,6 +287,27 @@ def process_all_exports():
     for idx, p in enumerate(all_posts):
         p["rank"] = idx + 1
 
+    # Cargar snapshots para calcular deltas de crecimiento reciente y catálogo
+    snapshots_dict = {}
+    if os.path.exists(SNAPSHOTS_JSON):
+        try:
+            with open(SNAPSHOTS_JSON, "r", encoding="utf-8") as f:
+                snapshots_dict = json.load(f).get("snapshots", {})
+        except Exception:
+            pass
+
+    sorted_snap_dates = sorted(snapshots_dict.keys())
+    ref_snap = snapshots_dict.get(sorted_snap_dates[0], {}) if sorted_snap_dates else {}
+
+    for p in all_posts:
+        pid = str(p.get("post_id", ""))
+        v_curr = p.get("views", 0)
+        v_old = ref_snap.get(pid, {}).get("views", v_curr) if ref_snap else v_curr
+        growth_7d = max(0, v_curr - v_old)
+        p["growth_7d_views"] = growth_7d
+        is_cur_week = "en curso" in p.get("week", "").lower()
+        p["is_evergreen"] = bool(growth_7d >= 50 and not is_cur_week)
+
     # Detección y ordenación dinámica de TODOS los meses presentes
     detected_months = list(set(p["month"] for p in all_posts if p["month"] != "Sin fecha"))
     months_list = sorted(detected_months, key=get_month_sort_key)
@@ -386,10 +409,54 @@ def process_all_exports():
 
         top_w = max(w_posts, key=lambda x: x["views"]) if w_posts else None
 
+        # Crecimiento de catálogo antiguo durante esta semana
+        w_min_date = min((p.get("date_dt") or "9999") for p in w_posts) if w_posts else "9999"
+        prior_posts = [p for p in all_posts if (p.get("date_dt") or "9999") < w_min_date]
+
+        catalog_growth_views = 0
+        catalog_growers = []
+
+        if "07-13 sep" in w.lower():
+            s_start = snapshots_dict.get("2026-09-08", {})
+            s_end = snapshots_dict.get("2026-09-15", {})
+            for pp in prior_posts:
+                ppid = str(pp.get("post_id", ""))
+                v_s = s_start.get(ppid, {}).get("views", 0)
+                v_e = s_end.get(ppid, {}).get("views", pp.get("views", 0))
+                diff = v_e - v_s
+                if diff > 0:
+                    catalog_growth_views += diff
+                    catalog_growers.append({
+                        "post_id": ppid,
+                        "title": pp.get("title", ""),
+                        "growth": diff,
+                        "original_week": pp.get("week", "")
+                    })
+        elif "en curso" in w.lower():
+            s_start = snapshots_dict.get("2026-09-15", {})
+            for pp in prior_posts:
+                ppid = str(pp.get("post_id", ""))
+                v_s = s_start.get(ppid, {}).get("views", 0)
+                diff = pp.get("views", 0) - v_s
+                if diff > 0:
+                    catalog_growth_views += diff
+                    catalog_growers.append({
+                        "post_id": ppid,
+                        "title": pp.get("title", ""),
+                        "growth": diff,
+                        "original_week": pp.get("week", "")
+                    })
+
+        catalog_growers.sort(key=lambda x: x["growth"], reverse=True)
+        total_consumption = w_views + catalog_growth_views
+
         weeks_stats[w] = {
             "week": w,
             "posts_count": w_count,
-            "total_views": w_views,
+            "total_views": total_consumption,
+            "views_new_posts": w_views,
+            "views_catalog_growth": catalog_growth_views,
+            "total_consumption_views": total_consumption,
             "avg_views_per_post": int(w_views / w_count) if w_count > 0 else 0,
             "total_reach": w_reach,
             "total_interactions": w_interactions,
@@ -404,7 +471,8 @@ def process_all_exports():
             "total_follows": w_follows,
             "engagement_rate_pct": round(w_interactions / w_views * 100, 2) if w_views > 0 else 0,
             "top_video": top_w["title"] if top_w else "-",
-            "top_views": top_w["views"] if top_w else 0
+            "top_views": top_w["views"] if top_w else 0,
+            "top_catalog_growers": catalog_growers[:3]
         }
 
     # Agrupamiento TEMÁTICO

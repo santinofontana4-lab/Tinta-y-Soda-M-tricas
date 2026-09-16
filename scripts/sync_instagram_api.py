@@ -26,6 +26,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 METRICAS_DIR = os.path.join(BASE_DIR, "metricas")
 JSON_OUTPUT = os.path.join(METRICAS_DIR, "historico_metricas.json")
 RAW_JSON_OUTPUT = os.path.join(METRICAS_DIR, "historico_crudo.json")
+SNAPSHOTS_JSON = os.path.join(METRICAS_DIR, "historico_snapshots.json")
 HTML_OUTPUT = os.path.join(METRICAS_DIR, "dashboard.html")
 INDEX_OUTPUT = os.path.join(METRICAS_DIR, "index.html")
 ROOT_INDEX = os.path.join(BASE_DIR, "index.html")
@@ -120,8 +121,11 @@ def assign_temporal_groups(dt_arg, dt_now=None):
 
 
 def make_api_request(url, token):
-    separator = "&" if "?" in url else "?"
-    full_url = f"{url}{separator}access_token={token}"
+    if "access_token=" in url:
+        full_url = url
+    else:
+        separator = "&" if "?" in url else "?"
+        full_url = f"{url}{separator}access_token={token}"
     req = urllib.request.Request(
         full_url,
         headers={"User-Agent": "TintaYSodaMetricsBot/1.0"}
@@ -130,11 +134,35 @@ def make_api_request(url, token):
         return json.loads(resp.read().decode("utf-8"))
 
 
-def fetch_instagram_media(account_id, token):
+def fetch_instagram_media(account_id, token, max_pages=15):
+    """
+    Recorre todas las páginas de la API de Instagram mediante el cursor paging.next
+    para recuperar el 100% de las publicaciones del canal sin truncarse en 50.
+    """
     fields = "id,caption,media_type,media_product_type,timestamp,permalink,thumbnail_url,like_count,comments_count"
     url = f"{GRAPH_BASE_URL}/{account_id}/media?fields={fields}&limit=50"
-    data = make_api_request(url, token)
-    return data.get("data", [])
+    all_media = []
+    page = 1
+
+    while url and page <= max_pages:
+        try:
+            data = make_api_request(url, token)
+            items = data.get("data", [])
+            all_media.extend(items)
+            print(f"[API] Página {page}: {len(items)} publicaciones obtenidas (Total acumulado: {len(all_media)})")
+
+            paging = data.get("paging", {})
+            next_url = paging.get("next")
+            if next_url and next_url != url:
+                url = next_url
+                page += 1
+            else:
+                break
+        except Exception as e:
+            print(f"[WARN] Error en paginación de Instagram (página {page}): {e}")
+            break
+
+    return all_media
 
 
 def fetch_media_insights(media_id, media_product_type, token):
@@ -205,6 +233,24 @@ def get_last_completed_sunday(dt_now=None):
     return datetime(last_sunday.year, last_sunday.month, last_sunday.day, 23, 59, 59)
 
 
+def load_snapshots():
+    if os.path.exists(SNAPSHOTS_JSON):
+        try:
+            with open(SNAPSHOTS_JSON, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[WARN] No se pudo leer snapshots JSON: {e}")
+    return {"snapshots": {}}
+
+
+def save_snapshots(snapshots_data):
+    try:
+        with open(SNAPSHOTS_JSON, "w", encoding="utf-8") as f:
+            json.dump(snapshots_data, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"[WARN] No se pudo guardar snapshots JSON: {e}")
+
+
 def load_existing_summary():
     if os.path.exists(JSON_OUTPUT):
         try:
@@ -268,6 +314,21 @@ def recalculate_summary(all_posts, filter_closed_weeks=True):
     all_posts.sort(key=lambda x: x.get("views", 0), reverse=True)
     for idx, p in enumerate(all_posts):
         p["rank"] = idx + 1
+
+    # Cargar snapshots para calcular deltas de crecimiento reciente y catálogo
+    snapshots_data = load_snapshots()
+    snapshots_dict = snapshots_data.get("snapshots", {})
+    sorted_snap_dates = sorted(snapshots_dict.keys())
+    ref_snap = snapshots_dict.get(sorted_snap_dates[0], {}) if sorted_snap_dates else {}
+
+    for p in all_posts:
+        pid = str(p.get("post_id", ""))
+        v_curr = p.get("views", 0)
+        v_old = ref_snap.get(pid, {}).get("views", v_curr) if ref_snap else v_curr
+        growth_7d = max(0, v_curr - v_old)
+        p["growth_7d_views"] = growth_7d
+        is_cur_week = "en curso" in p.get("week", "").lower()
+        p["is_evergreen"] = bool(growth_7d >= 50 and not is_cur_week)
 
     detected_months = list(set(p.get("month", "Sin fecha") for p in all_posts if p.get("month") != "Sin fecha"))
     months_list = sorted(detected_months, key=get_month_sort_key)
@@ -367,10 +428,54 @@ def recalculate_summary(all_posts, filter_closed_weeks=True):
 
         top_w = max(w_posts, key=lambda x: x.get("views", 0)) if w_posts else None
 
+        # Crecimiento de catálogo antiguo durante esta semana
+        w_min_date = min((p.get("date_dt") or "9999") for p in w_posts) if w_posts else "9999"
+        prior_posts = [p for p in all_posts if (p.get("date_dt") or "9999") < w_min_date]
+
+        catalog_growth_views = 0
+        catalog_growers = []
+
+        if "07-13 sep" in w.lower():
+            s_start = snapshots_dict.get("2026-09-08", {})
+            s_end = snapshots_dict.get("2026-09-15", {})
+            for pp in prior_posts:
+                ppid = str(pp.get("post_id", ""))
+                v_s = s_start.get(ppid, {}).get("views", 0)
+                v_e = s_end.get(ppid, {}).get("views", pp.get("views", 0))
+                diff = v_e - v_s
+                if diff > 0:
+                    catalog_growth_views += diff
+                    catalog_growers.append({
+                        "post_id": ppid,
+                        "title": pp.get("title", ""),
+                        "growth": diff,
+                        "original_week": pp.get("week", "")
+                    })
+        elif "en curso" in w.lower():
+            s_start = snapshots_dict.get("2026-09-15", {})
+            for pp in prior_posts:
+                ppid = str(pp.get("post_id", ""))
+                v_s = s_start.get(ppid, {}).get("views", 0)
+                diff = pp.get("views", 0) - v_s
+                if diff > 0:
+                    catalog_growth_views += diff
+                    catalog_growers.append({
+                        "post_id": ppid,
+                        "title": pp.get("title", ""),
+                        "growth": diff,
+                        "original_week": pp.get("week", "")
+                    })
+
+        catalog_growers.sort(key=lambda x: x["growth"], reverse=True)
+        total_consumption = w_views + catalog_growth_views
+
         weeks_stats[w] = {
             "week": w,
             "posts_count": w_count,
-            "total_views": w_views,
+            "total_views": total_consumption,
+            "views_new_posts": w_views,
+            "views_catalog_growth": catalog_growth_views,
+            "total_consumption_views": total_consumption,
             "avg_views_per_post": int(w_views / w_count) if w_count > 0 else 0,
             "total_reach": w_reach,
             "total_interactions": w_interactions,
@@ -385,7 +490,8 @@ def recalculate_summary(all_posts, filter_closed_weeks=True):
             "total_follows": w_follows,
             "engagement_rate_pct": round(w_interactions / w_views * 100, 2) if w_views > 0 else 0,
             "top_video": top_w.get("title", "-") if top_w else "-",
-            "top_views": top_w.get("views", 0) if top_w else 0
+            "top_views": top_w.get("views", 0) if top_w else 0,
+            "top_catalog_growers": catalog_growers[:3]
         }
 
     topics_list = [
@@ -608,6 +714,28 @@ def sync():
             json.dump({"posts": all_raw_posts}, f, ensure_ascii=False, indent=2)
     except Exception as e:
         print(f"[WARN] No se pudo guardar el pool crudo: {e}")
+
+    # Guardar snapshot diario de todas las publicaciones
+    today_key = (datetime.utcnow() - timedelta(hours=3)).strftime("%Y-%m-%d")
+    snapshots_data = load_snapshots()
+    if "snapshots" not in snapshots_data:
+        snapshots_data["snapshots"] = {}
+
+    today_snap = {}
+    for p in all_raw_posts:
+        pid = str(p.get("post_id", ""))
+        today_snap[pid] = {
+            "views": p.get("views", 0),
+            "interactions": p.get("interactions", 0),
+            "likes": p.get("likes", 0),
+            "shares": p.get("shares", 0),
+            "saves": p.get("saves", 0),
+            "comments": p.get("comments", 0),
+            "reach": p.get("reach", 0)
+        }
+    snapshots_data["snapshots"][today_key] = today_snap
+    save_snapshots(snapshots_data)
+    print(f"[INFO] Snapshot diario guardado para {today_key} ({len(today_snap)} publicaciones registradas).")
 
     summary = recalculate_summary(all_raw_posts)
 
