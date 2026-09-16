@@ -326,6 +326,17 @@ def process_all_exports():
         elif p.get("duration_sec", 0) > 0 and (p.get("duration_str") in ["-", ""] or not p.get("duration_str")):
             p["duration_str"] = f"{p['duration_sec']} seg"
 
+        # Reasignar mes y semana de forma dinámica con el ciclo oficial Lunes a Domingo
+        if p.get("date_dt") and p.get("date_dt") != "1970-01-01":
+            try:
+                clean_ds = p["date_dt"][:16]
+                dt_p = datetime.fromisoformat(clean_ds)
+                m_lbl, w_lbl = assign_temporal_groups(dt_p)
+                p["month"] = m_lbl
+                p["week"] = w_lbl
+            except Exception:
+                pass
+
     all_posts.sort(key=lambda x: x["views"], reverse=True)
     for idx, p in enumerate(all_posts):
         p["rank"] = idx + 1
