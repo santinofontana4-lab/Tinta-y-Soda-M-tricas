@@ -1,9 +1,11 @@
 ﻿name: Actualización Automática Diaria de Métricas (00:00)
 
 on:
-  schedule:
-    # Se ejecuta automáticamente todos los días a las 03:00 UTC (00:00 hs Argentina ART = UTC-3)
-    - cron: '0 3 * * *'
+  # Programación automática pausada temporalmente.
+  # Para reactivar, descomentar el bloque schedule:
+  # schedule:
+  #   # Se ejecuta automáticamente todos los días a las 03:00 UTC (00:00 hs Argentina ART = UTC-3)
+  #   - cron: '0 3 * * *'
   workflow_dispatch:
 
 permissions:
